@@ -1,0 +1,33 @@
+name: CI
+
+on:
+  pull_request:
+    branches: [ main, master, develop ]
+  push:
+    branches:
+      - main
+      - master
+      - develop
+      - 'feat/HU-**'
+
+jobs:
+  build-test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Set up JDK 17
+        uses: actions/setup-java@v4
+        with:
+          distribution: temurin
+          java-version: 17
+          cache: gradle
+      - name: Grant execute permission for gradlew
+        run: chmod +x gradlew
+      - name: Build, test and check coverage (>=80%)
+        run: ./gradlew clean testDebugUnitTest jacocoTestReport jacocoTestCoverageVerification --stacktrace
+      - name: Upload coverage report
+        uses: actions/upload-artifact@v4
+        with:
+          name: jacoco-html-report
+          path: app/build/reports/jacoco/jacocoTestReport/html
+
