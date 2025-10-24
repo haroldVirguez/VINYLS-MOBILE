@@ -1,3 +1,5 @@
+import org.gradle.api.initialization.dsl.RepositoriesMode
+
 pluginManagement {
     repositories {
         google {

@@ -1,0 +1,19 @@
+// Minimal Groovy settings to avoid Kotlin DSL script compilation issues
+pluginManagement {
+    repositories {
+        gradlePluginPortal()
+        google()
+        mavenCentral()
+    }
+}
+
+// Add repositories for dependency resolution so Gradle can download required libs
+dependencyResolutionManagement {
+    repositories {
+        google()
+        mavenCentral()
+    }
+}
+
+rootProject.name = 'VINYLS-MOBILE'
+include ':app'
