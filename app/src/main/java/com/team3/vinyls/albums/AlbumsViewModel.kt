@@ -3,6 +3,7 @@ package com.team3.vinyls.albums
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.albums.ui.AlbumUiModel
 import com.team3.vinyls.albums.data.AlbumRepository
@@ -12,31 +13,27 @@ import com.team3.vinyls.core.network.ApiConstants
 import kotlinx.coroutines.launch
 
 class AlbumsViewModel(
-    private val repositoryFactory: () -> AlbumRepository = {
-        val retrofit = NetworkModule.retrofit(ApiConstants.BASE_URL)
-        val service = retrofit.create(AlbumsService::class.java)
-        AlbumRepository(service)
-    }
+    private val repository: AlbumRepository
 ) : ViewModel() {
+    
     private val _albums = MutableLiveData<List<AlbumUiModel>>()
     val albums: LiveData<List<AlbumUiModel>> = _albums
+    
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
+    
     private val _error = MutableLiveData<String?>(null)
     val error: LiveData<String?> = _error
 
     init {
-        // Start with placeholder content, then try to fetch
-        _albums.value = listOf(
-            AlbumUiModel("featured", "Álbum destacado", "Artista • 2020"),
-            AlbumUiModel("recommended", "Recomendado", "Basado en tu historial"),
-            AlbumUiModel("news", "Novedades", "Lanzamientos")
-        )
-        fetch()
+        loadAlbums()
     }
-
-    private fun fetch() {
-        val repository = repositoryFactory()
+    
+    fun refresh() {
+        loadAlbums()
+    }
+    
+    private fun loadAlbums() {
         _loading.value = true
         _error.value = null
         viewModelScope.launch {

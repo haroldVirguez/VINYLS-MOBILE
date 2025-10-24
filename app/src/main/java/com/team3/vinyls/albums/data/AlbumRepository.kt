@@ -4,12 +4,39 @@ import com.team3.vinyls.albums.ui.AlbumUiModel
 
 open class AlbumRepository(private val service: AlbumsService) {
     open suspend fun fetchAlbums(): List<AlbumUiModel> {
-        return service.getAlbums().map { dto ->
+        val albums = service.getAlbums()
+        return albums.map { dto ->
             AlbumUiModel(
                 id = dto.id,
                 title = dto.name,
-                subtitle = "${dto.artist} • ${dto.year}"
+                subtitle = formatSubtitle(dto),
+                cover = dto.cover,
+                description = dto.description,
+                genre = dto.genre,
+                recordLabel = dto.recordLabel,
+                releaseDate = dto.releaseDate
             )
+        }
+    }
+    
+    private fun formatSubtitle(dto: AlbumDto): String {
+        val performers = dto.performers?.map { it.name } ?: emptyList()
+        val artistNames = if (performers.isNotEmpty()) {
+            performers.joinToString(" - ")
+        } else {
+            "Artista desconocido"
+        }
+        
+        val year = extractYearFromDate(dto.releaseDate)
+        return "$artistNames • $year"
+    }
+    
+    private fun extractYearFromDate(dateString: String): String {
+        return try {
+            val date = java.time.LocalDate.parse(dateString.substring(0, 10))
+            date.year.toString()
+        } catch (e: Exception) {
+            "N/A"
         }
     }
 }

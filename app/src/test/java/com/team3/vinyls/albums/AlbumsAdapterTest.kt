@@ -21,18 +21,20 @@ class AlbumsAdapterTest {
         val itemView = mock<View>()
         val titleView = mock<TextView>()
         val subtitleView = mock<TextView>()
+        val genreView = mock<TextView>()
 
         // Stub findViewById to return our mocked TextViews
         whenever(itemView.findViewById<TextView>(com.team3.vinyls.R.id.txtTitle)).thenReturn(titleView)
         whenever(itemView.findViewById<TextView>(com.team3.vinyls.R.id.txtSubtitle)).thenReturn(subtitleView)
+        whenever(itemView.findViewById<TextView>(com.team3.vinyls.R.id.txtGenre)).thenReturn(genreView)
 
         // Create view holder using adapter's inner class
         val vh = adapter.AlbumViewHolder(itemView)
 
-        val album = AlbumUiModel("42", "T", "S")
+        val album = AlbumUiModel(42, "T", "S", "cover", "desc", "genre", "label", "2023-01-01")
 
         // Setup click callback collector
-        var clickedId: String? = null
+        var clickedId: Int? = null
         adapter.onAlbumClick = { clickedId = it.id }
 
         // Call bind
@@ -47,6 +49,6 @@ class AlbumsAdapterTest {
 
         // Verify callback invoked with our album id
         assertNotNull(clickedId)
-        assertEquals("42", clickedId)
+        assertEquals(42, clickedId)
     }
 }
