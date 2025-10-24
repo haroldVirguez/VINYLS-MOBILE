@@ -9,8 +9,8 @@ class AlbumsAdapterTest {
     fun `submitList updates items and getItemCount reflects size`() {
         val adapter = AlbumsAdapter()
         val items = listOf(
-            AlbumUiModel(id = "1", title = "T1", subtitle = "S1"),
-            AlbumUiModel(id = "2", title = "T2", subtitle = "S2")
+            AlbumUiModel(id = 1, title = "T1", subtitle = "S1", cover = "cover1", description = "desc1", genre = "genre1", recordLabel = "label1", releaseDate = "2023-01-01"),
+            AlbumUiModel(id = 2, title = "T2", subtitle = "S2", cover = "cover2", description = "desc2", genre = "genre2", recordLabel = "label2", releaseDate = "2023-01-02")
         )
 
         adapter.submitList(items)
@@ -21,7 +21,7 @@ class AlbumsAdapterTest {
     @Test
     fun `submitList replaces previous items`() {
         val adapter = AlbumsAdapter()
-        adapter.submitList(listOf(AlbumUiModel("1","A","a")))
+        adapter.submitList(listOf(AlbumUiModel(1, "A", "a", "cover", "desc", "genre", "label", "2023-01-01")))
         assertEquals(1, adapter.itemCount)
 
         adapter.submitList(emptyList())
@@ -31,7 +31,7 @@ class AlbumsAdapterTest {
     @Test
     fun `onAlbumClick callback can be registered and invoked`() {
         val adapter = AlbumsAdapter()
-        val item = AlbumUiModel(id = "1", title = "T1", subtitle = "S1")
+        val item = AlbumUiModel(id = 1, title = "T1", subtitle = "S1", cover = "cover", description = "desc", genre = "genre", recordLabel = "label", releaseDate = "2023-01-01")
         adapter.submitList(listOf(item))
 
         var clicked: AlbumUiModel? = null

@@ -1,6 +1,7 @@
 package com.team3.vinyls.core.network
 
 import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
@@ -17,7 +18,11 @@ object NetworkModule {
             .build()
     }
 
-    private val moshi: Moshi by lazy { Moshi.Builder().build() }
+    private val moshi: Moshi by lazy { 
+        Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build() 
+    }
 
     fun retrofit(baseUrl: String): Retrofit = Retrofit.Builder()
         .baseUrl(baseUrl)

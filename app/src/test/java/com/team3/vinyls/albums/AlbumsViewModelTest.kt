@@ -31,11 +31,12 @@ class AlbumsViewModelTest {
                 override suspend fun getAlbums(): List<AlbumDto> = emptyList()
             }
 
-            val viewModel = AlbumsViewModel(repositoryFactory = {
-                object : AlbumRepository(dummyService) {
-                    override suspend fun fetchAlbums(): List<AlbumUiModel> = listOf(AlbumUiModel("1", "A", "B"))
-                }
-            })
+            val mockRepository = object : AlbumRepository(dummyService) {
+                override suspend fun fetchAlbums(): List<AlbumUiModel> = listOf(
+                    AlbumUiModel(1, "A", "B", "cover", "desc", "genre", "label", "2023-01-01")
+                )
+            }
+            val viewModel = AlbumsViewModel(repository = mockRepository)
 
             // let coroutines in viewModelScope run
             advanceUntilIdle()

@@ -29,13 +29,12 @@ class AlbumsViewModelLoadingErrorTest {
                 override suspend fun getAlbums(): List<AlbumDto> = emptyList()
             }
 
-            val viewModel = AlbumsViewModel(repositoryFactory = {
-                object : AlbumRepository(dummyService) {
-                    override suspend fun fetchAlbums(): List<com.team3.vinyls.albums.ui.AlbumUiModel> {
-                        throw RuntimeException("boom")
-                    }
+            val mockRepository = object : AlbumRepository(dummyService) {
+                override suspend fun fetchAlbums(): List<com.team3.vinyls.albums.ui.AlbumUiModel> {
+                    throw RuntimeException("boom")
                 }
-            })
+            }
+            val viewModel = AlbumsViewModel(repository = mockRepository)
 
             // let coroutines in viewModelScope run
             advanceUntilIdle()
