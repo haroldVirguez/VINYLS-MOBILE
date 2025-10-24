@@ -1,18 +1,19 @@
-package com.team3.vinyls.albums.viewmodels
+package com.team3.vinyls.albums
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team3.vinyls.albums.data.AlbumRepository
-import com.team3.vinyls.core.network.AlbumsService
 import com.team3.vinyls.albums.ui.AlbumUiModel
+import com.team3.vinyls.albums.data.AlbumRepository
+import com.team3.vinyls.albums.data.AlbumsService
 import com.team3.vinyls.core.network.NetworkModule
+import com.team3.vinyls.core.network.ApiConstants
 import kotlinx.coroutines.launch
 
 class AlbumsViewModel(
     private val repositoryFactory: () -> AlbumRepository = {
-        val retrofit = NetworkModule.retrofit
+        val retrofit = NetworkModule.retrofit(ApiConstants.BASE_URL)
         val service = retrofit.create(AlbumsService::class.java)
         AlbumRepository(service)
     }
@@ -25,6 +26,12 @@ class AlbumsViewModel(
     val error: LiveData<String?> = _error
 
     init {
+        // Start with placeholder content, then try to fetch
+        _albums.value = listOf(
+            AlbumUiModel("featured", "Álbum destacado", "Artista • 2020"),
+            AlbumUiModel("recommended", "Recomendado", "Basado en tu historial"),
+            AlbumUiModel("news", "Novedades", "Lanzamientos")
+        )
         fetch()
     }
 
@@ -44,3 +51,5 @@ class AlbumsViewModel(
         }
     }
 }
+
+
