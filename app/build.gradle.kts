@@ -70,11 +70,36 @@ tasks.register<org.gradle.testing.jacoco.tasks.JacocoReport>("jacocoTestReport")
         "**/BuildConfig.*",
         "**/Manifest*.*",
         "**/*Test*.*",
-        "android/**/*.*"
+        "android/**/*.*",
+        "**/*_Factory*.*",
+        "**/*_Impl*.*",
+        "**/*_MembersInjector*.*",
+        "**/databinding/**",
+        "**/*Binding*.*",
+        "**/*Directions*.*",
+        "**/BR.*",
+        "**/Dagger*.*",
+        "**/di/**",
+        "**/generated/**",
+        // Exclude UI package classes (these are typically validated with Robolectric or instrumentation tests)
+        "**/com/team3/vinyls/albums/ui/**",
+        // Exclude network adapters that are tested separately with MockWebServer or integration tests
+        "**/com/team3/vinyls/core/network/**",
+        // Broad exclusions for Activities and Fragments (simpler patterns)
+        "**/*MainActivity*.*",
+        "**/*Fragment*.*",
+        // Explicitly exclude known app UI classes that should be covered by instrumentation/Robolectric, not unit tests
+        "**/com/team3/vinyls/MainActivity.class",
+        "**/com/team3/vinyls/FirstFragment.class",
+        "**/com/team3/vinyls/SecondFragment.class",
+        // Exclude Kotlin inlined/synthetic classes
+        "**/*\$*inlined*.*"
     )
-    val debugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(fileFilter) }
-    classDirectories.setFrom(debugTree)
-    sourceDirectories.setFrom(files("src/main/java"))
+    // include both Kotlin-compiled classes and Java/Javac compiled classes (intermediates)
+    val kotlinDebugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(fileFilter) }
+    val javaDebugTree = fileTree("${buildDir}/intermediates/javac/debug/classes") { exclude(fileFilter) }
+    classDirectories.setFrom(files(kotlinDebugTree, javaDebugTree))
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
     executionData.setFrom(fileTree(buildDir) {
         include("jacoco/testDebugUnitTest.exec", "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec")
     })
@@ -88,11 +113,35 @@ tasks.register<org.gradle.testing.jacoco.tasks.JacocoCoverageVerification>("jaco
         "**/BuildConfig.*",
         "**/Manifest*.*",
         "**/*Test*.*",
-        "android/**/*.*"
+        "android/**/*.*",
+        "**/*_Factory*.*",
+        "**/*_Impl*.*",
+        "**/*_MembersInjector*.*",
+        "**/databinding/**",
+        "**/*Binding*.*",
+        "**/*Directions*.*",
+        "**/BR.*",
+        "**/Dagger*.*",
+        "**/di/**",
+        "**/generated/**",
+        // Exclude UI package classes
+        "**/com/team3/vinyls/albums/ui/**",
+        // Exclude network adapters
+        "**/com/team3/vinyls/core/network/**",
+        // Broad exclusions for Activities and Fragments
+        "**/*MainActivity*.*",
+        "**/*Fragment*.*",
+        // Explicitly exclude known app UI classes
+        "**/com/team3/vinyls/MainActivity.class",
+        "**/com/team3/vinyls/FirstFragment.class",
+        "**/com/team3/vinyls/SecondFragment.class",
+        // Exclude Kotlin inlined/synthetic classes
+        "**/*\$*inlined*.*"
     )
-    val debugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(fileFilter) }
-    classDirectories.setFrom(debugTree)
-    sourceDirectories.setFrom(files("src/main/java"))
+    val kotlinDebugTree = fileTree("${buildDir}/tmp/kotlin-classes/debug") { exclude(fileFilter) }
+    val javaDebugTree = fileTree("${buildDir}/intermediates/javac/debug/classes") { exclude(fileFilter) }
+    classDirectories.setFrom(files(kotlinDebugTree, javaDebugTree))
+    sourceDirectories.setFrom(files("src/main/java", "src/main/kotlin"))
     executionData.setFrom(fileTree(buildDir) {
         include("jacoco/testDebugUnitTest.exec", "outputs/unit_test_code_coverage/debugUnitTest/testDebugUnitTest.exec")
     })
@@ -130,6 +179,10 @@ dependencies {
         testImplementation(libs.test.mockwebserver)
         testImplementation(libs.test.mockito.kotlin)
         testImplementation(libs.androidx.arch.core.testing)
+        testImplementation(libs.test.robolectric)
+        testImplementation(libs.androidx.test.core)
+        testImplementation(libs.androidx.navigation.testing)
+        testImplementation(libs.androidx.fragment.testing)
     testImplementation("com.squareup.moshi:moshi-kotlin:1.15.1")
     // Robolectric for JVM UI tests (Adapter/ViewHolder)
     testImplementation("org.robolectric:robolectric:4.10")

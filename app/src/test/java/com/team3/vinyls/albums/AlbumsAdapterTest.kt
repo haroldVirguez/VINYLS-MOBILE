@@ -1,19 +1,20 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums
 
 import android.view.View
 import android.widget.TextView
-import com.team3.vinyls.R
+import com.team3.vinyls.albums.ui.AlbumUiModel
+import com.team3.vinyls.albums.ui.AlbumsAdapter
 import org.junit.Test
+import org.junit.Assert.*
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
-import org.junit.Assert.*
 
-class AlbumsAdapterMockitoTest {
+class AlbumsAdapterTest {
 
     @Test
-    fun bind_setsTextAndClickInvokesCallback() {
+    fun bindAndClickInvokesCallback() {
         val adapter = AlbumsAdapter()
 
         // Mocks for itemView and its child TextViews
@@ -22,24 +23,20 @@ class AlbumsAdapterMockitoTest {
         val subtitleView = mock<TextView>()
 
         // Stub findViewById to return our mocked TextViews
-        whenever(itemView.findViewById<TextView>(R.id.txtTitle)).thenReturn(titleView)
-        whenever(itemView.findViewById<TextView>(R.id.txtSubtitle)).thenReturn(subtitleView)
+        whenever(itemView.findViewById<TextView>(com.team3.vinyls.R.id.txtTitle)).thenReturn(titleView)
+        whenever(itemView.findViewById<TextView>(com.team3.vinyls.R.id.txtSubtitle)).thenReturn(subtitleView)
 
         // Create view holder using adapter's inner class
         val vh = adapter.AlbumViewHolder(itemView)
 
-        val album = AlbumUiModel("1", "TitleX", "Artist • 2025")
+        val album = AlbumUiModel("42", "T", "S")
 
         // Setup click callback collector
-        var clicked: AlbumUiModel? = null
-        adapter.onAlbumClick = { clicked = it }
+        var clickedId: String? = null
+        adapter.onAlbumClick = { clickedId = it.id }
 
         // Call bind
         vh.bind(album)
-
-        // Note: verifying calls to TextView.setText on mocked Android views can be fragile
-        // across environments. We avoid asserting on setText directly and focus on behavior
-        // (the click listener wiring) which is the important contract for this adapter.
 
         // Capture the OnClickListener set on itemView and invoke it
         val captor = argumentCaptor<View.OnClickListener>()
@@ -48,8 +45,8 @@ class AlbumsAdapterMockitoTest {
         // simulate click
         listener.onClick(itemView)
 
-        // Verify callback invoked with our album
-        assertNotNull(clicked)
-        assertEquals("1", clicked?.id)
+        // Verify callback invoked with our album id
+        assertNotNull(clickedId)
+        assertEquals("42", clickedId)
     }
 }
