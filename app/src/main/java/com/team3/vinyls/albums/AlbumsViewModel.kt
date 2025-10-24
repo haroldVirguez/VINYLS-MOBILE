@@ -8,11 +8,12 @@ import com.team3.vinyls.albums.ui.AlbumUiModel
 import com.team3.vinyls.albums.data.AlbumRepository
 import com.team3.vinyls.albums.data.AlbumsService
 import com.team3.vinyls.core.network.NetworkModule
+import com.team3.vinyls.core.network.ApiConstants
 import kotlinx.coroutines.launch
 
 class AlbumsViewModel(
     private val repositoryFactory: () -> AlbumRepository = {
-        val retrofit = NetworkModule.retrofit("https://example.com/api/")
+        val retrofit = NetworkModule.retrofit(ApiConstants.BASE_URL)
         val service = retrofit.create(AlbumsService::class.java)
         AlbumRepository(service)
     }
