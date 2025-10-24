@@ -2,9 +2,10 @@ package com.team3.vinyls.albums
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.team3.vinyls.albums.data.AlbumRepository
-import com.team3.vinyls.albums.data.AlbumsService
-import com.team3.vinyls.albums.data.AlbumDto
+import com.team3.vinyls.core.network.AlbumsService
+import com.team3.vinyls.core.network.AlbumDto
 import com.team3.vinyls.albums.ui.AlbumUiModel
+import com.team3.vinyls.albums.viewmodels.AlbumsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -33,7 +34,8 @@ class AlbumsViewModelTest {
 
             val viewModel = AlbumsViewModel(repositoryFactory = {
                 object : AlbumRepository(dummyService) {
-                    override suspend fun fetchAlbums(): List<AlbumUiModel> = listOf(AlbumUiModel("1", "A", "B"))
+                    override suspend fun fetchAlbums(): List<AlbumUiModel> =
+                        listOf(AlbumUiModel("1", "A", "B"))
                 }
             })
 

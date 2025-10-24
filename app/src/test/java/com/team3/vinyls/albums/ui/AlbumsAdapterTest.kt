@@ -1,5 +1,6 @@
 package com.team3.vinyls.albums.ui
 
+import com.team3.vinyls.albums.ui.adapters.AlbumsAdapter
 import org.junit.Assert.assertEquals
 import org.junit.Test
 

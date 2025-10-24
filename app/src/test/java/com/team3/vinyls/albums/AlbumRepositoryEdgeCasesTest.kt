@@ -3,8 +3,8 @@ package com.team3.vinyls.albums
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
-import com.team3.vinyls.albums.data.AlbumDto
-import com.team3.vinyls.albums.data.AlbumsService
+import com.team3.vinyls.core.network.AlbumDto
+import com.team3.vinyls.core.network.AlbumsService
 import com.team3.vinyls.albums.data.AlbumRepository
 
 class AlbumRepositoryEdgeCasesTest {

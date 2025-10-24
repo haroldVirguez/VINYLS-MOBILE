@@ -1,4 +1,4 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater

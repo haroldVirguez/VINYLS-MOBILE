@@ -1,4 +1,4 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -8,9 +8,9 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.team3.vinyls.databinding.FragmentAlbumsBinding
-import com.team3.vinyls.albums.AlbumsViewModel
+import com.team3.vinyls.albums.viewmodels.AlbumsViewModel
 import androidx.navigation.fragment.findNavController
-import com.team3.vinyls.R
+import com.team3.vinyls.albums.ui.adapters.AlbumsAdapter
 
 class AlbumsFragment : Fragment() {
 

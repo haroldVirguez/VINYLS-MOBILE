@@ -1,5 +1,7 @@
 package com.team3.vinyls.albums.data
 
+import com.team3.vinyls.core.network.AlbumDto
+import com.team3.vinyls.core.network.AlbumsService
 import kotlinx.coroutines.test.runTest
 import org.junit.Assert.assertEquals
 import org.junit.Test

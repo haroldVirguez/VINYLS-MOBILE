@@ -10,7 +10,7 @@ import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import com.team3.vinyls.albums.data.AlbumsService
+import com.team3.vinyls.core.network.AlbumsService
 import com.team3.vinyls.albums.data.AlbumRepository
 
 class AlbumRepositoryTest {
