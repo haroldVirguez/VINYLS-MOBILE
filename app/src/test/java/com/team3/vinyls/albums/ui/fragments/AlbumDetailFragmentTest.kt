@@ -1,6 +1,7 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums.ui.fragments
 
-import com.team3.vinyls.albums.ui.fragments.AlbumDetailFragment
+import org.junit.Assert.assertEquals
+import org.junit.Assert.assertNotNull
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
@@ -13,11 +14,11 @@ class AlbumDetailFragmentTest {
     @Test
     fun `album detail fragment can be instantiated`() {
         val fragment = AlbumDetailFragment()
-        assert(fragment != null)
+        assertNotNull(fragment)
     }
 
     @Test
     fun `album detail fragment has correct class`() {
-        assert(AlbumDetailFragment::class.java.simpleName == "AlbumDetailFragment")
+        assertEquals("AlbumDetailFragment", AlbumDetailFragment::class.java.simpleName)
     }
 }
