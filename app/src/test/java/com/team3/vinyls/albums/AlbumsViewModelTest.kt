@@ -30,7 +30,10 @@ class AlbumsViewModelTest {
             // Provide a non-null dummy AlbumsService to satisfy AlbumRepository constructor
             val dummyService = object : AlbumsService {
                 override suspend fun getAlbums(): List<AlbumDto> = emptyList()
-            }
+
+                override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+                    throw NotImplementedError("getAlbumDetail test not implemented")
+                }            }
 
             val mockRepository = object : AlbumRepository(dummyService) {
                 override suspend fun fetchAlbums(): List<AlbumUiModel> = listOf(

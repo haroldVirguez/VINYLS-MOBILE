@@ -28,6 +28,10 @@ class AlbumsViewModelLoadingErrorTest {
         try {
             val dummyService = object : AlbumsService {
                 override suspend fun getAlbums(): List<AlbumDto> = emptyList()
+
+                override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+                    throw NotImplementedError("getAlbumDetail test not implemented")
+                }
             }
 
             val mockRepository = object : AlbumRepository(dummyService) {

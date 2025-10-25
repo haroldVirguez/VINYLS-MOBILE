@@ -71,11 +71,9 @@ class AlbumsFragment : Fragment() {
             val action = AlbumsFragmentDirections.actionAlbumsFragmentToAlbumDetailFragment(album.id.toString())
             findNavController().navigate(action)
         }
-        
+
         binding.btnViewAll.setOnClickListener {
             viewModel.refresh()
         }
     }
 }
-
-

@@ -8,6 +8,10 @@ class AlbumRepositoryTest {
 
     private class FakeAlbumsService(private val albums: List<AlbumDto>) : AlbumsService {
         override suspend fun getAlbums(): List<AlbumDto> = albums
+
+        override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+            throw NotImplementedError("getAlbumDetail test not implemented")
+        }
     }
 
     @Test
