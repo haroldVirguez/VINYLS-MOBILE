@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/albumsFragment"
-        android:name="com.team3.vinyls.albums.ui.AlbumsFragment"
+        android:name="com.team3.vinyls.albums.ui.fragments.AlbumsFragment"
         android:label="Álbumes"
         tools:layout="@layout/fragment_albums" >
         <action
@@ -17,7 +17,7 @@
 
     <fragment
         android:id="@+id/albumDetailFragment"
-        android:name="com.team3.vinyls.albums.ui.AlbumDetailFragment"
+        android:name="com.team3.vinyls.albums.ui.fragments.AlbumDetailFragment"
         android:label="Detalle del álbum"
         tools:layout="@layout/fragment_album_detail">
         <argument

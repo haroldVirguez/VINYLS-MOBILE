@@ -4,6 +4,7 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.team3.vinyls.albums.data.AlbumRepository
 import com.team3.vinyls.albums.data.AlbumsService
 import com.team3.vinyls.albums.data.AlbumDto
+import com.team3.vinyls.albums.viewmodels.AlbumsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher

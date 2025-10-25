@@ -1,4 +1,4 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums.ui.adapters
 
 import android.view.LayoutInflater
 import android.view.View
@@ -6,6 +6,7 @@ import android.view.ViewGroup
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.team3.vinyls.R
+import com.team3.vinyls.albums.ui.AlbumUiModel
 
 class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 

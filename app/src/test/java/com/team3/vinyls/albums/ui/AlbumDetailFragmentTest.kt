@@ -1,5 +1,6 @@
 package com.team3.vinyls.albums.ui
 
+import com.team3.vinyls.albums.ui.fragments.AlbumDetailFragment
 import org.junit.Test
 import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
