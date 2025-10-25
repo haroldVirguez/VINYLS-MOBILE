@@ -7,7 +7,7 @@ import org.junit.Test
 class NavigationTest {
     @Test
     fun directionsContainAlbumIdArgument() {
-        val action = com.team3.vinyls.albums.ui.AlbumsFragmentDirections
+        val action = com.team3.vinyls.albums.ui.fragments.AlbumsFragmentDirections
             .actionAlbumsFragmentToAlbumDetailFragment("99")
 
         assertEquals(R.id.action_albumsFragment_to_albumDetailFragment, action.actionId)
