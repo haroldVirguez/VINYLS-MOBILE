@@ -59,8 +59,18 @@ class AlbumDetailFragment : Fragment() {
             binding.txtDescription.text = album.description
             binding.txtReleaseDate.text = "Lanzado en ${album.releaseDate.take(4)}"
 
-            // Imagen temporal
-            binding.imgAlbumCover.setImageResource(R.drawable.vinyls_card_bg)
+            // Cover
+            Thread {
+                try {
+                    val url = java.net.URL(album.cover)
+                    val bitmap = android.graphics.BitmapFactory.decodeStream(url.openConnection().getInputStream())
+                    requireActivity().runOnUiThread {
+                        binding.imgAlbumCover.setImageBitmap(bitmap)
+                    }
+                } catch (e: Exception) {
+                    e.printStackTrace()
+                }
+            }.start()
 
             // Tracks
             binding.tracksContainer.removeAllViews()
