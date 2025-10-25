@@ -1,9 +1,14 @@
 package com.team3.vinyls.albums.ui
 
 data class AlbumUiModel(
-    val id: String,
+    val id: Int,
     val title: String,
-    val subtitle: String
+    val subtitle: String,
+    val cover: String,
+    val description: String,
+    val genre: String,
+    val recordLabel: String,
+    val releaseDate: String
 )
 
 

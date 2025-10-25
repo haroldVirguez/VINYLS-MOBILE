@@ -43,8 +43,8 @@ class AlbumsServiceIntegrationTest {
     fun `getAlbums returns parsed list`() {
         val json = """
             [
-              {"id":"1","name":"Abbey Road","artist":"The Beatles","year":1969},
-              {"id":"2","name":"Revolver","artist":"The Beatles","year":1966}
+              {"id":1,"name":"Abbey Road","cover":"abbey_road.jpg","releaseDate":"1969-09-26","description":"The Beatles' final album","genre":"Rock","recordLabel":"Apple Records"},
+              {"id":2,"name":"Revolver","cover":"revolver.jpg","releaseDate":"1966-08-05","description":"The Beatles' experimental album","genre":"Rock","recordLabel":"Parlophone"}
             ]
         """.trimIndent()
 

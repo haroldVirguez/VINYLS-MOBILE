@@ -41,10 +41,12 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
     inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
         private val txtTitle: TextView = itemView.findViewById(R.id.txtTitle)
         private val txtSubtitle: TextView = itemView.findViewById(R.id.txtSubtitle)
+        private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
 
         fun bind(item: AlbumUiModel) {
             txtTitle.text = item.title
             txtSubtitle.text = item.subtitle
+            txtGenre.text = item.genre
             itemView.setOnClickListener { onAlbumClick?.invoke(item) }
         }
     }

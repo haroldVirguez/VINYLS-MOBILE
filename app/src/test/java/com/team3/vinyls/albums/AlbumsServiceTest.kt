@@ -39,8 +39,8 @@ class AlbumsServiceTest {
     fun getAlbums_returnsList() {
         val body = """
             [
-              {"id":"1","name":"Test","artist":"Artist","year":2020},
-              {"id":"2","name":"Another","artist":"B","year":2021}
+              {"id":1,"name":"Test","cover":"cover1.jpg","releaseDate":"2020-01-01","description":"Test album","genre":"Rock","recordLabel":"Test Label"},
+              {"id":2,"name":"Another","cover":"cover2.jpg","releaseDate":"2021-01-01","description":"Another album","genre":"Pop","recordLabel":"Another Label"}
             ]
         """.trimIndent()
         server.enqueue(MockResponse().setBody(body).setResponseCode(200))

@@ -21,15 +21,17 @@ class AlbumsAdapterMockitoTest {
         val itemView = mock<View>()
         val titleView = mock<TextView>()
         val subtitleView = mock<TextView>()
+        val genreView = mock<TextView>()
 
         // Stub findViewById to return our mocked TextViews
         whenever(itemView.findViewById<TextView>(R.id.txtTitle)).thenReturn(titleView)
         whenever(itemView.findViewById<TextView>(R.id.txtSubtitle)).thenReturn(subtitleView)
+        whenever(itemView.findViewById<TextView>(R.id.txtGenre)).thenReturn(genreView)
 
         // Create view holder using adapter's inner class
         val vh = adapter.AlbumViewHolder(itemView)
 
-        val album = AlbumUiModel("1", "TitleX", "Artist • 2025")
+        val album = AlbumUiModel(1, "TitleX", "Artist • 2025", "cover", "desc", "genre", "label", "2025-01-01")
 
         // Setup click callback collector
         var clicked: AlbumUiModel? = null
@@ -51,6 +53,6 @@ class AlbumsAdapterMockitoTest {
 
         // Verify callback invoked with our album
         assertNotNull(clicked)
-        assertEquals("1", clicked?.id)
+        assertEquals(1, clicked?.id)
     }
 }

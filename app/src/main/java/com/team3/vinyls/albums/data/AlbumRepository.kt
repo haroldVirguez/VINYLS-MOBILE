@@ -1,26 +1,42 @@
 package com.team3.vinyls.albums.data
 
 import com.team3.vinyls.albums.ui.AlbumUiModel
-import com.team3.vinyls.core.network.AlbumsService
 
 open class AlbumRepository(private val service: AlbumsService) {
-
     open suspend fun fetchAlbums(): List<AlbumUiModel> {
-        return service.getAlbums().map { dto ->
+        val albums = service.getAlbums()
+        return albums.map { dto ->
             AlbumUiModel(
-                id = dto.id.toString(),
+                id = dto.id,
                 title = dto.name,
-                subtitle = "${dto.recordLabel} • ${dto.genre}"
+                subtitle = formatSubtitle(dto),
+                cover = dto.cover,
+                description = dto.description,
+                genre = dto.genre,
+                recordLabel = dto.recordLabel,
+                releaseDate = dto.releaseDate
             )
         }
     }
-
-    open suspend fun getAlbumDetail(albumId: String): AlbumUiModel {
-        val dto = service.getAlbumById(albumId)
-        return AlbumUiModel(
-            id = dto.id.toString(),
-            title = dto.name,
-            subtitle = "${dto.recordLabel} • ${dto.genre}"
-        )
+    
+    private fun formatSubtitle(dto: AlbumDto): String {
+        val performers = dto.performers?.map { it.name } ?: emptyList()
+        val artistNames = if (performers.isNotEmpty()) {
+            performers.joinToString(" - ")
+        } else {
+            "Artista desconocido"
+        }
+        
+        val year = extractYearFromDate(dto.releaseDate)
+        return "$artistNames • $year"
+    }
+    
+    private fun extractYearFromDate(dateString: String): String {
+        return try {
+            val date = java.time.LocalDate.parse(dateString.substring(0, 10))
+            date.year.toString()
+        } catch (e: Exception) {
+            "N/A"
+        }
     }
 }

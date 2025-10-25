@@ -31,7 +31,7 @@ class AlbumRepositoryTest {
     fun mapsDtoToUiModel() {
         val body = """
             [
-              {"id":"1","name":"Test","artist":"Artist","year":2020}
+              {"id":1,"name":"Test","cover":"cover.jpg","releaseDate":"2020-01-01","description":"Test album","genre":"Rock","recordLabel":"Test Label"}
             ]
         """.trimIndent()
         server.enqueue(MockResponse().setBody(body).setResponseCode(200))
@@ -51,6 +51,6 @@ class AlbumRepositoryTest {
 
         assertEquals(1, result.size)
         assertEquals("Test", result[0].title)
-        assertEquals("Artist • 2020", result[0].subtitle)
+        assertEquals("Artista desconocido • 2020", result[0].subtitle)
     }
 }

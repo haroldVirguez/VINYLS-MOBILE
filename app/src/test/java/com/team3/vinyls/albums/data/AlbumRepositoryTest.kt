@@ -14,7 +14,15 @@ class AlbumRepositoryTest {
 
     @Test
     fun `fetchAlbums maps AlbumDto to AlbumUiModel`() = runTest {
-        val dto = AlbumDto(id = "1", name = "Abbey Road", artist = "The Beatles", year = 1969)
+        val dto = AlbumDto(
+            id = 1, 
+            name = "Abbey Road", 
+            cover = "cover.jpg",
+            releaseDate = "1969-09-26",
+            description = "The Beatles' final album",
+            genre = "Rock",
+            recordLabel = "Apple Records"
+        )
         val service = FakeAlbumsService(listOf(dto))
         val repo = AlbumRepository(service)
 
@@ -22,9 +30,9 @@ class AlbumRepositoryTest {
 
         assertEquals(1, result.size)
         val ui = result[0]
-        assertEquals("1", ui.id)
+        assertEquals(1, ui.id)
         assertEquals("Abbey Road", ui.title)
-        assertEquals("The Beatles • 1969", ui.subtitle)
+        assertEquals("Artista desconocido • 1969", ui.subtitle)
     }
 }
 
