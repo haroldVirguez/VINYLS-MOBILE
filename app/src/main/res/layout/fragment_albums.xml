@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:background="@color/bg_dark"
     android:padding="12dp"
-    tools:context=".albums.ui.AlbumsFragment">
+    tools:context=".albums.ui.fragments.AlbumsFragment">
 
     <TextView
         android:id="@+id/heading"

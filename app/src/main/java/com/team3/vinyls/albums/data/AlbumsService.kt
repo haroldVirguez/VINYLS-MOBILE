@@ -39,6 +39,7 @@ data class CommentDto(
 interface AlbumsService {
     @GET(ApiConstants.ALBUMS_ENDPOINT)
     suspend fun getAlbums(): List<AlbumDto>
+
+    @GET("${ApiConstants.ALBUMS_ENDPOINT}/{id}")
+    suspend fun getAlbumDetail(@retrofit2.http.Path("id") albumId: Int): AlbumDto
 }
-
-

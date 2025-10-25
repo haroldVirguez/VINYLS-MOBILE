@@ -1,8 +1,9 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums.ui.adapters
 
 import android.view.View
 import android.widget.TextView
 import com.team3.vinyls.R
+import com.team3.vinyls.albums.ui.AlbumUiModel
 import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
@@ -30,7 +31,16 @@ class AlbumsAdapterMockitoTest {
         // Create view holder using adapter's inner class
         val vh = adapter.AlbumViewHolder(itemView)
 
-        val album = AlbumUiModel(1, "TitleX", "Artist • 2025", "cover", "desc", "genre", "label", "2025-01-01")
+        val album = AlbumUiModel(
+            1,
+            "TitleX",
+            "Artist • 2025",
+            "cover",
+            "desc",
+            "genre",
+            "label",
+            "2025-01-01"
+        )
 
         // Setup click callback collector
         var clicked: AlbumUiModel? = null

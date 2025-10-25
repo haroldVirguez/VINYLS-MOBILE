@@ -3,7 +3,7 @@ package com.team3.vinyls.albums
 import android.view.View
 import android.widget.TextView
 import com.team3.vinyls.albums.ui.AlbumUiModel
-import com.team3.vinyls.albums.ui.AlbumsAdapter
+import com.team3.vinyls.albums.ui.adapters.AlbumsAdapter
 import org.junit.Test
 import org.junit.Assert.*
 import org.mockito.kotlin.argumentCaptor

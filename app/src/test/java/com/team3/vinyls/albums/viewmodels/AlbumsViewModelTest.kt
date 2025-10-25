@@ -1,18 +1,18 @@
-package com.team3.vinyls.albums
+package com.team3.vinyls.albums.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.team3.vinyls.albums.data.AlbumDto
 import com.team3.vinyls.albums.data.AlbumRepository
 import com.team3.vinyls.albums.data.AlbumsService
-import com.team3.vinyls.albums.data.AlbumDto
 import com.team3.vinyls.albums.ui.AlbumUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import kotlinx.coroutines.test.advanceUntilIdle
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
@@ -29,6 +29,10 @@ class AlbumsViewModelTest {
             // Provide a non-null dummy AlbumsService to satisfy AlbumRepository constructor
             val dummyService = object : AlbumsService {
                 override suspend fun getAlbums(): List<AlbumDto> = emptyList()
+
+                override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+                    throw NotImplementedError("getAlbumDetail test not implemented")
+                }
             }
 
             val mockRepository = object : AlbumRepository(dummyService) {
@@ -41,8 +45,8 @@ class AlbumsViewModelTest {
             // let coroutines in viewModelScope run
             advanceUntilIdle()
 
-            assertEquals(1, viewModel.albums.value?.size)
-            assertEquals("A", viewModel.albums.value?.first()?.title)
+            Assert.assertEquals(1, viewModel.albums.value?.size)
+            Assert.assertEquals("A", viewModel.albums.value?.first()?.title)
         } finally {
             Dispatchers.resetMain()
         }
