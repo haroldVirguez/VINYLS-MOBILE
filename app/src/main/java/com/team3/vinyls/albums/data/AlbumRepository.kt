@@ -18,6 +18,14 @@ open class AlbumRepository(private val service: AlbumsService) {
             )
         }
     }
+
+    suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+        return try {
+            service.getAlbumDetail(albumId)
+        } catch (e: Exception) {
+            throw Exception("Error al obtener detalle del álbum: ${e.message}")
+        }
+    }
     
     private fun formatSubtitle(dto: AlbumDto): String {
         val performers = dto.performers?.map { it.name } ?: emptyList()

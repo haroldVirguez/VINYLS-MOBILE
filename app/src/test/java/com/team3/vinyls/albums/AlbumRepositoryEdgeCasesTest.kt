@@ -17,6 +17,11 @@ class AlbumRepositoryEdgeCasesTest {
                 Behavior.THROW -> throw IllegalArgumentException("fake error")
             }
         }
+
+        override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+            // Como este test solo verifica getAlbums, puedes dejarlo como dummy
+            throw NotImplementedError("FakeAlbumsService.getAlbumDetail() no implementado en este test")
+        }
     }
 
     private fun repoWithBehavior(behavior: FakeAlbumsService.Behavior): AlbumRepository {

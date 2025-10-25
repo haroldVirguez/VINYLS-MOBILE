@@ -1,17 +1,18 @@
-package com.team3.vinyls.albums
+package com.team3.vinyls.albums.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.team3.vinyls.albums.data.AlbumDto
 import com.team3.vinyls.albums.data.AlbumRepository
 import com.team3.vinyls.albums.data.AlbumsService
-import com.team3.vinyls.albums.data.AlbumDto
+import com.team3.vinyls.albums.ui.AlbumUiModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
+import kotlinx.coroutines.test.advanceUntilIdle
 import kotlinx.coroutines.test.resetMain
 import kotlinx.coroutines.test.runTest
 import kotlinx.coroutines.test.setMain
-import kotlinx.coroutines.test.advanceUntilIdle
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Rule
 import org.junit.Test
 
@@ -27,10 +28,14 @@ class AlbumsViewModelLoadingErrorTest {
         try {
             val dummyService = object : AlbumsService {
                 override suspend fun getAlbums(): List<AlbumDto> = emptyList()
+
+                override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
+                    throw NotImplementedError("getAlbumDetail test not implemented")
+                }
             }
 
             val mockRepository = object : AlbumRepository(dummyService) {
-                override suspend fun fetchAlbums(): List<com.team3.vinyls.albums.ui.AlbumUiModel> {
+                override suspend fun fetchAlbums(): List<AlbumUiModel> {
                     throw RuntimeException("boom")
                 }
             }
@@ -40,7 +45,7 @@ class AlbumsViewModelLoadingErrorTest {
             advanceUntilIdle()
 
             // After init, error should be populated
-            assertEquals("boom", viewModel.error.value)
+            Assert.assertEquals("boom", viewModel.error.value)
         } finally {
             Dispatchers.resetMain()
         }

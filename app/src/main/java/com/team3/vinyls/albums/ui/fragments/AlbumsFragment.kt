@@ -1,4 +1,4 @@
-package com.team3.vinyls.albums.ui
+package com.team3.vinyls.albums.ui.fragments
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -10,13 +10,13 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.team3.vinyls.databinding.FragmentAlbumsBinding
-import com.team3.vinyls.albums.AlbumsViewModel
+import com.team3.vinyls.albums.viewmodels.AlbumsViewModel
 import androidx.navigation.fragment.findNavController
-import com.team3.vinyls.R
 import com.team3.vinyls.core.network.NetworkModule
 import com.team3.vinyls.core.network.ApiConstants
 import com.team3.vinyls.albums.data.AlbumsService
 import com.team3.vinyls.albums.data.AlbumRepository
+import com.team3.vinyls.albums.ui.adapters.AlbumsAdapter
 
 class AlbumsFragment : Fragment() {
 
@@ -71,11 +71,9 @@ class AlbumsFragment : Fragment() {
             val action = AlbumsFragmentDirections.actionAlbumsFragmentToAlbumDetailFragment(album.id.toString())
             findNavController().navigate(action)
         }
-        
+
         binding.btnViewAll.setOnClickListener {
             viewModel.refresh()
         }
     }
 }
-
-
