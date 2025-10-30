@@ -7,17 +7,18 @@
 
     <fragment
         android:id="@+id/albumsFragment"
-        android:name="com.team3.vinyls.albums.ui.fragments.AlbumsFragment"
+        android:name="com.team3.vinyls.ui.fragments.AlbumsFragment"
         android:label="Álbumes"
         tools:layout="@layout/fragment_albums" >
         <action
             android:id="@+id/action_albumsFragment_to_albumDetailFragment"
-            app:destination="@id/albumDetailFragment" />
+            app:destination="@id/albumDetailFragment"
+            app:enterAnim="@android:animator/fade_in" />
     </fragment>
 
     <fragment
         android:id="@+id/albumDetailFragment"
-        android:name="com.team3.vinyls.albums.ui.fragments.AlbumDetailFragment"
+        android:name="com.team3.vinyls.ui.fragments.AlbumDetailFragment"
         android:label="Detalle del álbum"
         tools:layout="@layout/fragment_album_detail">
         <argument

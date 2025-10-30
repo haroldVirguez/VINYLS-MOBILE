@@ -36,14 +36,17 @@ class MainActivity : AppCompatActivity() {
                     navController.navigate(R.id.albumsFragment)
                     true
                 }
+
                 R.id.nav_artists -> {
                     // Placeholder destination
                     true
                 }
+
                 R.id.nav_collectors -> {
                     // Placeholder destination
                     true
                 }
+
                 else -> false
             }
         }

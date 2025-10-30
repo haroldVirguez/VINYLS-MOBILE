@@ -18,10 +18,10 @@ object NetworkModule {
             .build()
     }
 
-    private val moshi: Moshi by lazy { 
+    private val moshi: Moshi by lazy {
         Moshi.Builder()
             .add(KotlinJsonAdapterFactory())
-            .build() 
+            .build()
     }
 
     fun retrofit(baseUrl: String): Retrofit = Retrofit.Builder()
