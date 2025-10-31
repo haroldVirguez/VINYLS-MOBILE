@@ -12,7 +12,7 @@ import com.team3.vinyls.ui.AlbumUiModel
 import kotlinx.coroutines.*
 import java.net.URL
 
-class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
     private val items = mutableListOf<AlbumUiModel>()
 
@@ -61,7 +61,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
             loadJob?.cancel()
 
             // launch new coroutine for this holder
-            loadJob = CoroutineScope(Dispatchers.Main).launch {
+            loadJob = CoroutineScope(uiDispatcher).launch {
                 try {
                     val bitmap = withContext(Dispatchers.IO) {
                         val url = URL(item.cover)
@@ -71,7 +71,7 @@ class AlbumsAdapter : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
                 } catch (e: CancellationException) {
                     // ignore if the job was cancelled
                 } catch (e: Exception) {
-                    e.printStackTrace()
+
                 }
             }
 
