@@ -4,7 +4,6 @@ import android.view.View
 import android.widget.TextView
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.AlbumUiModel
-import com.team3.vinyls.ui.adapters.AlbumsAdapter
 import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock

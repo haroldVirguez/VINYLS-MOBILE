@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.AlbumRepository
 import com.team3.vinyls.ui.AlbumUiModel
 import kotlinx.coroutines.launch
+import com.team3.vinyls.ui.mapper.toUi
 
 class AlbumsViewModel(
     private val repository: AlbumRepository
@@ -35,7 +36,7 @@ class AlbumsViewModel(
         viewModelScope.launch {
             try {
                 val data = repository.fetchAlbums()
-                _albums.value = data
+                _albums.value = data.map { it.toUi() }
             } catch (t: Throwable) {
                 _error.value = t.message
             } finally {

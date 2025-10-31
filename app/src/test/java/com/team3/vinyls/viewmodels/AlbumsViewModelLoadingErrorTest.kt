@@ -4,8 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.AlbumRepository
 import com.team3.vinyls.data.AlbumsService
-import com.team3.vinyls.ui.AlbumUiModel
-import com.team3.vinyls.viewmodels.AlbumsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -36,7 +34,7 @@ class AlbumsViewModelLoadingErrorTest {
             }
 
             val mockRepository = object : AlbumRepository(dummyService) {
-                override suspend fun fetchAlbums(): List<AlbumUiModel> {
+                override suspend fun fetchAlbums(): List<AlbumDto> {
                     throw RuntimeException("boom")
                 }
             }
