@@ -1,7 +1,7 @@
 package com.team3.vinyls.ui.adapters
 
 import com.team3.vinyls.ui.AlbumUiModel
-import com.team3.vinyls.ui.adapters.AlbumsAdapter
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Assert.assertEquals
 import org.junit.Test
 
@@ -9,7 +9,7 @@ class AlbumsAdapterTest {
 
     @Test
     fun `submitList updates items and getItemCount reflects size`() {
-        val adapter = AlbumsAdapter()
+        val adapter = AlbumsAdapter(StandardTestDispatcher())
         val items = listOf(
             AlbumUiModel(
                 id = 1,

@@ -12,6 +12,10 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import androidx.lifecycle.lifecycleScope
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.withContext
 import androidx.navigation.fragment.navArgs
 import com.team3.vinyls.R
 import com.team3.vinyls.data.AlbumRepository
@@ -62,19 +66,17 @@ class AlbumDetailFragment : Fragment() {
             binding.txtReleaseDate.text = "Lanzado en ${album.releaseDate.take(4)}"
 
             // Cover
-            Thread {
+            viewLifecycleOwner.lifecycleScope.launch {
                 try {
-                    val url = URL(album.cover)
-                    val bitmap = BitmapFactory.decodeStream(
-                        url.openConnection().getInputStream()
-                    )
-                    requireActivity().runOnUiThread {
-                        binding.imgAlbumCover.setImageBitmap(bitmap)
+                    val bitmap = withContext(Dispatchers.IO) {
+                        val url = URL(album.cover)
+                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
                     }
+                    binding.imgAlbumCover.setImageBitmap(bitmap)
                 } catch (e: Exception) {
                     e.printStackTrace()
                 }
-            }.start()
+            }
 
             // Tracks
             binding.tracksContainer.removeAllViews()

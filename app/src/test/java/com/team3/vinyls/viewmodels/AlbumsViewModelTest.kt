@@ -4,8 +4,6 @@ import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.AlbumRepository
 import com.team3.vinyls.data.AlbumsService
-import com.team3.vinyls.ui.AlbumUiModel
-import com.team3.vinyls.viewmodels.AlbumsViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -37,8 +35,8 @@ class AlbumsViewModelTest {
             }
 
             val mockRepository = object : AlbumRepository(dummyService) {
-                override suspend fun fetchAlbums(): List<AlbumUiModel> = listOf(
-                    AlbumUiModel(1, "A", "B", "cover", "desc", "genre", "label", "2023-01-01")
+                override suspend fun fetchAlbums(): List<AlbumDto> = listOf(
+                    AlbumDto(1, "A", "B", "cover", "desc", "genre", "label")
                 )
             }
             val viewModel = AlbumsViewModel(repository = mockRepository)

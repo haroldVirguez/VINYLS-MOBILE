@@ -1,10 +1,11 @@
 package com.team3.vinyls.ui.adapters
 
 import android.view.View
+import android.widget.ImageView
 import android.widget.TextView
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.AlbumUiModel
-import com.team3.vinyls.ui.adapters.AlbumsAdapter
+import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Test
 import org.mockito.kotlin.argumentCaptor
 import org.mockito.kotlin.mock
@@ -16,19 +17,20 @@ class AlbumsAdapterMockitoTest {
 
     @Test
     fun bind_setsTextAndClickInvokesCallback() {
-        val adapter = AlbumsAdapter()
+        val adapter = AlbumsAdapter(StandardTestDispatcher())
 
         // Mocks for itemView and its child TextViews
         val itemView = mock<View>()
         val titleView = mock<TextView>()
         val subtitleView = mock<TextView>()
         val genreView = mock<TextView>()
+        val imCover = mock<ImageView>()
 
         // Stub findViewById to return our mocked TextViews
         whenever(itemView.findViewById<TextView>(R.id.txtTitle)).thenReturn(titleView)
         whenever(itemView.findViewById<TextView>(R.id.txtSubtitle)).thenReturn(subtitleView)
         whenever(itemView.findViewById<TextView>(R.id.txtGenre)).thenReturn(genreView)
-
+        whenever(itemView.findViewById<ImageView>(R.id.imgCover)).thenReturn(imCover)
         // Create view holder using adapter's inner class
         val vh = adapter.AlbumViewHolder(itemView)
 

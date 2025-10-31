@@ -1,43 +1,55 @@
 package com.team3.vinyls.data
 
-import com.team3.vinyls.data.models.AlbumDto
-import com.team3.vinyls.data.AlbumRepository
-import com.team3.vinyls.data.AlbumsService
-import kotlinx.coroutines.test.runTest
-import org.junit.Assert.assertEquals
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import kotlinx.coroutines.runBlocking
+import okhttp3.mockwebserver.MockResponse
+import okhttp3.mockwebserver.MockWebServer
+import org.junit.After
+import org.junit.Assert
+import org.junit.Before
 import org.junit.Test
+import retrofit2.Retrofit
+import retrofit2.converter.moshi.MoshiConverterFactory
 
 class AlbumRepositoryTest {
+    private lateinit var server: MockWebServer
 
-    private class FakeAlbumsService(private val albums: List<AlbumDto>) : AlbumsService {
-        override suspend fun getAlbums(): List<AlbumDto> = albums
+    @Before
+    fun setup() {
+        server = MockWebServer()
+        server.start()
+    }
 
-        override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
-            throw NotImplementedError("getAlbumDetail test not implemented")
-        }
+    @After
+    fun teardown() {
+        server.shutdown()
     }
 
     @Test
-    fun `fetchAlbums maps AlbumDto to AlbumUiModel`() = runTest {
-        val dto = AlbumDto(
-            id = 1,
-            name = "Abbey Road",
-            cover = "cover.jpg",
-            releaseDate = "1969-09-26",
-            description = "The Beatles' final album",
-            genre = "Rock",
-            recordLabel = "Apple Records"
-        )
-        val service = FakeAlbumsService(listOf(dto))
+    fun getsInfoFromService() {
+        val body = """
+            [
+              {"id":1,"name":"Test","cover":"cover.jpg","releaseDate":"2020-01-01","description":"Test album","genre":"Rock","recordLabel":"Test Label"}
+            ]
+        """.trimIndent()
+        server.enqueue(MockResponse().setBody(body).setResponseCode(200))
+
+        val moshi = Moshi.Builder()
+            .add(KotlinJsonAdapterFactory())
+            .build()
+
+        val retrofit = Retrofit.Builder()
+            .baseUrl(server.url("/").toString())
+            .addConverterFactory(MoshiConverterFactory.create(moshi))
+            .build()
+        val service = retrofit.create(AlbumsService::class.java)
         val repo = AlbumRepository(service)
 
-        val result = repo.fetchAlbums()
+        val result = runBlocking { repo.fetchAlbums() }
 
-        assertEquals(1, result.size)
-        val ui = result[0]
-        assertEquals(1, ui.id)
-        assertEquals("Abbey Road", ui.title)
-        assertEquals("Artista desconocido • 1969", ui.subtitle)
+        Assert.assertEquals(1, result.size)
+        Assert.assertEquals("Test", result[0].name)
+
     }
 }
-
