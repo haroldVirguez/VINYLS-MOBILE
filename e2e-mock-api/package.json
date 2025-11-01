@@ -1,0 +1,19 @@
+{
+  "name": "vinyls-e2e-mock-api",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Express mock API for E2E tests (HU01/HU02)",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "start:watch": "nodemon server.js"
+  },
+  "dependencies": {
+    "cors": "^2.8.5",
+    "express": "^4.19.2"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.0"
+  }
+}
+
