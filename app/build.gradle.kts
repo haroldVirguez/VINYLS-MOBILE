@@ -42,6 +42,21 @@ android {
     }
     buildFeatures {
         viewBinding = true
+        buildConfig = true
+    }
+
+    // E2E product flavors to switch BASE_URL between real backend and local mock (Express)
+    flavorDimensions += "env"
+    productFlavors {
+        create("prod") {
+            dimension = "env"
+            buildConfigField("String", "BASE_URL", "\"https://backvynils-q6yc.onrender.com/\"")
+        }
+        create("e2e") {
+            dimension = "env"
+            // 10.0.2.2 maps host localhost from Android Emulator
+            buildConfigField("String", "BASE_URL", "\"http://10.0.2.2:3000/\"")
+        }
     }
 }
 
@@ -59,7 +74,8 @@ configure<org.gradle.testing.jacoco.plugins.JacocoPluginExtension> {
 }
 
 tasks.register<org.gradle.testing.jacoco.tasks.JacocoReport>("jacocoTestReport") {
-    dependsOn("testDebugUnitTest")
+    // Depend on all unit test tasks (handles product flavors like e2e/prod)
+    dependsOn(tasks.matching { it.name.matches(Regex("test.*UnitTest")) })
     reports {
         xml.required.set(true)
         html.required.set(true)
@@ -106,7 +122,8 @@ tasks.register<org.gradle.testing.jacoco.tasks.JacocoReport>("jacocoTestReport")
 }
 
 tasks.register<org.gradle.testing.jacoco.tasks.JacocoCoverageVerification>("jacocoTestCoverageVerification") {
-    dependsOn("testDebugUnitTest")
+    // Depend on all unit test tasks to support flavor variants
+    dependsOn(tasks.matching { it.name.matches(Regex("test.*UnitTest")) })
     val fileFilter = listOf(
         "**/R.class",
         "**/R$*.class",
@@ -198,4 +215,6 @@ dependencies {
     testRuntimeOnly("org.junit.vintage:junit-vintage-engine:5.9.3")
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+    androidTestImplementation("androidx.test.espresso:espresso-contrib:3.5.1")
+    androidTestImplementation("org.hamcrest:hamcrest:2.2")
 }
