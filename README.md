@@ -82,7 +82,6 @@ Archivos clave:
 ## Kraken (Appium + Cucumber) — e2e-kraken
 Se provee una suite alternativa de e2e basada en Appium + Cucumber (ubicada en `e2e-kraken/`).
 
-He actualizado los scripts y el runner para que funcionen bien en Windows/PowerShell:
 - `e2e-kraken/package.json` contiene ahora scripts útiles:
   - `npm run appium` → arranca appium (usa `appium` instalado localmente)
   - `npm run test:android` → corre `cucumber-js` (por defecto usa el flavor `e2e`)

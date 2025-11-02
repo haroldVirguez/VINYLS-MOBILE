@@ -14,3 +14,10 @@
 .cxx
 local.properties
 .idea
+
+# Node modules for e2e projects
+/e2e-kraken/node_modules/
+/e2e-mock-api/node_modules/
+
+# Logs from e2e-kraken
+/e2e-kraken/logs/
