@@ -12,10 +12,11 @@
   "dependencies": {
     "@cucumber/cucumber": "^10.0.0",
     "appium": "^2.11.3",
+    "kraken-node": "^1.0.24",
     "webdriverio": "^8.39.0"
   },
   "devDependencies": {
-    "appium-uiautomator2-driver": "^6.1.0",
+    "appium-uiautomator2-driver": "^2.4.8",
     "cross-env": "^7.0.3"
   }
 }
