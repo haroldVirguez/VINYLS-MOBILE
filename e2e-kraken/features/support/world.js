@@ -18,7 +18,7 @@ Before(async function () {
   const appFlavor = process.env.E2E_APP_FLAVOR || 'e2e'
   const tryInstall = (process.env.E2E_INSTALL_APP === '1')
 
-NO_RESET.
+//NO_RESET.
   let noReset
   if (typeof process.env.E2E_NO_RESET !== 'undefined') {
     noReset = process.env.E2E_NO_RESET !== '0'

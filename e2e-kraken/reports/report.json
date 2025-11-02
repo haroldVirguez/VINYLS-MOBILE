@@ -1,0 +1,160 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hu01/hu02---álbumes-lista-y-detalle;hu01---ver-la-lista-de-álbumes",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "HU01 - Ver la lista de álbumes",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2922892208
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:6"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 50387113124,
+              "error_message": "Error: element (\"//*[@resource-id=\"com.team3.vinyls:id/recyclerAlbums\"]\") still not existing after 45000ms\n    at file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/webdriverio/build/commands/browser/waitUntil.js:39:23\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Element.elementErrorHandlerCallbackFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/webdriverio/build/middlewares.js:19:32)\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Element.elementErrorHandlerCallbackFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/webdriverio/build/middlewares.js:19:32)\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async VinylsWorld.<anonymous> (/Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/features/step_definitions/albums.steps.js:9:5)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "I should see the albums list",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:29"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 46011916
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "hu01/hu02---álbumes-lista-y-detalle;hu02---abrir-detalle-del-primer-álbum",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "HU02 - Abrir detalle del primer álbum",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2503737458
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:6"
+            },
+            "result": {
+              "status": "failed",
+              "duration": 50410330082,
+              "error_message": "Error: element (\"//*[@resource-id=\"com.team3.vinyls:id/recyclerAlbums\"]\") still not existing after 45000ms\n    at file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/webdriverio/build/commands/browser/waitUntil.js:39:23\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Element.elementErrorHandlerCallbackFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/webdriverio/build/middlewares.js:19:32)\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Element.elementErrorHandlerCallbackFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/webdriverio/build/middlewares.js:19:32)\n    at async Element.wrapCommandFn (file:///Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async VinylsWorld.<anonymous> (/Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/features/step_definitions/albums.steps.js:9:5)"
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I tap the first album in the list",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:35"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "I should see the album detail title \"Mock Album 1\"",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:54"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "I should see the album description",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:66"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I should see the album tracks section",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:74"
+            },
+            "result": {
+              "status": "skipped",
+              "duration": 0
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 59446834
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hu01/hu02---álbumes-lista-y-detalle",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HU01/HU02 - Álbumes lista y detalle",
+    "tags": [],
+    "uri": "features/albums.feature"
+  }
+]
