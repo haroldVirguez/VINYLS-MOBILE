@@ -47,7 +47,6 @@ const albums = [
 ];
 
 app.get('/albums', (req, res) => {
-  // For list, return albums without heavy nested arrays if desired. Keeping complete for simplicity.
   res.json(albums.map(({ tracks, performers, comments, ...rest }) => rest));
 });
 
