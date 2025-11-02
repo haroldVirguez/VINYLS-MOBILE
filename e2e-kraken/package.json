@@ -5,7 +5,7 @@
   "description": "Kraken/Appium+Cucumber E2E for HU01/HU02",
   "scripts": {
     "appium": "appium",
-    "test:android": "cucumber-js --require features/step_definitions/**/*.js --require features/support/**/*.js",
+    "test:android": "cucumber-js --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
     "test:android:prod": "node ./scripts/run-test-prod.js",
     "test:android:prod:install": "node ./scripts/run-test-prod.js --install"
   },
@@ -17,6 +17,7 @@
   },
   "devDependencies": {
     "appium-uiautomator2-driver": "^2.4.8",
-    "cross-env": "^7.0.3"
+    "cross-env": "^7.0.3",
+    "cucumber-html-reporter": "^7.2.0"
   }
 }
