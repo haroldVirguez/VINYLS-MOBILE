@@ -1,1 +1,9 @@
-/build
+/build/*
+!/build/outputs
+!/build/outputs/apk
+!/build/outputs/apk/prod
+!/build/outputs/apk/prod/debug
+!/build/outputs/apk/prod/debug/app-prod-debug.apk
+/build/outputs/apk/**/output-metadata.json
+/build/outputs/apk/**/*androidTest*.apk
+/build/outputs/logs/
