@@ -1,4 +1,4 @@
-# Vinyls Mobile
+# Spinify Mobile
 
 Aplicación Android (Kotlin) con MVVM, Repository y Service Adapter. Presenta una lista de álbumes y una pantalla de detalle.
 
@@ -7,31 +7,63 @@ Aplicación Android (Kotlin) con MVVM, Repository y Service Adapter. Presenta un
 - Android SDK API 36 (o ajusta `compileSdk`/`targetSdk`)
 
 ## Quick Start
-1) Abre el proyecto en Android Studio y haz “Sync Project with Gradle Files”.
+1) Abre el proyecto en Android Studio y haz "Sync Project with Gradle Files".
 2) Verifica Gradle JDK=17 (Settings → Build Tools → Gradle).
 3) Crea/inicia un emulador en AVD Manager (API 33+ sirve).
-4) Ejecuta el módulo `app` desde Android Studio; la app inicia en “Álbumes”.
+4) Selecciona el flavor de construcción:
+   - En Android Studio: **View → Tool Windows → Build Variants** (o pestaña inferior "Build Variants")
+   - Para producción: selecciona **prodDebug** (usa backend real `https://backvynils-q6yc.onrender.com/`)
+   - Para pruebas E2E: selecciona **e2eDebug** (requiere servidor mock local corriendo)
+5) Ejecuta el módulo `app` desde Android Studio; la app inicia en "Álbumes".
 
 CLI (opcional, ejecutar desde la raíz del repositorio):
 
 - Unix / Git Bash / macOS / Linux:
 ```bash
-./gradlew clean :app:assembleDebug :app:installDebug
+# Producción
+./gradlew clean :app:assembleProdDebug :app:installProdDebug
+
+# E2E (requiere servidor mock)
+./gradlew clean :app:assembleE2eDebug :app:installE2eDebug
+
 adb shell am start -n com.team3.vinyls/.MainActivity
 ```
 
 - Windows (cmd.exe / PowerShell, ejecutar desde la raíz del repo):
 ```powershell
-.\gradlew.bat clean :app:assembleDebug :app:installDebug
+# Producción
+.\gradlew.bat clean :app:assembleProdDebug :app:installProdDebug
+
+# E2E (requiere servidor mock)
+.\gradlew.bat clean :app:assembleE2eDebug :app:installE2eDebug
+
 adb shell am start -n com.team3.vinyls/.MainActivity
 ```
 
-Nota: no es necesario usar rutas absolutas; asume que estás en la raíz del repositorio antes de ejecutar los comandos.
+**Nota:** no es necesario usar rutas absolutas; asume que estás en la raíz del repositorio antes de ejecutar los comandos.
 
 ## Pruebas y cobertura
-- Ejecutar pruebas unitarias: `./gradlew test` (o `.
-gradlew.bat test` en Windows)
-- Reporte JaCoCo: `./gradlew jacocoTestReport` y abre `app/build/reports/jacoco/jacocoTestReport/html/index.html`
+
+**Windows (PowerShell/cmd.exe):**
+```powershell
+# Ejecutar pruebas unitarias
+.\gradlew.bat test
+
+# Reporte JaCoCo
+.\gradlew.bat jacocoTestReport
+# Luego abre: app/build/reports/jacoco/jacocoTestReport/html/index.html
+```
+
+**macOS / Linux / Unix:**
+```bash
+# Ejecutar pruebas unitarias
+./gradlew test
+
+# Reporte JaCoCo
+./gradlew jacocoTestReport
+# Luego abre: app/build/reports/jacoco/jacocoTestReport/html/index.html
+```
+
 - Umbral de cobertura: 80% (la tarea `jacocoTestCoverageVerification` y `check` fallan si no se alcanza)
 
 ## E2E con Express (HU01 y HU02)
@@ -71,8 +103,36 @@ Qué valida:
 - HU02: al tocar un álbum, se navega a detalle y se muestra el título correcto.
 
 ### 3) Cambiar entre ambientes
-- `prod`: usa el backend real `https://backvynils-q6yc.onrender.com/`.
-- `e2e`: usa el mock `http://10.0.2.2:3000/` (emulador). Configurado vía `BuildConfig.BASE_URL`.
+
+#### En Android Studio:
+1. Abre **View → Tool Windows → Build Variants** (o pestaña inferior "Build Variants")
+2. En la columna "Active Build Variant" para el módulo `app`, selecciona:
+   - **prodDebug** para producción (backend real)
+   - **e2eDebug** para pruebas (mock local)
+
+#### Desde línea de comandos:
+
+**Windows (PowerShell/cmd.exe):**
+```powershell
+# Producción (backend real)
+.\gradlew.bat :app:installProdDebug
+
+# E2E (mock local - requiere servidor corriendo)
+.\gradlew.bat :app:installE2eDebug
+```
+
+**macOS / Linux / Unix:**
+```bash
+# Producción (backend real)
+./gradlew :app:installProdDebug
+
+# E2E (mock local - requiere servidor corriendo)
+./gradlew :app:installE2eDebug
+```
+
+**Configuración:**
+- `prod`: usa el backend real `https://backvynils-q6yc.onrender.com/`
+- `e2e`: usa el mock `http://10.0.2.2:3000/` (emulador). Configurado vía `BuildConfig.BASE_URL` en `app/build.gradle.kts`
 
 Archivos clave:
 - `app/build.gradle.kts` → flavors con `BuildConfig.BASE_URL`.
@@ -88,8 +148,11 @@ Se provee una suite alternativa de e2e basada en Appium + Cucumber (ubicada en `
   - `npm run test:android:prod` → corre las pruebas apuntando a `prod` (usa un runner Node local que establece las variables de entorno)
   - `npm run test:android:prod:install` → como anterior pero fuerza la instalación del APK antes de ejecutar
 
-Resumen de pasos para Kraken (PowerShell)
+Resumen de pasos para Kraken
+
 1) Construir e instalar la app (flavor mock/e2e) y/o prod según necesites:
+
+**Windows (PowerShell/cmd.exe):**
 ```powershell
 # instalar flavor e2e (mock)
 .\gradlew.bat :app:installE2eDebug
@@ -97,20 +160,52 @@ Resumen de pasos para Kraken (PowerShell)
 # instalar flavor prod (backend real)
 .\gradlew.bat clean :app:assembleProdDebug :app:installProdDebug
 ```
+
+**macOS / Linux / Unix:**
+```bash
+# instalar flavor e2e (mock)
+./gradlew :app:installE2eDebug
+
+# instalar flavor prod (backend real)
+./gradlew clean :app:assembleProdDebug :app:installProdDebug
+```
 2) (Opcional) Iniciar Appium desde `e2e-kraken`:
+
+**Windows (PowerShell):**
 ```powershell
 Set-Location .\e2e-kraken
 npm run appium
 # o desde la raíz:
 npm --prefix .\e2e-kraken run appium
 ```
+
+**macOS / Linux / Unix:**
+```bash
+cd e2e-kraken
+npm run appium
+# o desde la raíz:
+npm --prefix ./e2e-kraken run appium
+```
+
 3) Ejecutar las pruebas
+
 - Contra el mock (flavor `e2e`, asumiendo el server Express corriendo):
+
+**Windows (PowerShell):**
 ```powershell
 Set-Location .\e2e-kraken
 npm run test:android
 ```
-- Contra el backend real (`prod`): (PowerShell)
+
+**macOS / Linux / Unix:**
+```bash
+cd e2e-kraken
+npm run test:android
+```
+
+- Contra el backend real (`prod`):
+
+**Windows (PowerShell):**
 ```powershell
 Set-Location .\e2e-kraken
 $env:E2E_APP_FLAVOR = 'prod'
@@ -119,9 +214,28 @@ node .\scripts\run-test-prod.js
 # o alternativamente
 npm run test:android:prod
 ```
+
+**macOS / Linux / Unix:**
+```bash
+cd e2e-kraken
+export E2E_APP_FLAVOR=prod
+export E2E_INSTALL_APP=0
+node ./scripts/run-test-prod.js
+# o alternativamente
+npm run test:android:prod
+```
+
 - Para forzar instalación del APK antes de ejecutar (prod):
+
+**Windows (PowerShell):**
 ```powershell
 Set-Location .\e2e-kraken
+npm run test:android:prod:install
+```
+
+**macOS / Linux / Unix:**
+```bash
+cd e2e-kraken
 npm run test:android:prod:install
 ```
 
@@ -133,8 +247,9 @@ adb shell uiautomator dump /sdcard/window_dump.xml
 adb pull /sdcard/window_dump.xml .\e2e-kraken\logs\window_dump.xml
 ```
 
-Notas importantes (PowerShell)
-- PowerShell puede interpretar `&&` de forma distinta en versiones antiguas. Para comandos encadenados usa `;` o ejecuta por pasos (Set-Location; luego ejecutar). También puedes usar `npm --prefix` para ejecutar scripts desde la raíz sin cambiar de carpeta.
+Notas importantes
+- **Windows/PowerShell:** PowerShell puede interpretar `&&` de forma distinta en versiones antiguas. Para comandos encadenados usa `;` o ejecuta por pasos (Set-Location; luego ejecutar). También puedes usar `npm --prefix` para ejecutar scripts desde la raíz sin cambiar de carpeta.
+- **macOS/Linux:** Los comandos `adb` funcionan igual en todos los sistemas operativos.
 - Si ves errores de resolución de binarios (`cross-env`), los scripts ahora usan un runner Node local (`scripts/run-test-prod.js`) que maneja fallbacks y `npx` cuando sea necesario.
 
 Para más detalles y ejemplos de ejecución (comandos listos para copiar/pegar), abre `e2e-kraken/README.md`.
