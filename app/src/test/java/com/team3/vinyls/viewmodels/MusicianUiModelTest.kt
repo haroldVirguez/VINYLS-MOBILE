@@ -1,5 +1,6 @@
-package com.team3.vinyls.ui
+package com.team3.vinyls.viewmodels
 
+import com.team3.vinyls.ui.MusicianUiModel
 import org.junit.Assert.*
 import org.junit.Test
 

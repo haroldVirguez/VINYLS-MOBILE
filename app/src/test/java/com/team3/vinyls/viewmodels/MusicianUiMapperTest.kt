@@ -1,4 +1,4 @@
-package com.team3.vinyls.ui
+package com.team3.vinyls.viewmodels
 
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.models.MusicianDto
