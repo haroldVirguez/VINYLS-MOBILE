@@ -24,10 +24,9 @@ jobs:
       - name: Grant execute permission for gradlew
         run: chmod +x gradlew
       - name: Build, test and check coverage (>=80%)
-        run: ./gradlew clean testDebugUnitTest jacocoTestReport jacocoTestCoverageVerification --stacktrace
+        run: ./gradlew clean :app:testE2eDebugUnitTest :app:jacocoTestReport :app:jacocoTestCoverageVerification --stacktrace
       - name: Upload coverage report
         uses: actions/upload-artifact@v4
         with:
           name: jacoco-html-report
           path: app/build/reports/jacoco/jacocoTestReport/html
-

@@ -1,0 +1,23 @@
+{
+  "name": "vinyls-kraken-e2e",
+  "private": true,
+  "version": "1.0.0",
+  "description": "Kraken/Appium+Cucumber E2E for HU01/HU02",
+  "scripts": {
+    "appium": "appium",
+    "test:android": "cucumber-js --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:prod": "node ./scripts/run-test-prod.js",
+    "test:android:prod:install": "node ./scripts/run-test-prod.js --install"
+  },
+  "dependencies": {
+    "@cucumber/cucumber": "^10.0.0",
+    "appium": "^2.11.3",
+    "kraken-node": "^1.0.24",
+    "webdriverio": "^8.39.0"
+  },
+  "devDependencies": {
+    "appium-uiautomator2-driver": "^2.4.8",
+    "cross-env": "^7.0.3",
+    "cucumber-html-reporter": "^7.2.0"
+  }
+}
