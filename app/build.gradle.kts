@@ -204,7 +204,7 @@ dependencies {
         testImplementation(libs.androidx.fragment.testing)
     testImplementation(libs.moshi.kotlin)
     // Robolectric for JVM UI tests (Adapter/ViewHolder)
-    testImplementation("org.robolectric:robolectric:4.10")
+    testImplementation(libs.test.robolectric)
     // AndroidX Test core for ApplicationProvider
     testImplementation("androidx.test:core:1.5.0")
     // Mockito inline to mock final Android classes (TextView, View) in unit tests

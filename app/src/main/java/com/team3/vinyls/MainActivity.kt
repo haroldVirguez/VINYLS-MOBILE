@@ -38,7 +38,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_artists -> {
-                    // Placeholder destination
+                    navController.navigate(R.id.musiciansFragment)
                     true
                 }
 
