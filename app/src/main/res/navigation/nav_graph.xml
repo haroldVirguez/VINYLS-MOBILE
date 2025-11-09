@@ -25,4 +25,12 @@
             android:name="albumId"
             app:argType="string" />
     </fragment>
+
+    <!-- Musicians / Artists fragment -->
+    <fragment
+        android:id="@+id/musiciansFragment"
+        android:name="com.team3.vinyls.ui.fragments.MusiciansFragment"
+        android:label="Artistas"
+        tools:layout="@layout/fragment_musicians" />
+
 </navigation>

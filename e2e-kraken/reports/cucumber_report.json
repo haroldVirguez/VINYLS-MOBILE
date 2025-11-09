@@ -1,0 +1,222 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hu01/hu02---álbumes-lista-y-detalle;hu01---ver-la-lista-de-álbumes",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "HU01 - Ver la lista de álbumes",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 10056746800
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 100391999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "I should see the albums list",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:29"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94597600
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 106433200
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      },
+      {
+        "description": "",
+        "id": "hu01/hu02---álbumes-lista-y-detalle;hu02---abrir-detalle-del-primer-álbum",
+        "keyword": "Scenario",
+        "line": 9,
+        "name": "HU02 - Abrir detalle del primer álbum",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 8874037000
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94591300
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 10,
+            "name": "I tap the first album in the list",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:35"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 225858600
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "I should see the album detail title \"Mock Album 1\"",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:54"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1189491799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "I should see the album description",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:66"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 175235100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 13,
+            "name": "I should see the album tracks section",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:74"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 193271000
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 219581999
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hu01/hu02---álbumes-lista-y-detalle",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HU01/HU02 - Álbumes lista y detalle",
+    "tags": [],
+    "uri": "features\\albums.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "huxx---artistas-(musicians)-lista-y-detalle;ver-la-lista-de-artistas",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Ver la lista de artistas",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 12275497200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 104327799
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "I should see the musicians list",
+            "match": {
+              "location": "features\\step_definitions\\musicians.steps.js:19"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11618401900
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 112317900
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "huxx---artistas-(musicians)-lista-y-detalle",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HUxx - Artistas (Musicians) lista y detalle",
+    "tags": [],
+    "uri": "features\\musicians.feature"
+  }
+]

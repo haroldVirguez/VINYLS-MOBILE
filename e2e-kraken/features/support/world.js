@@ -74,6 +74,30 @@ Before(async function () {
     }
   })
   await this.driver.setTimeout({ implicit: 5000 })
+
+  try {
+    try {
+      await this.driver.startActivity('com.team3.vinyls', '.MainActivity')
+    } catch (e) {
+      try { await this.driver.activateApp('com.team3.vinyls') } catch (err) {}
+    }
+
+    try {
+      const recycler = await this.driver.$('//*[@resource-id="com.team3.vinyls:id/recyclerAlbums"]')
+      await recycler.waitForExist({ timeout: 10000 })
+    } catch (e) {
+      try {
+        const nav = await this.driver.$('//*[@resource-id="com.team3.vinyls:id/nav_albums"]')
+        if (nav && await nav.isExisting()) {
+          await nav.click()
+          const recycler2 = await this.driver.$('//*[@resource-id="com.team3.vinyls:id/recyclerAlbums"]')
+          await recycler2.waitForExist({ timeout: 10000 })
+        }
+      } catch (err) {
+      }
+    }
+  } catch (err) {
+  }
 })
 
 After(async function () {

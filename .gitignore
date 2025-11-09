@@ -8,15 +8,49 @@
 /.idea/navEditor.xml
 /.idea/assetWizardSettings.xml
 .DS_Store
+/build
 /captures
 .externalNativeBuild
 .cxx
 local.properties
 .idea
 
-# Node modules for e2e projects
-/e2e-kraken/node_modules/
-/e2e-mock-api/node_modules/
+# Node.js
+# Ignorar node_modules en cualquier subdirectorio (incluye e2e-mock-api)
+**/node_modules/
 
-# Logs from e2e-kraken
-/e2e-kraken/logs/
+# Específicos de los E2E JS localmente
+/e2e-mock-api/node_modules/
+/e2e-kraken/node_modules/
+
+# IDEs y editores
+.vscode/
+
+# Logs y archivos temporales
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Entornos y archivos de configuración sensibles
+.env
+.env.*
+
+# Keystores y artefactos sensibles
+*.jks
+*.keystore
+
+# Excluir todos los build outputs (incluye submódulos)
+**/build/
+
+# Android Studio misc
+captures/
+
+# Gradle wrapper
+.gradle/
+
+# Gradle generated local files
+gradle-app.setting
+
+# Otros
+*.keystore
