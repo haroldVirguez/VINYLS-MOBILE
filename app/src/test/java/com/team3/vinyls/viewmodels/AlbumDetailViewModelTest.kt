@@ -2,8 +2,8 @@ package com.team3.vinyls.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
 import com.team3.vinyls.data.models.AlbumDto
-import com.team3.vinyls.data.AlbumRepository
-import com.team3.vinyls.data.AlbumsService
+import com.team3.vinyls.data.repository.AlbumRepository
+import com.team3.vinyls.data.service.AlbumsService
 import com.team3.vinyls.viewmodels.AlbumDetailViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.ExperimentalCoroutinesApi

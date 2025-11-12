@@ -2,6 +2,8 @@ package com.team3.vinyls.data
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.team3.vinyls.data.repository.AlbumRepository
+import com.team3.vinyls.data.service.AlbumsService
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer

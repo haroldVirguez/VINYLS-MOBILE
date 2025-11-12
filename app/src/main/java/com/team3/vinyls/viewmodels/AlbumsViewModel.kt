@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team3.vinyls.data.AlbumRepository
+import com.team3.vinyls.data.repository.AlbumRepository
 import com.team3.vinyls.ui.AlbumUiModel
 import kotlinx.coroutines.launch
 import com.team3.vinyls.ui.mapper.toUi

@@ -1,7 +1,7 @@
-package com.team3.vinyls.data
+package com.team3.vinyls.data.repository
 
+import com.team3.vinyls.data.service.AlbumsService
 import com.team3.vinyls.data.models.AlbumDto
-import java.time.LocalDate
 
 open class AlbumRepository(private val service: AlbumsService) {
     open suspend fun fetchAlbums(): List<AlbumDto> {

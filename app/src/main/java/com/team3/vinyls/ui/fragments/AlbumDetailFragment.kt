@@ -18,8 +18,8 @@ import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.navigation.fragment.navArgs
 import com.team3.vinyls.R
-import com.team3.vinyls.data.AlbumRepository
-import com.team3.vinyls.data.AlbumsService
+import com.team3.vinyls.data.repository.AlbumRepository
+import com.team3.vinyls.data.service.AlbumsService
 import com.team3.vinyls.viewmodels.AlbumDetailViewModel
 import com.team3.vinyls.core.network.ApiConstants
 import com.team3.vinyls.core.network.NetworkModule

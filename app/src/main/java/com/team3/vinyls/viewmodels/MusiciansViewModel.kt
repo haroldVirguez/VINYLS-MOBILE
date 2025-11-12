@@ -5,7 +5,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team3.vinyls.data.MusicianRepository
+import com.team3.vinyls.data.repository.MusicianRepository
 import com.team3.vinyls.ui.MusicianUiModel
 import com.team3.vinyls.ui.mapper.toUi
 import kotlinx.coroutines.launch

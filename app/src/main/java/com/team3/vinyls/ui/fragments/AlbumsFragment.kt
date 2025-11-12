@@ -14,8 +14,8 @@ import com.team3.vinyls.viewmodels.AlbumsViewModel
 import androidx.navigation.fragment.findNavController
 import com.team3.vinyls.core.network.NetworkModule
 import com.team3.vinyls.core.network.ApiConstants
-import com.team3.vinyls.data.AlbumsService
-import com.team3.vinyls.data.AlbumRepository
+import com.team3.vinyls.data.service.AlbumsService
+import com.team3.vinyls.data.repository.AlbumRepository
 import com.team3.vinyls.ui.adapters.AlbumsAdapter
 
 class AlbumsFragment : Fragment() {
