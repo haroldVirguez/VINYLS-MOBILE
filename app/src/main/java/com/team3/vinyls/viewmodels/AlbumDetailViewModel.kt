@@ -5,11 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.repositories.AlbumRepository
+import com.team3.vinyls.data.repositories.TrackRepository
 import com.team3.vinyls.data.models.AlbumDto
+import com.team3.vinyls.data.models.TrackDto
 import kotlinx.coroutines.launch
 
 class AlbumDetailViewModel(
-    private val repository: AlbumRepository
+    private val albumRepository: AlbumRepository,
+    private val trackRepository: TrackRepository
 ) : ViewModel() {
 
     private val _album = MutableLiveData<AlbumDto>()
@@ -27,12 +30,24 @@ class AlbumDetailViewModel(
 
         viewModelScope.launch {
             try {
-                val data = repository.getAlbumDetail(albumId)
+                val data = albumRepository.getAlbumDetail(albumId)
                 _album.value = data
             } catch (t: Throwable) {
                 _error.value = t.message
             } finally {
                 _loading.value = false
+            }
+        }
+    }
+
+    fun addTrackToAlbum(albumId: Int, trackName: String, trackDuration: String) {
+        val track = TrackDto(id = 0, name = trackName, duration = trackDuration)
+        viewModelScope.launch {
+            try {
+                val newTrack = trackRepository.addTrackToAlbum(albumId, track)
+                println("Track agregado: ${newTrack.name}")
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }

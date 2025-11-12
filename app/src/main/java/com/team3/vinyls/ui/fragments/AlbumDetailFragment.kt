@@ -38,8 +38,9 @@ class AlbumDetailFragment : Fragment() {
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 val retrofit = NetworkModule.retrofit(ApiConstants.BASE_URL)
                 val service = retrofit.create(AlbumsService::class.java)
-                val repository = AlbumRepository(service)
-                return AlbumDetailViewModel(repository) as T
+                val albumRepository = AlbumRepository(service)
+                val trackRepository = NetworkModule.provideTrackRepository(ApiConstants.BASE_URL)
+                return AlbumDetailViewModel(albumRepository, trackRepository) as T
             }
         }
     }
