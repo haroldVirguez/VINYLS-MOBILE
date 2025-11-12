@@ -7,6 +7,9 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
+import android.app.AlertDialog
+import android.widget.EditText
+import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
@@ -59,6 +62,7 @@ class AlbumDetailFragment : Fragment() {
 
         val albumId = args.albumId.toInt()
         viewModel.loadAlbumDetail(albumId)
+        viewModel.loadTracks(albumId)
 
         viewModel.album.observe(viewLifecycleOwner) { album ->
             binding.txtTitle.text = album.name
@@ -79,10 +83,17 @@ class AlbumDetailFragment : Fragment() {
                 }
             }
 
-            // Tracks
+            // Comentarios
+            val commentsText =
+                album.comments?.joinToString("\n\n") { "⭐️ ${it.rating}/5\n${it.description}" }
+                    ?: "Sin comentarios aún"
+            binding.txtComments.text = commentsText
+        }
+
+        viewModel.tracks.observe(viewLifecycleOwner) { tracks ->
             binding.tracksContainer.removeAllViews()
 
-            album.tracks?.forEachIndexed { index, track ->
+            tracks.forEachIndexed { index, track ->
                 val row = LinearLayout(requireContext()).apply {
                     orientation = LinearLayout.HORIZONTAL
                     setPadding(0, 6, 0, 6)
@@ -104,7 +115,7 @@ class AlbumDetailFragment : Fragment() {
                 }
 
                 val durationView = TextView(requireContext()).apply {
-                    text = "${track.duration} min"
+                    text = track.duration
                     setTextColor(ContextCompat.getColor(requireContext(), R.color.text_secondary))
                     textSize = 14f
                 }
@@ -115,16 +126,45 @@ class AlbumDetailFragment : Fragment() {
 
                 binding.tracksContainer.addView(row)
             }
+        }
 
-            // Comentarios
-            val commentsText =
-                album.comments?.joinToString("\n\n") { "⭐️ ${it.rating}/5\n${it.description}" }
-                    ?: "Sin comentarios aún"
-            binding.txtComments.text = commentsText
+        binding.btnAddTrack.setOnClickListener {
+            val albumId = args.albumId.toInt()
+
+            // Crear el layout del diálogo
+            val layout = LinearLayout(requireContext())
+            layout.orientation = LinearLayout.VERTICAL
+            layout.setPadding(50, 40, 50, 10)
+
+            val nameInput = EditText(requireContext())
+            nameInput.hint = "Nombre de la canción"
+            layout.addView(nameInput)
+
+            val durationInput = EditText(requireContext())
+            durationInput.hint = "Duración (ej: 4:05)"
+            layout.addView(durationInput)
+
+            // Crear el AlertDialog
+            AlertDialog.Builder(requireContext())
+                .setTitle("Agregar canción")
+                .setView(layout)
+                .setPositiveButton("Guardar") { _, _ ->
+                    val trackName = nameInput.text.toString().trim()
+                    val trackDuration = durationInput.text.toString().trim()
+
+                    if (trackName.isNotEmpty() && trackDuration.isNotEmpty()) {
+                        viewModel.addTrackToAlbum(albumId, trackName, trackDuration)
+                        viewModel.loadTracks(albumId)
+                    } else {
+                        Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                    }
+                }
+                .setNegativeButton("Cancelar", null)
+                .show()
         }
 
         binding.btnAddComment.setOnClickListener {
-            // Aquí más adelante podrás abrir un formulario o diálogo para agregar comentario
+            // Placeholder
         }
     }
 

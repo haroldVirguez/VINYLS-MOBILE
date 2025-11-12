@@ -18,6 +18,9 @@ class AlbumDetailViewModel(
     private val _album = MutableLiveData<AlbumDto>()
     val album: LiveData<AlbumDto> = _album
 
+    private val _tracks = MutableLiveData<List<TrackDto>>()
+    val tracks: LiveData<List<TrackDto>> = _tracks
+
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
 
@@ -40,8 +43,19 @@ class AlbumDetailViewModel(
         }
     }
 
+    fun loadTracks(albumId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = trackRepository.getTracksByAlbum(albumId)
+                _tracks.postValue(response)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
     fun addTrackToAlbum(albumId: Int, trackName: String, trackDuration: String) {
-        val track = TrackDto(id = 0, name = trackName, duration = trackDuration)
+        val track = TrackDto(name = trackName, duration = trackDuration)
         viewModelScope.launch {
             try {
                 val newTrack = trackRepository.addTrackToAlbum(albumId, track)
