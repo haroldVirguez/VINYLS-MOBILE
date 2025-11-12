@@ -1,4 +1,4 @@
-package com.team3.vinyls.data.service
+package com.team3.vinyls.data.services
 
 import com.team3.vinyls.core.network.ApiConstants
 import com.team3.vinyls.data.models.MusicianDto

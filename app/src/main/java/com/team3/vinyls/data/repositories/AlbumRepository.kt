@@ -1,6 +1,6 @@
-package com.team3.vinyls.data.repository
+package com.team3.vinyls.data.repositories
 
-import com.team3.vinyls.data.service.AlbumsService
+import com.team3.vinyls.data.services.AlbumsService
 import com.team3.vinyls.data.models.AlbumDto
 
 open class AlbumRepository(private val service: AlbumsService) {

@@ -13,8 +13,8 @@ import com.team3.vinyls.databinding.FragmentMusiciansBinding
 import com.team3.vinyls.viewmodels.MusiciansViewModel
 import com.team3.vinyls.core.network.NetworkModule
 import com.team3.vinyls.core.network.ApiConstants
-import com.team3.vinyls.data.service.MusiciansService
-import com.team3.vinyls.data.repository.MusicianRepository
+import com.team3.vinyls.data.services.MusiciansService
+import com.team3.vinyls.data.repositories.MusicianRepository
 import com.team3.vinyls.ui.adapters.MusiciansAdapter
 
 class MusiciansFragment : Fragment() {

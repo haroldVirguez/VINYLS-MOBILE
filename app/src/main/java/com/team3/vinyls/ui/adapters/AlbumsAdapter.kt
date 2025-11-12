@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.team3.vinyls.R
-import com.team3.vinyls.ui.AlbumUiModel
+import com.team3.vinyls.ui.models.AlbumUiModel
 import kotlinx.coroutines.*
 import java.net.URL
 

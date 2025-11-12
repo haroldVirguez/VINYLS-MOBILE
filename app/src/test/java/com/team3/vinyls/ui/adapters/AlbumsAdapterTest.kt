@@ -1,6 +1,6 @@
 package com.team3.vinyls.ui.adapters
 
-import com.team3.vinyls.ui.AlbumUiModel
+import com.team3.vinyls.ui.models.AlbumUiModel
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Assert.assertEquals
 import org.junit.Test

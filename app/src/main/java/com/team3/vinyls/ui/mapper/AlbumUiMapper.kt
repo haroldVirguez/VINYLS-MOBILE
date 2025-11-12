@@ -1,7 +1,7 @@
 package com.team3.vinyls.ui.mapper
 
 import com.team3.vinyls.data.models.AlbumDto
-import com.team3.vinyls.ui.AlbumUiModel
+import com.team3.vinyls.ui.models.AlbumUiModel
 import java.time.LocalDate
 
 fun AlbumDto.toUi(): AlbumUiModel {
