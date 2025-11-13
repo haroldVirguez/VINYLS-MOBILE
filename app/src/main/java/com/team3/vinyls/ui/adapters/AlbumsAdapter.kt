@@ -10,6 +10,9 @@ import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.AlbumUiModel
 import kotlinx.coroutines.*
 import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import androidx.core.net.toUri
 
 class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) :
     RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
