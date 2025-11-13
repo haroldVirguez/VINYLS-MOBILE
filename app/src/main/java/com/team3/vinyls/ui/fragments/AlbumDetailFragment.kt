@@ -20,6 +20,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.withContext
 import androidx.navigation.fragment.navArgs
+import com.google.android.material.textfield.TextInputEditText
 import com.team3.vinyls.R
 import com.team3.vinyls.data.repositories.AlbumRepository
 import com.team3.vinyls.data.services.AlbumsService
@@ -132,35 +133,33 @@ class AlbumDetailFragment : Fragment() {
             val albumId = args.albumId.toInt()
 
             // Crear el layout del diálogo
-            val layout = LinearLayout(requireContext())
-            layout.orientation = LinearLayout.VERTICAL
-            layout.setPadding(50, 40, 50, 10)
+            val dialogView = layoutInflater.inflate(R.layout.dialog_add_track, null)
+            val nameInput = dialogView.findViewById<TextInputEditText>(R.id.inputTrackName)
+            val durationInput = dialogView.findViewById<TextInputEditText>(R.id.inputTrackDuration)
+            val dialog = AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create()
+            dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
+            dialog.show()
+            val btnSave = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
+            val btnCancel = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
 
-            val nameInput = EditText(requireContext())
-            nameInput.hint = "Nombre de la canción"
-            layout.addView(nameInput)
+            btnSave.setOnClickListener {
+                val trackName = nameInput.text.toString().trim()
+                val trackDuration = durationInput.text.toString().trim()
 
-            val durationInput = EditText(requireContext())
-            durationInput.hint = "Duración (ej: 4:05)"
-            layout.addView(durationInput)
-
-            // Crear el AlertDialog
-            AlertDialog.Builder(requireContext())
-                .setTitle("Agregar canción")
-                .setView(layout)
-                .setPositiveButton("Guardar") { _, _ ->
-                    val trackName = nameInput.text.toString().trim()
-                    val trackDuration = durationInput.text.toString().trim()
-
-                    if (trackName.isNotEmpty() && trackDuration.isNotEmpty()) {
-                        viewModel.addTrackToAlbum(albumId, trackName, trackDuration)
-                        viewModel.loadTracks(albumId)
-                    } else {
-                        Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
-                    }
+                if (trackName.isNotEmpty() && trackDuration.isNotEmpty()) {
+                    viewModel.addTrackToAlbum(albumId, trackName, trackDuration)
+                    viewModel.loadTracks(albumId)
+                    dialog.dismiss()
+                } else {
+                    Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
                 }
-                .setNegativeButton("Cancelar", null)
-                .show()
+            }
+
+            btnCancel.setOnClickListener {
+                dialog.dismiss()
+            }
         }
 
         binding.btnAddComment.setOnClickListener {
