@@ -193,6 +193,7 @@ dependencies {
     implementation(libs.coroutines.android)
     implementation(libs.androidx.lifecycle.viewmodel.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
     testImplementation(libs.junit)
         testImplementation(libs.test.coroutines)
         testImplementation(libs.test.mockwebserver)
