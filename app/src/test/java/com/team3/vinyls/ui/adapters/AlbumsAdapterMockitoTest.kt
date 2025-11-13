@@ -3,6 +3,7 @@ package com.team3.vinyls.ui.adapters
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
+import com.bumptech.glide.Glide
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.AlbumUiModel
 import kotlinx.coroutines.test.StandardTestDispatcher
@@ -12,6 +13,10 @@ import org.mockito.kotlin.mock
 import org.mockito.kotlin.verify
 import org.mockito.kotlin.whenever
 import org.junit.Assert.*
+import org.mockito.Mockito
+import android.content.Context
+import com.bumptech.glide.RequestManager
+import org.mockito.Answers
 
 class AlbumsAdapterMockitoTest {
 
@@ -48,6 +53,17 @@ class AlbumsAdapterMockitoTest {
         // Setup click callback collector
         var clicked: AlbumUiModel? = null
         adapter.onAlbumClick = { clicked = it }
+
+
+        // Mock Glide
+        whenever(itemView.context).thenReturn(mock<Context>())
+
+        val glideMock = Mockito.mockStatic(Glide::class.java)
+        val requestManager = mock<RequestManager>(defaultAnswer = Answers.RETURNS_DEEP_STUBS)
+
+        glideMock.`when`<RequestManager> {
+            Glide.with(Mockito.any(Context::class.java))
+        }.thenReturn(requestManager)
 
         // Call bind
         vh.bind(album)
