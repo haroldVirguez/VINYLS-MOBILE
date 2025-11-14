@@ -1,7 +1,7 @@
 package com.team3.vinyls.ui.mapper
 
 import com.team3.vinyls.data.models.MusicianDto
-import com.team3.vinyls.ui.MusicianUiModel
+import com.team3.vinyls.ui.models.MusicianUiModel
 
 fun MusicianDto.toUi(): MusicianUiModel {
     // Prefer the musician's own description as subtitle; if missing, fall back to first album's genre

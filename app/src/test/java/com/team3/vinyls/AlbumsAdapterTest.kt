@@ -3,7 +3,7 @@ package com.team3.vinyls
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.team3.vinyls.ui.AlbumUiModel
+import com.team3.vinyls.ui.models.AlbumUiModel
 import com.team3.vinyls.ui.adapters.AlbumsAdapter
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Test

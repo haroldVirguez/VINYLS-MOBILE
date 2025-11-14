@@ -1,4 +1,4 @@
-package com.team3.vinyls.ui
+package com.team3.vinyls.ui.models
 
 data class MusicianUiModel(
     val id: Int,
@@ -6,4 +6,3 @@ data class MusicianUiModel(
     val subtitle: String,
     val image: String?
 )
-

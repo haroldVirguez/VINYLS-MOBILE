@@ -5,7 +5,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.team3.vinyls.R
-import com.team3.vinyls.ui.MusicianUiModel
+import com.team3.vinyls.ui.models.MusicianUiModel
 import com.team3.vinyls.databinding.ItemMusicianBinding
 import kotlinx.coroutines.*
 import java.net.URL

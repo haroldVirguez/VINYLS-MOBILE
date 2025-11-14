@@ -3,7 +3,7 @@ package com.team3.vinyls.ui.adapters
 import android.widget.FrameLayout
 import androidx.test.core.app.ApplicationProvider
 import com.team3.vinyls.R
-import com.team3.vinyls.ui.MusicianUiModel
+import com.team3.vinyls.ui.models.MusicianUiModel
 import org.junit.Assert.*
 import org.junit.Test
 import org.junit.runner.RunWith

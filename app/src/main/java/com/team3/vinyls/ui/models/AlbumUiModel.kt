@@ -1,4 +1,4 @@
-package com.team3.vinyls.ui
+package com.team3.vinyls.ui.models
 
 data class AlbumUiModel(
     val id: Int,
@@ -10,5 +10,3 @@ data class AlbumUiModel(
     val recordLabel: String,
     val releaseDate: String
 )
-
-

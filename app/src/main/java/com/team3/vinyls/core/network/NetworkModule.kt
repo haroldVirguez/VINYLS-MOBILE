@@ -29,6 +29,13 @@ object NetworkModule {
         .client(client)
         .addConverterFactory(MoshiConverterFactory.create(moshi))
         .build()
+
+    fun provideTrackService(baseUrl: String): com.team3.vinyls.data.services.TrackService {
+        return retrofit(baseUrl).create(com.team3.vinyls.data.services.TrackService::class.java)
+    }
+
+    fun provideTrackRepository(baseUrl: String): com.team3.vinyls.data.repositories.TrackRepository {
+        val trackService = provideTrackService(baseUrl)
+        return com.team3.vinyls.data.repositories.TrackRepository(trackService)
+    }
 }
-
-

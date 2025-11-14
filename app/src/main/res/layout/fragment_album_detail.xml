@@ -107,6 +107,7 @@
             android:padding="12dp">
 
             <!-- Título de la caja -->
+
             <TextView
                 android:id="@+id/txtTracksTitle"
                 android:layout_width="match_parent"
@@ -127,6 +128,15 @@
         </LinearLayout>
 
         <!-- Sección de comentarios -->
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btnAddTrack"
+            android:layout_width="180dp"
+            android:layout_height="wrap_content"
+            android:text="Agregar canción"
+            android:textAllCaps="false"
+            app:backgroundTint="@color/accent_purple"
+            app:cornerRadius="12dp" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -157,13 +167,11 @@
         <!-- Botón para agregar comentario -->
         <com.google.android.material.button.MaterialButton
             android:id="@+id/btnAddComment"
-            android:layout_width="wrap_content"
+            android:layout_width="180dp"
             android:layout_height="wrap_content"
             android:text="Agregar comentario"
             android:textAllCaps="false"
             app:backgroundTint="@color/accent_purple"
-            app:cornerRadius="12dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:cornerRadius="12dp" />
     </LinearLayout>
 </ScrollView>

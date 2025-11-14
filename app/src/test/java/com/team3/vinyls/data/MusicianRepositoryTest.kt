@@ -1,6 +1,8 @@
 package com.team3.vinyls.data
 
 import com.team3.vinyls.data.models.MusicianDto
+import com.team3.vinyls.data.repositories.MusicianRepository
+import com.team3.vinyls.data.services.MusiciansService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
 import org.junit.Test

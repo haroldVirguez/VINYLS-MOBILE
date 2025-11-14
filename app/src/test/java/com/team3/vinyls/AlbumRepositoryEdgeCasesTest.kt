@@ -4,8 +4,8 @@ import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
 import com.team3.vinyls.data.models.AlbumDto
-import com.team3.vinyls.data.AlbumsService
-import com.team3.vinyls.data.AlbumRepository
+import com.team3.vinyls.data.services.AlbumsService
+import com.team3.vinyls.data.repositories.AlbumRepository
 
 class AlbumRepositoryEdgeCasesTest {
 

@@ -4,16 +4,22 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.team3.vinyls.data.AlbumRepository
+import com.team3.vinyls.data.repositories.AlbumRepository
+import com.team3.vinyls.data.repositories.TrackRepository
 import com.team3.vinyls.data.models.AlbumDto
+import com.team3.vinyls.data.models.TrackDto
 import kotlinx.coroutines.launch
 
 class AlbumDetailViewModel(
-    private val repository: AlbumRepository
+    private val albumRepository: AlbumRepository,
+    private val trackRepository: TrackRepository
 ) : ViewModel() {
 
     private val _album = MutableLiveData<AlbumDto>()
     val album: LiveData<AlbumDto> = _album
+
+    private val _tracks = MutableLiveData<List<TrackDto>>()
+    val tracks: LiveData<List<TrackDto>> = _tracks
 
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
@@ -27,12 +33,35 @@ class AlbumDetailViewModel(
 
         viewModelScope.launch {
             try {
-                val data = repository.getAlbumDetail(albumId)
+                val data = albumRepository.getAlbumDetail(albumId)
                 _album.value = data
             } catch (t: Throwable) {
                 _error.value = t.message
             } finally {
                 _loading.value = false
+            }
+        }
+    }
+
+    fun loadTracks(albumId: Int) {
+        viewModelScope.launch {
+            try {
+                val response = trackRepository.getTracksByAlbum(albumId)
+                _tracks.postValue(response)
+            } catch (e: Exception) {
+                e.printStackTrace()
+            }
+        }
+    }
+
+    fun addTrackToAlbum(albumId: Int, trackName: String, trackDuration: String) {
+        val track = TrackDto(name = trackName, duration = trackDuration)
+        viewModelScope.launch {
+            try {
+                val newTrack = trackRepository.addTrackToAlbum(albumId, track)
+                println("Track agregado: ${newTrack.name}")
+            } catch (e: Exception) {
+                e.printStackTrace()
             }
         }
     }
