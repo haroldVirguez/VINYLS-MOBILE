@@ -17,7 +17,9 @@ import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputEditText
 import com.team3.vinyls.R
 import com.team3.vinyls.data.repositories.AlbumRepository
+import com.team3.vinyls.data.repositories.TrackRepository
 import com.team3.vinyls.data.services.AlbumsService
+import com.team3.vinyls.data.services.TrackService
 import com.team3.vinyls.viewmodels.AlbumDetailViewModel
 import com.team3.vinyls.core.network.ApiConstants
 import com.team3.vinyls.core.network.NetworkModule
@@ -26,6 +28,7 @@ import com.bumptech.glide.Glide
 import androidx.core.net.toUri
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+
 
 class AlbumDetailFragment : Fragment() {
 
@@ -38,9 +41,13 @@ class AlbumDetailFragment : Fragment() {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 val retrofit = NetworkModule.retrofit(ApiConstants.BASE_URL)
-                val service = retrofit.create(AlbumsService::class.java)
-                val albumRepository = AlbumRepository(service)
-                val trackRepository = NetworkModule.provideTrackRepository(ApiConstants.BASE_URL)
+
+                val albumService = retrofit.create(AlbumsService::class.java)
+                val albumRepository = AlbumRepository(albumService)
+
+                val trackService = retrofit.create(TrackService::class.java)
+                val trackRepository = TrackRepository(trackService)
+
                 return AlbumDetailViewModel(albumRepository, trackRepository) as T
             }
         }
