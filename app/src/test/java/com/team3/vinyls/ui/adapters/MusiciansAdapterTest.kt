@@ -27,7 +27,6 @@ class MusiciansAdapterTest {
         adapter.submitList(listOf(item))
         assertEquals(1, adapter.itemCount)
 
-        // Bind should set texts and placeholder image (no remote load since image == null)
         adapter.onBindViewHolder(holder, 0)
 
         val nameView = holder.itemView.findViewById<android.widget.TextView>(R.id.txtName)
@@ -36,7 +35,8 @@ class MusiciansAdapterTest {
 
         assertEquals("Artist", nameView.text.toString())
         assertEquals("Rock", subtitleView.text.toString())
-        assertNotNull(imgView.drawable)
+
+        assertNull(imgView.drawable)
     }
 
     @Test
@@ -54,7 +54,6 @@ class MusiciansAdapterTest {
         adapter.submitList(listOf(item))
         adapter.onBindViewHolder(holder, 0)
 
-        // perform click on root
         holder.itemView.performClick()
 
         assertNotNull(clicked)

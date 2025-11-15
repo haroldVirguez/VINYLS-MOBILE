@@ -1,6 +1,5 @@
 package com.team3.vinyls.ui.fragments
 
-import android.graphics.BitmapFactory
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,27 +7,28 @@ import android.view.ViewGroup
 import android.widget.LinearLayout
 import android.widget.TextView
 import android.app.AlertDialog
-import android.widget.EditText
 import android.widget.Toast
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.lifecycleScope
-import kotlinx.coroutines.launch
-import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.withContext
 import androidx.navigation.fragment.navArgs
 import com.google.android.material.textfield.TextInputEditText
 import com.team3.vinyls.R
 import com.team3.vinyls.data.repositories.AlbumRepository
+import com.team3.vinyls.data.repositories.TrackRepository
 import com.team3.vinyls.data.services.AlbumsService
+import com.team3.vinyls.data.services.TrackService
 import com.team3.vinyls.viewmodels.AlbumDetailViewModel
 import com.team3.vinyls.core.network.ApiConstants
 import com.team3.vinyls.core.network.NetworkModule
 import com.team3.vinyls.databinding.FragmentAlbumDetailBinding
-import java.net.URL
+import com.bumptech.glide.Glide
+import androidx.core.net.toUri
+import com.bumptech.glide.request.RequestOptions
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+
 
 class AlbumDetailFragment : Fragment() {
 
@@ -41,9 +41,13 @@ class AlbumDetailFragment : Fragment() {
             @Suppress("UNCHECKED_CAST")
             override fun <T : ViewModel> create(modelClass: Class<T>): T {
                 val retrofit = NetworkModule.retrofit(ApiConstants.BASE_URL)
-                val service = retrofit.create(AlbumsService::class.java)
-                val albumRepository = AlbumRepository(service)
-                val trackRepository = NetworkModule.provideTrackRepository(ApiConstants.BASE_URL)
+
+                val albumService = retrofit.create(AlbumsService::class.java)
+                val albumRepository = AlbumRepository(albumService)
+
+                val trackService = retrofit.create(TrackService::class.java)
+                val trackRepository = TrackRepository(trackService)
+
                 return AlbumDetailViewModel(albumRepository, trackRepository) as T
             }
         }
@@ -70,19 +74,17 @@ class AlbumDetailFragment : Fragment() {
             binding.txtSubtitle.text = "${album.genre} • ${album.recordLabel}"
             binding.txtDescription.text = album.description
             binding.txtReleaseDate.text = "Lanzado en ${album.releaseDate.take(4)}"
-
             // Cover
-            viewLifecycleOwner.lifecycleScope.launch {
-                try {
-                    val bitmap = withContext(Dispatchers.IO) {
-                        val url = URL(album.cover)
-                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    }
-                    binding.imgAlbumCover.setImageBitmap(bitmap)
-                } catch (e: Exception) {
-                    e.printStackTrace()
-                }
-            }
+            Glide.with(requireContext())
+                .load(album.cover.toUri().buildUpon().scheme("https").build())
+                .apply(
+                    RequestOptions()
+                        .placeholder(R.drawable.loading_animation)
+                        .diskCacheStrategy(DiskCacheStrategy.ALL)
+                        .error(R.drawable.ic_broken_image)
+                )
+                .centerCrop()
+                .into(binding.imgAlbumCover)
 
             // Comentarios
             val commentsText =
@@ -141,8 +143,10 @@ class AlbumDetailFragment : Fragment() {
                 .create()
             dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
             dialog.show()
-            val btnSave = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
-            val btnCancel = dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
+            val btnSave =
+                dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
+            val btnCancel =
+                dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
 
             btnSave.setOnClickListener {
                 val trackName = nameInput.text.toString().trim()
@@ -153,7 +157,11 @@ class AlbumDetailFragment : Fragment() {
                     viewModel.loadTracks(albumId)
                     dialog.dismiss()
                 } else {
-                    Toast.makeText(requireContext(), "Completa todos los campos", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(
+                        requireContext(),
+                        "Completa todos los campos",
+                        Toast.LENGTH_SHORT
+                    ).show()
                 }
             }
 

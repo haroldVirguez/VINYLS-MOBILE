@@ -1,6 +1,5 @@
 package com.team3.vinyls.ui.adapters
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,9 +9,13 @@ import androidx.recyclerview.widget.RecyclerView
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.AlbumUiModel
 import kotlinx.coroutines.*
-import java.net.URL
+import com.bumptech.glide.Glide
+import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.bumptech.glide.request.RequestOptions
+import androidx.core.net.toUri
 
-class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) : RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) :
+    RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
 
     private val items = mutableListOf<AlbumUiModel>()
 
@@ -21,7 +24,8 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
         items.addAll(newItems)
         try {
             notifyDataSetChanged()
-        } catch (_: Exception) { /* ignore for unit tests */ }
+        } catch (_: Exception) { /* ignore for unit tests */
+        }
     }
 
     var onAlbumClick: ((AlbumUiModel) -> Unit)? = null
@@ -40,6 +44,7 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
         super.onViewRecycled(holder)
         holder.loadJob?.cancel() // stop background work for recycled views
     }
+
     override fun getItemCount(): Int = items.size
 
     // 🧠 Use ViewHolder-level coroutine scope
@@ -60,20 +65,9 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
             // cancel any previous running job for this recycled view
             loadJob?.cancel()
 
-            // launch new coroutine for this holder
-            loadJob = CoroutineScope(uiDispatcher).launch {
-                try {
-                    val bitmap = withContext(Dispatchers.IO) {
-                        val url = URL(item.cover)
-                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    }
-                    imgCover.setImageBitmap(bitmap)
-                } catch (e: CancellationException) {
-                    // ignore if the job was cancelled
-                } catch (e: Exception) {
-
-                }
-            }
+            Glide.with(itemView.context)
+                .load(item.cover)
+                .into(imgCover)
 
             itemView.setOnClickListener { onAlbumClick?.invoke(item) }
         }
