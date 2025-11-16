@@ -5,28 +5,41 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.AlbumUiModel
-import kotlinx.coroutines.*
 import com.bumptech.glide.Glide
-import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.bumptech.glide.request.RequestOptions
-import androidx.core.net.toUri
 
-class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) :
-    RecyclerView.Adapter<AlbumsAdapter.AlbumViewHolder>() {
+interface ImageLoader {
+    fun load(url: String?, target: ImageView)
+    fun clear(target: ImageView)
+}
 
-    private val items = mutableListOf<AlbumUiModel>()
-
-    fun submitList(newItems: List<AlbumUiModel>) {
-        items.clear()
-        items.addAll(newItems)
-        try {
-            notifyDataSetChanged()
-        } catch (_: Exception) { /* ignore for unit tests */
+class GlideImageLoader(private val placeholderRes: Int = R.drawable.vinyls_card_bg) : ImageLoader {
+    override fun load(url: String?, target: ImageView) {
+        if (!url.isNullOrEmpty()) {
+            Glide.with(target.context)
+                .load(url)
+                .placeholder(placeholderRes)
+                .centerCrop()
+                .into(target)
+        } else {
+            target.setImageResource(placeholderRes)
         }
     }
+
+    override fun clear(target: ImageView) {
+        Glide.with(target.context).clear(target)
+        target.setImageResource(placeholderRes)
+    }
+}
+
+class AlbumsAdapter(
+    private val uiDispatcher: kotlinx.coroutines.CoroutineDispatcher = kotlinx.coroutines.Dispatchers.Main,
+    private val imageLoader: ImageLoader = GlideImageLoader()
+) : ListAdapter<AlbumUiModel, AlbumsAdapter.AlbumViewHolder>(AlbumDiffCallback()) {
 
     var onAlbumClick: ((AlbumUiModel) -> Unit)? = null
 
@@ -37,17 +50,14 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
     }
 
     override fun onBindViewHolder(holder: AlbumViewHolder, position: Int) {
-        holder.bind(items[position])
+        holder.bind(getItem(position))
     }
 
     override fun onViewRecycled(holder: AlbumViewHolder) {
         super.onViewRecycled(holder)
-        holder.loadJob?.cancel() // stop background work for recycled views
+        holder.clear()
     }
 
-    override fun getItemCount(): Int = items.size
-
-    // 🧠 Use ViewHolder-level coroutine scope
     inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
 
         private val imgCover: ImageView = itemView.findViewById(R.id.imgCover)
@@ -55,21 +65,29 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
         private val txtSubtitle: TextView = itemView.findViewById(R.id.txtSubtitle)
         private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
 
-        var loadJob: Job? = null  // reference to cancel previous loads
-
         fun bind(item: AlbumUiModel) {
             txtTitle.text = item.title
             txtSubtitle.text = item.subtitle
             txtGenre.text = item.genre
 
-            // cancel any previous running job for this recycled view
-            loadJob?.cancel()
-
-            Glide.with(itemView.context)
-                .load(item.cover)
-                .into(imgCover)
+            // Load image using injected ImageLoader (default: GlideImageLoader)
+            imageLoader.load(item.cover, imgCover)
 
             itemView.setOnClickListener { onAlbumClick?.invoke(item) }
+        }
+
+        fun clear() {
+            imageLoader.clear(imgCover)
+        }
+    }
+
+    class AlbumDiffCallback : DiffUtil.ItemCallback<AlbumUiModel>() {
+        override fun areItemsTheSame(oldItem: AlbumUiModel, newItem: AlbumUiModel): Boolean {
+            return oldItem.id == newItem.id
+        }
+
+        override fun areContentsTheSame(oldItem: AlbumUiModel, newItem: AlbumUiModel): Boolean {
+            return oldItem == newItem
         }
     }
 }

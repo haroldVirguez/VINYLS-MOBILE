@@ -10,6 +10,11 @@ import org.junit.runner.RunWith
 import org.robolectric.RobolectricTestRunner
 import org.robolectric.annotation.Config
 import kotlinx.coroutines.Dispatchers
+import com.team3.vinyls.testutils.TestImageLoader
+import java.util.concurrent.CountDownLatch
+import java.util.concurrent.TimeUnit
+import org.robolectric.Shadows.shadowOf
+import android.os.Looper
 
 @RunWith(RobolectricTestRunner::class)
 @Config(sdk = [33])
@@ -19,12 +24,16 @@ class MusiciansAdapterTest {
     fun `submitList updates itemCount and bind sets texts and placeholder image`() {
         val context = ApplicationProvider.getApplicationContext<android.content.Context>()
         val parent = FrameLayout(context)
-        val adapter = MusiciansAdapter(uiDispatcher = Dispatchers.Unconfined)
+        val adapter = MusiciansAdapter(uiDispatcher = Dispatchers.Unconfined, imageLoader = TestImageLoader())
 
         val holder = adapter.onCreateViewHolder(parent, 0)
         val item = MusicianUiModel(id = 1, name = "Artist", subtitle = "Rock", image = null)
 
-        adapter.submitList(listOf(item))
+        val latch = CountDownLatch(1)
+        adapter.submitList(listOf(item)) { latch.countDown() }
+        latch.await(1, TimeUnit.SECONDS)
+        shadowOf(Looper.getMainLooper()).idle()
+
         assertEquals(1, adapter.itemCount)
 
         adapter.onBindViewHolder(holder, 0)
@@ -36,6 +45,7 @@ class MusiciansAdapterTest {
         assertEquals("Artist", nameView.text.toString())
         assertEquals("Rock", subtitleView.text.toString())
 
+        // TestImageLoader sets drawable to null in tests
         assertNull(imgView.drawable)
     }
 
@@ -43,7 +53,7 @@ class MusiciansAdapterTest {
     fun `click on item invokes onMusicianClick`() {
         val context = ApplicationProvider.getApplicationContext<android.content.Context>()
         val parent = FrameLayout(context)
-        val adapter = MusiciansAdapter(uiDispatcher = Dispatchers.Unconfined)
+        val adapter = MusiciansAdapter(uiDispatcher = Dispatchers.Unconfined, imageLoader = TestImageLoader())
 
         val holder = adapter.onCreateViewHolder(parent, 0)
         val item = MusicianUiModel(id = 2, name = "ClickMe", subtitle = "Pop", image = null)
@@ -51,7 +61,11 @@ class MusiciansAdapterTest {
         var clicked: MusicianUiModel? = null
         adapter.onMusicianClick = { clicked = it }
 
-        adapter.submitList(listOf(item))
+        val latch = CountDownLatch(1)
+        adapter.submitList(listOf(item)) { latch.countDown() }
+        latch.await(1, TimeUnit.SECONDS)
+        shadowOf(Looper.getMainLooper()).idle()
+
         adapter.onBindViewHolder(holder, 0)
 
         holder.itemView.performClick()
