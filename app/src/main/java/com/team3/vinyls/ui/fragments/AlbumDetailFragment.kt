@@ -67,7 +67,10 @@ class AlbumDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val albumId = args.albumId.toInt()
-        val fabAddTrack = view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabAddTrack)
+        val fabAddTrack =
+            view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
+                R.id.fabAddTrack
+            )
 
         fabAddTrack.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.menu_fab_options, null)
@@ -189,6 +192,11 @@ class AlbumDetailFragment : Fragment() {
             if (trackName.isNotEmpty() && trackDuration.isNotEmpty()) {
                 viewModel.addTrackToAlbum(albumId, trackName, trackDuration)
                 viewModel.loadTracks(albumId)
+                Toast.makeText(
+                    requireContext(),
+                    "Canción agregada",
+                    Toast.LENGTH_SHORT
+                ).show()
                 dialog.dismiss()
             } else {
                 Toast.makeText(
@@ -206,7 +214,11 @@ class AlbumDetailFragment : Fragment() {
 
     private fun showAddCommentDialog() {
         // TODO: Implementar flujo real de agregar comentario
-        Toast.makeText(requireContext(), "Agregar comentario (pendiente de implementar)", Toast.LENGTH_SHORT).show()
+        Toast.makeText(
+            requireContext(),
+            "Agregar comentario (pendiente de implementar)",
+            Toast.LENGTH_SHORT
+        ).show()
     }
 
     override fun onDestroyView() {

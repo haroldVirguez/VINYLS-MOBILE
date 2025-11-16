@@ -59,7 +59,9 @@ class AlbumDetailViewModel(
         viewModelScope.launch {
             try {
                 val newTrack = trackRepository.addTrackToAlbum(albumId, track)
-                println("Track agregado: ${newTrack.name}")
+
+                loadTracks(albumId)
+
             } catch (e: Exception) {
                 e.printStackTrace()
             }
