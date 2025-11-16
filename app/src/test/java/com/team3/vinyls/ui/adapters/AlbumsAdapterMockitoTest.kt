@@ -1,85 +1,68 @@
 package com.team3.vinyls.ui.adapters
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import android.widget.LinearLayout
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.AlbumUiModel
+import com.team3.vinyls.testutils.TestImageLoader
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Test
-import org.mockito.kotlin.argumentCaptor
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
 import org.junit.Assert.*
-import org.mockito.Mockito
+import androidx.test.core.app.ApplicationProvider
 import android.content.Context
-import com.bumptech.glide.RequestManager
-import org.mockito.Answers
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [28])
 
 class AlbumsAdapterMockitoTest {
 
     @Test
     fun bind_setsTextAndClickInvokesCallback() {
-        val adapter = AlbumsAdapter(StandardTestDispatcher())
+        val adapter = AlbumsAdapter(StandardTestDispatcher(), TestImageLoader())
 
-        // Mocks for itemView and its child TextViews
-        val itemView = mock<View>()
-        val titleView = mock<TextView>()
-        val subtitleView = mock<TextView>()
-        val genreView = mock<TextView>()
-        val imCover = mock<ImageView>()
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val itemView = LinearLayout(context)
 
-        // Stub findViewById to return our mocked TextViews
-        whenever(itemView.findViewById<TextView>(R.id.txtTitle)).thenReturn(titleView)
-        whenever(itemView.findViewById<TextView>(R.id.txtSubtitle)).thenReturn(subtitleView)
-        whenever(itemView.findViewById<TextView>(R.id.txtGenre)).thenReturn(genreView)
-        whenever(itemView.findViewById<ImageView>(R.id.imgCover)).thenReturn(imCover)
-        // Create view holder using adapter's inner class
+        val titleView = TextView(context)
+        titleView.id = R.id.txtTitle
+        itemView.addView(titleView)
+
+        val subtitleView = TextView(context)
+        subtitleView.id = R.id.txtSubtitle
+        itemView.addView(subtitleView)
+
+        val genreView = TextView(context)
+        genreView.id = R.id.txtGenre
+        itemView.addView(genreView)
+
+        val imCover = ImageView(context)
+        imCover.id = R.id.imgCover
+        itemView.addView(imCover)
+
         val vh = adapter.AlbumViewHolder(itemView)
 
         val album = AlbumUiModel(
             1,
             "TitleX",
             "Artist • 2025",
-            "cover",
+            "", // dejar cover vacío para evitar llamar a Glide.with en tests
             "desc",
             "genre",
             "label",
             "2025-01-01"
         )
 
-        // Setup click callback collector
         var clicked: AlbumUiModel? = null
         adapter.onAlbumClick = { clicked = it }
 
-
-        // Mock Glide
-        whenever(itemView.context).thenReturn(mock<Context>())
-
-        val glideMock = Mockito.mockStatic(Glide::class.java)
-        val requestManager = mock<RequestManager>(defaultAnswer = Answers.RETURNS_DEEP_STUBS)
-
-        glideMock.`when`<RequestManager> {
-            Glide.with(Mockito.any(Context::class.java))
-        }.thenReturn(requestManager)
-
-        // Call bind
         vh.bind(album)
 
-        // Note: verifying calls to TextView.setText on mocked Android views can be fragile
-        // across environments. We avoid asserting on setText directly and focus on behavior
-        // (the click listener wiring) which is the important contract for this adapter.
+        itemView.performClick()
 
-        // Capture the OnClickListener set on itemView and invoke it
-        val captor = argumentCaptor<View.OnClickListener>()
-        verify(itemView).setOnClickListener(captor.capture())
-        val listener = captor.firstValue
-        // simulate click
-        listener.onClick(itemView)
-
-        // Verify callback invoked with our album
         assertNotNull(clicked)
         assertEquals(1, clicked?.id)
     }

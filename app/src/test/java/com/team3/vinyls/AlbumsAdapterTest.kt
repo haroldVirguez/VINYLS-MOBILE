@@ -1,22 +1,21 @@
 package com.team3.vinyls
 
-import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
-import com.bumptech.glide.Glide
+import android.widget.LinearLayout
 import com.team3.vinyls.ui.models.AlbumUiModel
 import com.team3.vinyls.ui.adapters.AlbumsAdapter
 import kotlinx.coroutines.test.StandardTestDispatcher
 import org.junit.Test
 import org.junit.Assert.*
-import org.mockito.Mockito
-import org.mockito.kotlin.argumentCaptor
-import org.mockito.kotlin.mock
-import org.mockito.kotlin.verify
-import org.mockito.kotlin.whenever
+import androidx.test.core.app.ApplicationProvider
 import android.content.Context
-import com.bumptech.glide.RequestManager
-import org.mockito.Answers
+import org.junit.runner.RunWith
+import org.robolectric.RobolectricTestRunner
+import org.robolectric.annotation.Config
+
+@RunWith(RobolectricTestRunner::class)
+@Config(sdk = [28])
 
 class AlbumsAdapterTest {
 
@@ -24,42 +23,40 @@ class AlbumsAdapterTest {
     fun bindAndClickInvokesCallback() {
         val adapter = AlbumsAdapter(StandardTestDispatcher())
 
-        val itemView = mock<View>()
-        val titleView = mock<TextView>()
-        val subtitleView = mock<TextView>()
-        val genreView = mock<TextView>()
-        val imCover = mock<ImageView>()
+        // Crear vistas reales en el contexto de Robolectric para evitar problemas de classloader con Glide
+        val context = ApplicationProvider.getApplicationContext<Context>()
+        val itemView = LinearLayout(context)
 
-        whenever(itemView.findViewById<TextView>(R.id.txtTitle)).thenReturn(titleView)
-        whenever(itemView.findViewById<TextView>(R.id.txtSubtitle)).thenReturn(subtitleView)
-        whenever(itemView.findViewById<TextView>(R.id.txtGenre)).thenReturn(genreView)
-        whenever(itemView.findViewById<ImageView>(R.id.imgCover)).thenReturn(imCover)
-        whenever(itemView.context).thenReturn(mock<Context>())
+        val titleView = TextView(context)
+        titleView.id = R.id.txtTitle
+        itemView.addView(titleView)
 
-        // Mockear Glide
-        val glideMock = Mockito.mockStatic(Glide::class.java)
-        val requestManager = mock<RequestManager>(defaultAnswer = Answers.RETURNS_DEEP_STUBS)
-        glideMock.`when`<RequestManager> {
-            Glide.with(Mockito.any(Context::class.java))
-        }.thenReturn(requestManager)
+        val subtitleView = TextView(context)
+        subtitleView.id = R.id.txtSubtitle
+        itemView.addView(subtitleView)
+
+        val genreView = TextView(context)
+        genreView.id = R.id.txtGenre
+        itemView.addView(genreView)
+
+        val imCover = ImageView(context)
+        imCover.id = R.id.imgCover
+        itemView.addView(imCover)
 
         val vh = adapter.AlbumViewHolder(itemView)
 
-        val album = AlbumUiModel(42, "T", "S", "cover", "desc", "genre", "label", "2023-01-01")
+        // Dejar cover vacío para evitar llamar a Glide.with en tests
+        val album = AlbumUiModel(42, "T", "S", "", "desc", "genre", "label", "2023-01-01")
 
         var clickedId: Int? = null
         adapter.onAlbumClick = { clickedId = it.id }
 
         vh.bind(album)
 
-        val captor = argumentCaptor<View.OnClickListener>()
-        verify(itemView).setOnClickListener(captor.capture())
-        val listener = captor.firstValue
-        listener.onClick(itemView)
+        // Simular click en la vista real
+        itemView.performClick()
 
         assertNotNull(clickedId)
         assertEquals(42, clickedId)
-
-        glideMock.close()
     }
 }

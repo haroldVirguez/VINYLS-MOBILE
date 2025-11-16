@@ -1,18 +1,17 @@
 package com.team3.vinyls.ui.adapters
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.MusicianUiModel
 import com.team3.vinyls.databinding.ItemMusicianBinding
-import kotlinx.coroutines.*
-import java.net.URL
 
-class MusiciansAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) : ListAdapter<MusicianUiModel, MusiciansAdapter.MusicianViewHolder>(MusicianDiffCallback()) {
+class MusiciansAdapter(
+    private val uiDispatcher: kotlinx.coroutines.CoroutineDispatcher = kotlinx.coroutines.Dispatchers.Main,
+    private val imageLoader: ImageLoader = GlideImageLoader()
+) : ListAdapter<MusicianUiModel, MusiciansAdapter.MusicianViewHolder>(MusicianDiffCallback()) {
 
     var onMusicianClick: ((MusicianUiModel) -> Unit)? = null
 
@@ -27,38 +26,22 @@ class MusiciansAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatche
 
     override fun onViewRecycled(holder: MusicianViewHolder) {
         super.onViewRecycled(holder)
-        holder.loadJob?.cancel()
+        holder.clear()
     }
 
     inner class MusicianViewHolder(private val binding: ItemMusicianBinding) : RecyclerView.ViewHolder(binding.root) {
-
-        var loadJob: Job? = null
 
         fun bind(item: MusicianUiModel) {
             binding.txtName.text = item.name
             binding.txtSubtitle.text = item.subtitle
 
-            loadJob?.cancel()
-
-            loadJob = CoroutineScope(uiDispatcher).launch {
-                if (!item.image.isNullOrEmpty()) {
-                    try {
-                        val bitmap = withContext(Dispatchers.IO) {
-                            val url = URL(item.image)
-                            BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                        }
-                        binding.imgArtist.setImageBitmap(bitmap)
-                    } catch (e: CancellationException) {
-                        // ignore
-                    } catch (e: Exception) {
-                        // ignore image load errors
-                    }
-                } else {
-                    binding.imgArtist.setImageResource(R.drawable.vinyls_card_bg)
-                }
-            }
+            imageLoader.load(item.image, binding.imgArtist)
 
             binding.root.setOnClickListener { onMusicianClick?.invoke(item) }
+        }
+
+        fun clear() {
+            imageLoader.clear(binding.imgArtist)
         }
     }
 

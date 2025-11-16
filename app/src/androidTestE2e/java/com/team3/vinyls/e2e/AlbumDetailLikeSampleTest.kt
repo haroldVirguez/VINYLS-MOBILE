@@ -17,6 +17,8 @@ import androidx.test.ext.junit.runners.AndroidJUnit4
 import com.team3.vinyls.MainActivity
 import com.team3.vinyls.R
 import com.team3.vinyls.e2e.util.RecyclerViewItemCountIdlingResource
+import com.team3.vinyls.e2e.util.ViewVisibilityIdlingResource
+import com.team3.vinyls.e2e.util.ViewChildCountIdlingResource
 import com.team3.vinyls.ui.adapters.AlbumsAdapter
 import org.hamcrest.CoreMatchers.allOf
 import org.junit.After
@@ -32,6 +34,8 @@ class AlbumDetailLikeSampleTest {
     val activityRule = ActivityScenarioRule(MainActivity::class.java)
 
     private var recyclerIdling: RecyclerViewItemCountIdlingResource? = null
+    private var viewVisibilityIdling: ViewVisibilityIdlingResource? = null
+    private var viewChildCountIdling: ViewChildCountIdlingResource? = null
 
     @Before
     fun setUp() {
@@ -48,6 +52,14 @@ class AlbumDetailLikeSampleTest {
                 )
             )
 
+        // Register a ViewVisibilityIdlingResource to wait until tracksContainer is truly visible on screen
+        viewVisibilityIdling = ViewVisibilityIdlingResource(activityRule.scenario, R.id.tracksContainer)
+        IdlingRegistry.getInstance().register(viewVisibilityIdling)
+
+        // Register a ViewChildCountIdlingResource to wait until tracksContainer has at least one child
+        viewChildCountIdling = ViewChildCountIdlingResource(activityRule.scenario, R.id.tracksContainer, 1)
+        IdlingRegistry.getInstance().register(viewChildCountIdling)
+
         onView(allOf(withId(R.id.txtTitle), isDisplayed()))
             .check(matches(isDisplayed()))
     }
@@ -55,8 +67,9 @@ class AlbumDetailLikeSampleTest {
     @After
     fun tearDown() {
         recyclerIdling?.let { IdlingRegistry.getInstance().unregister(it) }
-        // Cleanup internal observer to avoid leaks in the RecyclerView
         recyclerIdling?.unregister()
+        viewVisibilityIdling?.let { IdlingRegistry.getInstance().unregister(it) }
+        viewChildCountIdling?.let { IdlingRegistry.getInstance().unregister(it) }
     }
 
     @Test

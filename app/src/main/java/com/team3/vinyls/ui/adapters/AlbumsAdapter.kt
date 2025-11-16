@@ -1,6 +1,5 @@
 package com.team3.vinyls.ui.adapters
 
-import android.graphics.BitmapFactory
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,10 +10,36 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.team3.vinyls.R
 import com.team3.vinyls.ui.models.AlbumUiModel
-import kotlinx.coroutines.*
-import java.net.URL
+import com.bumptech.glide.Glide
 
-class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.Main) : ListAdapter<AlbumUiModel, AlbumsAdapter.AlbumViewHolder>(AlbumDiffCallback()) {
+interface ImageLoader {
+    fun load(url: String?, target: ImageView)
+    fun clear(target: ImageView)
+}
+
+class GlideImageLoader(private val placeholderRes: Int = R.drawable.vinyls_card_bg) : ImageLoader {
+    override fun load(url: String?, target: ImageView) {
+        if (!url.isNullOrEmpty()) {
+            Glide.with(target.context)
+                .load(url)
+                .placeholder(placeholderRes)
+                .centerCrop()
+                .into(target)
+        } else {
+            target.setImageResource(placeholderRes)
+        }
+    }
+
+    override fun clear(target: ImageView) {
+        Glide.with(target.context).clear(target)
+        target.setImageResource(placeholderRes)
+    }
+}
+
+class AlbumsAdapter(
+    private val uiDispatcher: kotlinx.coroutines.CoroutineDispatcher = kotlinx.coroutines.Dispatchers.Main,
+    private val imageLoader: ImageLoader = GlideImageLoader()
+) : ListAdapter<AlbumUiModel, AlbumsAdapter.AlbumViewHolder>(AlbumDiffCallback()) {
 
     var onAlbumClick: ((AlbumUiModel) -> Unit)? = null
 
@@ -30,7 +55,7 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
 
     override fun onViewRecycled(holder: AlbumViewHolder) {
         super.onViewRecycled(holder)
-        holder.loadJob?.cancel()
+        holder.clear()
     }
 
     inner class AlbumViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -40,31 +65,19 @@ class AlbumsAdapter(private val uiDispatcher: CoroutineDispatcher = Dispatchers.
         private val txtSubtitle: TextView = itemView.findViewById(R.id.txtSubtitle)
         private val txtGenre: TextView = itemView.findViewById(R.id.txtGenre)
 
-        var loadJob: Job? = null
-
         fun bind(item: AlbumUiModel) {
             txtTitle.text = item.title
             txtSubtitle.text = item.subtitle
             txtGenre.text = item.genre
 
-            loadJob?.cancel()
-
-            // launch new coroutine for this holder
-            loadJob = CoroutineScope(uiDispatcher).launch {
-                try {
-                    val bitmap = withContext(Dispatchers.IO) {
-                        val url = URL(item.cover)
-                        BitmapFactory.decodeStream(url.openConnection().getInputStream())
-                    }
-                    imgCover.setImageBitmap(bitmap)
-                } catch (e: CancellationException) {
-                    // ignore if the job was cancelled
-                } catch (e: Exception) {
-                    imgCover.setImageResource(R.drawable.vinyls_card_bg)
-                }
-            }
+            // Load image using injected ImageLoader (default: GlideImageLoader)
+            imageLoader.load(item.cover, imgCover)
 
             itemView.setOnClickListener { onAlbumClick?.invoke(item) }
+        }
+
+        fun clear() {
+            imageLoader.clear(imgCover)
         }
     }
 

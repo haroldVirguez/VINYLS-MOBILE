@@ -9,10 +9,10 @@ app.use(cors());
 const albums = [
   {
     id: 1,
-    name: 'Mock Album 1',
+    name: 'Buscando América Prueba',
     cover: 'https://picsum.photos/seed/album1/600/600',
     releaseDate: '2020-05-10',
-    description: 'Primer álbum de prueba para E2E',
+    description: 'Álbum de prueba para E2E - Buscando América Prueba',
     genre: 'Rock',
     recordLabel: 'Mock Records',
     tracks: [
@@ -55,6 +55,38 @@ app.get('/albums/:id', (req, res) => {
   const album = albums.find(a => a.id === id);
   if (!album) return res.status(404).json({ error: 'Album not found' });
   res.json(album);
+});
+
+// New endpoint: return tracks for an album
+app.get('/albums/:id/tracks', (req, res) => {
+  const id = Number(req.params.id);
+  const album = albums.find(a => a.id === id);
+  console.log(`[mock] GET /albums/${id}/tracks -> album ${album ? 'FOUND' : 'NOT FOUND'}`);
+  if (!album) return res.status(404).json({ error: 'Album not found' });
+  console.log(`[mock] returning ${album.tracks ? album.tracks.length : 0} tracks for album ${id}`);
+  res.json(album.tracks || []);
+});
+
+// New endpoint: add a track to an album (in-memory)
+app.post('/albums/:id/tracks', (req, res) => {
+  const id = Number(req.params.id);
+  const album = albums.find(a => a.id === id);
+  console.log(`[mock] POST /albums/${id}/tracks -> album ${album ? 'FOUND' : 'NOT FOUND'}`);
+  if (!album) return res.status(404).json({ error: 'Album not found' });
+
+  const track = req.body;
+  console.log('[mock] received new track payload:', track);
+  // simple id generation
+  const maxId = albums.flatMap(a => a.tracks || []).reduce((acc, t) => Math.max(acc, t.id || 0), 0);
+  const newId = maxId + 1;
+  const newTrack = Object.assign({ id: newId }, track);
+
+  album.tracks = album.tracks || [];
+  album.tracks.push(newTrack);
+
+  console.log(`[mock] album ${id} now has ${album.tracks.length} tracks`);
+
+  res.status(201).json(newTrack);
 });
 
 // Explicit mock musicians data to be returned by /musicians

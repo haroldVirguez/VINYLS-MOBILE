@@ -155,20 +155,91 @@ Then('I should see the track added toast', async function () {
       }
     })
 
+// Helper: poll the local mock server for the track to appear in album's tracks
+async function pollMockForTrack(albumId, trackName, timeoutMs = 15000) {
+  const http = require('http')
+  const url = `http://localhost:3000/albums/${albumId}/tracks`
+  const start = Date.now()
+
+  while (Date.now() - start < timeoutMs) {
+    try {
+      const tracks = await new Promise((resolve, reject) => {
+        http.get(url, (res) => {
+          const chunks = []
+          res.on('data', (c) => chunks.push(c))
+          res.on('end', () => {
+            try {
+              const body = Buffer.concat(chunks).toString('utf8')
+              const parsed = JSON.parse(body)
+              resolve(parsed)
+            } catch (err) { reject(err) }
+          })
+        }).on('error', reject)
+      })
+
+      if (Array.isArray(tracks)) {
+        const found = tracks.some(t => String(t.name).toLowerCase().includes(trackName.toLowerCase()))
+        if (found) return true
+      }
+    } catch (_) {
+      // ignore and retry
+    }
+    await new Promise(r => setTimeout(r, 500))
+  }
+  return false
+}
+
 Then('I should see the track name {string} in the tracks list', async function (trackName) {
   const byText = (txt) => `//*[contains(@text, "${txt}")]`
 
+  // Poll mock API to ensure server-side data is present before attempting UI lookup
+  try {
+    const present = await pollMockForTrack(1, trackName, 15000)
+    if (!present) console.warn(`[e2e] track ${trackName} not present in mock after POST (continuing to UI polling)`)
+  } catch (err) {
+    console.warn('[e2e] error polling mock for track:', err.message)
+  }
+
+  // Try to scrollIntoView once (best-effort)
   try {
     await this.driver.$(
       `android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().text("${trackName}"))`
     )
   } catch (_) {}
 
-  let el = await this.driver.$(byText(trackName))
+  // Poll for the element up to 20 seconds (20 attempts * 1s)
+  const maxAttempts = 20
+  const delayMs = 1000
+  let found = false
+  let el = null
 
-  const exists = await el.isExisting()
+  // give the app a short moment to process the POST and refresh the UI
+  await this.driver.pause(500)
 
-  if (!exists) {
+  for (let attempt = 0; attempt < maxAttempts; attempt++) {
+    try {
+      el = await this.driver.$(byText(trackName))
+      if (await el.isExisting()) {
+        found = true
+        break
+      }
+    } catch (_) {
+      // ignore and retry
+    }
+
+    // try a gentle scroll to encourage rendering
+    try {
+      await this.driver.touchAction([
+        { action: 'press', x: 500, y: 1500 },
+        { action: 'moveTo', x: 500, y: 1000 },
+        { action: 'release' }
+      ])
+    } catch (_) {}
+
+    await this.driver.pause(delayMs)
+  }
+
+  if (!found) {
     let src = '<page source unavailable>'
     try {
       src = await this.driver.getPageSource()
@@ -176,12 +247,12 @@ Then('I should see the track name {string} in the tracks list', async function (
       const path = require('path')
       const ts = new Date().toISOString().replace(/[:.]/g, '-')
       const outDir = path.join(__dirname, '..', '..', 'logs')
-      try { fs.mkdirSync(outDir, { recursive: true }) } catch (_) {}
+      try { fs.mkdirSync(outDir, { recursive: true }) } catch (err) {}
       const outPath = path.join(outDir, `trackname-error-${ts}.xml`)
-      try { fs.writeFileSync(outPath, src, 'utf8'); console.error(`Wrote page source to ${outPath}`) } catch (_) {}
+      try { fs.writeFileSync(outPath, src, 'utf8'); console.error(`Wrote page source to ${outPath}`) } catch (err) { console.error('Failed writing page source:', err.message) }
     } catch (_) {}
 
-    console.error(`Track name "${trackName}" not found. Page source (first 400 chars):\n`, String(src).slice(0,400))
+    console.error(`Track name "${trackName}" not found after polling. Page source (first 400 chars):\n`, String(src).slice(0,400))
     throw new Error(`Track name "${trackName}" not found`)
   }
 })
