@@ -28,6 +28,7 @@ import com.bumptech.glide.Glide
 import androidx.core.net.toUri
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.load.engine.DiskCacheStrategy
+import com.google.android.material.floatingactionbutton.FloatingActionButton
 
 
 class AlbumDetailFragment : Fragment() {
@@ -66,6 +67,36 @@ class AlbumDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val albumId = args.albumId.toInt()
+        val fabAddTrack = view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(R.id.fabAddTrack)
+
+        fabAddTrack.setOnClickListener {
+            val dialogView = layoutInflater.inflate(R.layout.menu_fab_options, null)
+            val option1 = dialogView.findViewById<TextView>(R.id.option1)
+            val option2 = dialogView.findViewById<TextView>(R.id.option2)
+
+            option1.text = "Agregar canción"
+            option2.text = "Agregar comentario"
+
+            val dialog = AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .create()
+
+            dialog.window?.setBackgroundDrawable(
+                android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
+            )
+            dialog.show()
+
+            option1.setOnClickListener {
+                showAddTrackDialog(albumId)
+                dialog.dismiss()
+            }
+
+            option2.setOnClickListener {
+                showAddCommentDialog()
+                dialog.dismiss()
+            }
+        }
+
         viewModel.loadAlbumDetail(albumId)
         viewModel.loadTracks(albumId)
 
@@ -130,49 +161,52 @@ class AlbumDetailFragment : Fragment() {
                 binding.tracksContainer.addView(row)
             }
         }
+    }
 
-        binding.btnAddTrack.setOnClickListener {
-            val albumId = args.albumId.toInt()
+    private fun showAddTrackDialog(albumId: Int) {
+        val dialogView = layoutInflater.inflate(R.layout.dialog_add_track, null)
+        val nameInput = dialogView.findViewById<TextInputEditText>(R.id.inputTrackName)
+        val durationInput = dialogView.findViewById<TextInputEditText>(R.id.inputTrackDuration)
 
-            // Crear el layout del diálogo
-            val dialogView = layoutInflater.inflate(R.layout.dialog_add_track, null)
-            val nameInput = dialogView.findViewById<TextInputEditText>(R.id.inputTrackName)
-            val durationInput = dialogView.findViewById<TextInputEditText>(R.id.inputTrackDuration)
-            val dialog = AlertDialog.Builder(requireContext())
-                .setView(dialogView)
-                .create()
-            dialog.window?.setBackgroundDrawable(android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT))
-            dialog.show()
-            val btnSave =
-                dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
-            val btnCancel =
-                dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
 
-            btnSave.setOnClickListener {
-                val trackName = nameInput.text.toString().trim()
-                val trackDuration = durationInput.text.toString().trim()
+        dialog.window?.setBackgroundDrawable(
+            android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
+        )
+        dialog.show()
 
-                if (trackName.isNotEmpty() && trackDuration.isNotEmpty()) {
-                    viewModel.addTrackToAlbum(albumId, trackName, trackDuration)
-                    viewModel.loadTracks(albumId)
-                    dialog.dismiss()
-                } else {
-                    Toast.makeText(
-                        requireContext(),
-                        "Completa todos los campos",
-                        Toast.LENGTH_SHORT
-                    ).show()
-                }
-            }
+        val btnSave =
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnSave)
+        val btnCancel =
+            dialogView.findViewById<com.google.android.material.button.MaterialButton>(R.id.btnCancel)
 
-            btnCancel.setOnClickListener {
+        btnSave.setOnClickListener {
+            val trackName = nameInput.text.toString().trim()
+            val trackDuration = durationInput.text.toString().trim()
+
+            if (trackName.isNotEmpty() && trackDuration.isNotEmpty()) {
+                viewModel.addTrackToAlbum(albumId, trackName, trackDuration)
+                viewModel.loadTracks(albumId)
                 dialog.dismiss()
+            } else {
+                Toast.makeText(
+                    requireContext(),
+                    "Completa todos los campos",
+                    Toast.LENGTH_SHORT
+                ).show()
             }
         }
 
-        binding.btnAddComment.setOnClickListener {
-            // Placeholder
+        btnCancel.setOnClickListener {
+            dialog.dismiss()
         }
+    }
+
+    private fun showAddCommentDialog() {
+        // TODO: Implementar flujo real de agregar comentario
+        Toast.makeText(requireContext(), "Agregar comentario (pendiente de implementar)", Toast.LENGTH_SHORT).show()
     }
 
     override fun onDestroyView() {
