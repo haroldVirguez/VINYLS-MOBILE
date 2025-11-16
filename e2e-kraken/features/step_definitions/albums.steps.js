@@ -51,15 +51,28 @@ When('I tap the first album in the list', async function () {
   }
 })
 
-Then('I should see the album detail title {string}', async function (expectedTitle) {
-  const titleEl = await this.driver.$(byResId('txtTitle'))
-  await titleEl.waitForExist({ timeout: 10000 })
-  const text = await titleEl.getText()
-  // Si estamos ejecutando contra el backend real (prod), no asumimos valores mock concretos.
-  if (process.env.E2E_APP_FLAVOR === 'prod') {
-    assert.ok(text && text.trim().length > 0, 'Title is empty')
-  } else {
-    assert.strictEqual(text, expectedTitle, `Unexpected title: ${text}`)
+Then('I should see the album name {string}', async function (albumName) {
+  const byText = (txt) => `//*[contains(@text, "${txt}")]`
+
+  let el = await this.driver.$(byText(albumName))
+
+  const exists = await el.isExisting()
+
+  if (!exists) {
+    let src = '<page source unavailable>'
+    try {
+      src = await this.driver.getPageSource()
+      const fs = require('fs')
+      const path = require('path')
+      const ts = new Date().toISOString().replace(/[:.]/g, '-')
+      const outDir = path.join(__dirname, '..', '..', 'logs')
+      try { fs.mkdirSync(outDir, { recursive: true }) } catch (_) {}
+      const outPath = path.join(outDir, `albumname-error-${ts}.xml`)
+      try { fs.writeFileSync(outPath, src, 'utf8'); console.error(`Wrote page source to ${outPath}`) } catch (_) {}
+    } catch (_) {}
+
+    console.error(`Album name "${albumName}" not found. Page source (first 400 chars):\n`, String(src).slice(0,400))
+    throw new Error(`Album name "${albumName}" not found`)
   }
 })
 

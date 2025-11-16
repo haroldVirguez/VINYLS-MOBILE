@@ -1,4 +1,4 @@
-Feature: HUxx - Artistas (Musicians) lista y detalle
+Feature: HU03 - Artistas (Musicians) lista y detalle
 
   Background:
     Given the app is launched
