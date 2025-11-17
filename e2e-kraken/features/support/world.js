@@ -2,7 +2,7 @@ const { setWorldConstructor, Before, After, setDefaultTimeout } = require('@cucu
 const { remote } = require('webdriverio')
 const { execSync } = require('child_process')
 const path = require('path')
-
+const fs = require('fs')
 setDefaultTimeout(300 * 1000)
 
 class VinylsWorld {
@@ -70,7 +70,8 @@ Before(async function () {
       'appium:appPackage': 'com.team3.vinyls',
       'appium:appActivity': '.MainActivity',
       'appium:noReset': noReset,
-      'appium:newCommandTimeout': 120
+      'appium:newCommandTimeout': 120,
+      "appium:recordVideo": true
     }
   })
   await this.driver.setTimeout({ implicit: 5000 })
@@ -98,10 +99,31 @@ Before(async function () {
     }
   } catch (err) {
   }
+  if (this.driver?.startRecordingScreen) {
+    await this.driver.startRecordingScreen();
+    await new Promise(res => setTimeout(res, 500));
+  }
 })
 
-After(async function () {
+After(async function (scenario) {
   if (this.driver) {
+    if (this.driver.stopRecordingScreen) {
+          const videoBase64 = await this.driver.stopRecordingScreen();
+          const filename = scenario.pickle.name
+            .replace(/[^a-z0-9]/gi, '_')
+            .toLowerCase();
+    
+          const videosDir = path.join(process.cwd(), 'reports', 'videos');
+    
+          if (!fs.existsSync(videosDir)) {
+            fs.mkdirSync(videosDir, { recursive: true });
+          }
+    
+          const filePath = path.join(videosDir, `${filename}.mp4`);
+          fs.writeFileSync(filePath, videoBase64, 'base64');
+    
+          console.log(`🎥 Saved video: ${filePath}`);
+        }
     await this.driver.deleteSession()
     this.driver = null
   }

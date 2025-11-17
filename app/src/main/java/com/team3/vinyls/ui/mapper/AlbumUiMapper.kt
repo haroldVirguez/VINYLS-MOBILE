@@ -1,5 +1,6 @@
 package com.team3.vinyls.ui.mapper
 
+import com.team3.vinyls.data.models.AlbumCreateDto
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.ui.models.AlbumUiModel
 import java.time.LocalDate
@@ -16,7 +17,6 @@ fun AlbumDto.toUi(): AlbumUiModel {
         releaseDate = releaseDate
     )
 }
-
 private fun formatSubtitle(dto: AlbumDto): String {
     val performers = dto.performers?.map { it.name } ?: emptyList()
     val artistNames = if (performers.isNotEmpty()) {

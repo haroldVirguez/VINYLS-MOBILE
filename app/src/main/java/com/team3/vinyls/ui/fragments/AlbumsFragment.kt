@@ -55,6 +55,12 @@ class AlbumsFragment : Fragment() {
         binding.recyclerAlbums.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerAlbums.adapter = adapter
 
+
+         binding.includeFab.fabAddTrack.setOnClickListener {
+            val action = AlbumsFragmentDirections.actionAlbumsFragmentToCreateAlbumFragment()
+            findNavController().navigate(action)
+        }
+
         viewModel.albums.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
         }

@@ -1,6 +1,7 @@
 package com.team3.vinyls.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.team3.vinyls.data.models.AlbumCreateDto
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.models.TrackDto
 import com.team3.vinyls.data.repositories.AlbumRepository
@@ -44,6 +45,10 @@ class AlbumDetailViewModelTest {
             override suspend fun getAlbums() = emptyList<AlbumDto>()
             override suspend fun getAlbumDetail(albumId: Int) =
                 album ?: throw RuntimeException("Album no encontrado")
+
+            override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+                TODO("Not yet implemented")
+            }
         }
     )
 
@@ -80,6 +85,9 @@ class AlbumDetailViewModelTest {
         val fakeRepo = object : AlbumRepository(service = object : AlbumsService {
             override suspend fun getAlbums() = emptyList<AlbumDto>()
             override suspend fun getAlbumDetail(albumId: Int) = fakeAlbum
+            override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+                TODO("Not yet implemented")
+            }
         }) {}
 
         val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo())
@@ -96,6 +104,9 @@ class AlbumDetailViewModelTest {
             override suspend fun getAlbums() = emptyList<AlbumDto>()
             override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
                 throw RuntimeException("Error de red")
+            }
+            override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+                TODO("Not yet implemented")
             }
         }) {}
 
@@ -128,6 +139,10 @@ class AlbumDetailViewModelTest {
                 // simulamos un pequeño retraso
                 delay(50)
                 return fakeAlbum
+            }
+
+            override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+                TODO("Not yet implemented")
             }
         }) {}
 
@@ -201,6 +216,10 @@ class AlbumDetailViewModelTest {
             override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
                 delay(50)
                 return fakeAlbum
+            }
+
+            override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+                TODO("Not yet implemented")
             }
         }
 

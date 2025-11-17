@@ -1,6 +1,7 @@
 package com.team3.vinyls.viewmodels
 
 import androidx.arch.core.executor.testing.InstantTaskExecutorRule
+import com.team3.vinyls.data.models.AlbumCreateDto
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.repositories.AlbumRepository
 import com.team3.vinyls.data.services.AlbumsService
@@ -31,6 +32,9 @@ class AlbumsViewModelTest {
 
                 override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
                     throw NotImplementedError("getAlbumDetail test not implemented")
+                }
+                override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+                    TODO("Not yet implemented")
                 }
             }
 

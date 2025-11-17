@@ -67,6 +67,18 @@ app.get('/albums/:id/tracks', (req, res) => {
   res.json(album.tracks || []);
 });
 
+app.post('/albums', (req, res) => {
+  const album = req.body;
+  console.log('[mock] received new album payload:', album);
+  // simple id generation
+  const maxId = albums.reduce((acc, a) => Math.max(acc, a.id), 0);
+  const newId = maxId + 1;
+  const newAlbum = Object.assign({ id: newId, tracks: [], performers: [], comments: [] }, album);
+  albums.push(newAlbum);
+  console.log(`[mock] created new album with id ${newId}`);
+  res.status(200).json(newAlbum);
+});
+
 // New endpoint: add a track to an album (in-memory)
 app.post('/albums/:id/tracks', (req, res) => {
   const id = Number(req.params.id);

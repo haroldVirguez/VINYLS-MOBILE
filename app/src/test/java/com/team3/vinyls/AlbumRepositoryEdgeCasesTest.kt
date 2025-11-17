@@ -1,5 +1,6 @@
 package com.team3.vinyls
 
+import com.team3.vinyls.data.models.AlbumCreateDto
 import kotlinx.coroutines.runBlocking
 import org.junit.Assert.assertTrue
 import org.junit.Test
@@ -21,6 +22,10 @@ class AlbumRepositoryEdgeCasesTest {
         override suspend fun getAlbumDetail(albumId: Int): AlbumDto {
             // Como este test solo verifica getAlbums, puedes dejarlo como dummy
             throw NotImplementedError("FakeAlbumsService.getAlbumDetail() no implementado en este test")
+        }
+
+        override suspend fun createAlbum(albumBody: AlbumCreateDto): AlbumDto {
+            TODO("Not yet implemented")
         }
     }
 

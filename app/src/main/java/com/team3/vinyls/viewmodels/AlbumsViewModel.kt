@@ -4,6 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.team3.vinyls.data.models.AlbumCreateDto
+import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.repositories.AlbumRepository
 import com.team3.vinyls.ui.models.AlbumUiModel
 import kotlinx.coroutines.launch
@@ -21,6 +23,9 @@ class AlbumsViewModel(
 
     private val _error = MutableLiveData<String?>(null)
     val error: LiveData<String?> = _error
+
+    private val _createAlbumResult = MutableLiveData<Result<AlbumDto>?>()
+    val createAlbumResult: LiveData<Result<AlbumDto>?> = _createAlbumResult
 
     init {
         loadAlbums()
@@ -43,5 +48,20 @@ class AlbumsViewModel(
                 _loading.value = false
             }
         }
+    }
+
+    fun createAlbum(dto: AlbumCreateDto) {
+        viewModelScope.launch {
+            try {
+                val createdAlbum = repository.createAlbum(dto)   // now returns AlbumDto
+                _createAlbumResult.postValue(Result.success(createdAlbum))
+            } catch (e: Exception) {
+                _createAlbumResult.postValue(Result.failure(e))
+            }
+        }
+    }
+
+    fun clearCreateResult() {
+        _createAlbumResult.value = null
     }
 }
