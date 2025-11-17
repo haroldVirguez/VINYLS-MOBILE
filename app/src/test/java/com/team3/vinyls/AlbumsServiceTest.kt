@@ -10,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.team3.vinyls.data.models.AlbumCreateDto
 import com.team3.vinyls.data.services.AlbumsService
 import kotlinx.coroutines.runBlocking
 
@@ -50,5 +51,28 @@ class AlbumsServiceTest {
 
         assertEquals(2, list.size)
         assertEquals("Test", list[0].name)
+    }
+
+    @Test
+    fun createAlbums(){
+        val responseBody = """
+            {"id":3,"name":"New Album","cover":"newcover.jpg","releaseDate":"2022-01-01","description":"New album description","genre":"Jazz","recordLabel":"New Label"}
+        """.trimIndent()
+        server.enqueue(MockResponse().setBody(responseBody).setResponseCode(201))
+
+        val albumDto = AlbumCreateDto(
+            name = "New Album",
+            cover = "newcover.jpg",
+            releaseDate = "2022-01-01",
+            description = "New album description",
+            genre = "Jazz",
+            recordLabel = "New Label"
+        )
+        val newAlbum = runBlocking {
+            service.createAlbum(albumDto)
+        }
+
+        assertEquals(3, newAlbum.id)
+        assertEquals("New Album", newAlbum.name)
     }
 }
