@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 8371076100
+              "duration": 6231828583
             }
           },
           {
@@ -23,11 +23,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:6"
+              "location": "features/step_definitions/albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 111375899
+              "duration": 98778457
             }
           },
           {
@@ -36,11 +36,11 @@
             "line": 7,
             "name": "I should see the albums list",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:29"
+              "location": "features/step_definitions/albums.steps.js:29"
             },
             "result": {
               "status": "passed",
-              "duration": 114871400
+              "duration": 63373874
             }
           },
           {
@@ -48,7 +48,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 122860899
+              "duration": 695698999
             }
           }
         ],
@@ -67,7 +67,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 7861035000
+              "duration": 6203559334
             }
           },
           {
@@ -76,11 +76,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:6"
+              "location": "features/step_definitions/albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 203463299
+              "duration": 70531667
             }
           },
           {
@@ -89,12 +89,11 @@
             "line": 10,
             "name": "I tap the first album in the list",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:35"
+              "location": "features/step_definitions/albums.steps.js:35"
             },
             "result": {
-              "status": "failed",
-              "duration": 1113850273399,
-              "error_message": "RequestError: write ECONNABORTED\n    at ClientRequest.<anonymous> (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/got/dist/source/core/index.js:790:107)\n    at Object.onceWrapper (node:events:639:26)\n    at ClientRequest.emit (node:events:536:35)\n    at ClientRequest.emit (node:domain:489:12)\n    at emitErrorEvent (node:_http_client:104:11)\n    at Socket.socketErrorListener (node:_http_client:512:5)\n    at Socket.emit (node:events:524:28)\n    at Socket.emit (node:domain:489:12)\n    at emitErrorNT (node:internal/streams/destroy:170:8)\n    at emitErrorCloseNT (node:internal/streams/destroy:129:3)\n    at afterWriteDispatched (node:internal/stream_base_commons:159:15)\n    at writevGeneric (node:internal/stream_base_commons:142:3)\n    at Socket._writeGeneric (node:net:962:11)\n    at Socket._writev (node:net:971:8)\n    at doWrite (node:internal/streams/writable:596:12)\n    at clearBuffer (node:internal/streams/writable:775:5)\n    at Writable.uncork (node:internal/streams/writable:531:7)\n    at ClientRequest._flushOutput (node:_http_outgoing:1219:10)\n    at ClientRequest._flush (node:_http_outgoing:1193:22)\n    at onSocketNT (node:_http_client:915:9)"
+              "status": "passed",
+              "duration": 191651375
             }
           },
           {
@@ -103,11 +102,11 @@
             "line": 11,
             "name": "I should see the album name \"Buscando América Prueba\"",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:54"
+              "location": "features/step_definitions/albums.steps.js:54"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 701076250
             }
           },
           {
@@ -116,11 +115,11 @@
             "line": 12,
             "name": "I should see the album description",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:79"
+              "location": "features/step_definitions/albums.steps.js:79"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 71508625
             }
           },
           {
@@ -129,20 +128,19 @@
             "line": 13,
             "name": "I should see the album tracks section",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:87"
+              "location": "features/step_definitions/albums.steps.js:87"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 80389916
             }
           },
           {
             "keyword": "After",
             "hidden": true,
             "result": {
-              "status": "failed",
-              "duration": 143729300,
-              "error_message": "invalid session id: A session is either terminated or not started\n    at getErrorFromResponseBody (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriver/build/utils.js:195:12)\n    at NodeJSRequest._request (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriver/build/request/index.js:193:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Browser.wrapCommandFn (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async VinylsWorld.<anonymous> (C:\\Users\\USER\\AndroidStudioProjects\\VINYLS-MOBILE\\e2e-kraken\\features\\support\\world.js:105:5)"
+              "status": "passed",
+              "duration": 689070792
             }
           }
         ],
@@ -155,7 +153,110 @@
     "keyword": "Feature",
     "name": "HU01/HU02 - Álbumes lista y detalle",
     "tags": [],
-    "uri": "features\\albums.feature"
+    "uri": "features/albums.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hu07---crear-album;hu07---crear-un-nuevo-album",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "HU07 - Crear un nuevo album",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 5774374583
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 79605374
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 8,
+            "name": "I tap the create album button",
+            "match": {
+              "location": "features/step_definitions/album_create.steps.js:28"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 586974041
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I fill the album creation form",
+            "match": {
+              "location": "features/step_definitions/album_create.steps.js:37"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10660100875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I submit the album creation form",
+            "match": {
+              "location": "features/step_definitions/album_create.steps.js:70"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11384744666
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 11,
+            "name": "I should see the album name \"Buscando América Prueba\"",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:54"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 56777583
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 767463916
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hu07---crear-album",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HU07 - Crear Album",
+    "tags": [],
+    "uri": "features/albums_create.feature"
   },
   {
     "description": "",
@@ -172,7 +273,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 94953951799
+              "duration": 5770262042
             }
           },
           {
@@ -181,12 +282,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:6"
+              "location": "features/step_definitions/albums.steps.js:6"
             },
             "result": {
-              "status": "failed",
-              "duration": 1315688799,
-              "error_message": "unknown error: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details\n    at getErrorFromResponseBody (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriver/build/utils.js:195:12)\n    at NodeJSRequest._request (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriver/build/request/index.js:193:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Browser.wrapCommandFn (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Browser.$ (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriverio/build/commands/browser/$.js:74:17)\n    at async Browser.wrapCommandFn (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async VinylsWorld.<anonymous> (C:\\Users\\USER\\AndroidStudioProjects\\VINYLS-MOBILE\\e2e-kraken\\features\\step_definitions\\albums.steps.js:7:14)"
+              "status": "passed",
+              "duration": 87786290
             }
           },
           {
@@ -195,11 +295,11 @@
             "line": 7,
             "name": "I should see the musicians list",
             "match": {
-              "location": "features\\step_definitions\\musicians.steps.js:19"
+              "location": "features/step_definitions/musicians.steps.js:19"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 10319625166
             }
           },
           {
@@ -207,7 +307,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 94214200
+              "duration": 749300875
             }
           }
         ],
@@ -220,7 +320,7 @@
     "keyword": "Feature",
     "name": "HU03 - Artistas (Musicians) lista y detalle",
     "tags": [],
-    "uri": "features\\musicians.feature"
+    "uri": "features/musicians.feature"
   },
   {
     "description": "",
@@ -237,7 +337,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 11992729599
+              "duration": 5737432208
             }
           },
           {
@@ -246,12 +346,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:6"
+              "location": "features/step_definitions/albums.steps.js:6"
             },
             "result": {
-              "status": "failed",
-              "duration": 1319713299,
-              "error_message": "unknown error: An unknown server-side error occurred while processing the command. Original error: 'POST /element' cannot be proxied to UiAutomator2 server because the instrumentation process is not running (probably crashed). Check the server log and/or the logcat output for more details\n    at getErrorFromResponseBody (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriver/build/utils.js:195:12)\n    at NodeJSRequest._request (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriver/build/request/index.js:193:23)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)\n    at async Browser.wrapCommandFn (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async Browser.$ (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/webdriverio/build/commands/browser/$.js:74:17)\n    at async Browser.wrapCommandFn (file:///C:/Users/USER/AndroidStudioProjects/VINYLS-MOBILE/e2e-kraken/node_modules/@wdio/utils/build/shim.js:90:29)\n    at async VinylsWorld.<anonymous> (C:\\Users\\USER\\AndroidStudioProjects\\VINYLS-MOBILE\\e2e-kraken\\features\\step_definitions\\albums.steps.js:7:14)"
+              "status": "passed",
+              "duration": 80213792
             }
           },
           {
@@ -260,11 +359,11 @@
             "line": 7,
             "name": "I tap the first album in the list",
             "match": {
-              "location": "features\\step_definitions\\albums.steps.js:35"
+              "location": "features/step_definitions/albums.steps.js:35"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 189594249
             }
           },
           {
@@ -273,11 +372,11 @@
             "line": 8,
             "name": "I tap the plus floating button",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:4"
+              "location": "features/step_definitions/tracks_album.steps.js:4"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 725655041
             }
           },
           {
@@ -286,11 +385,11 @@
             "line": 9,
             "name": "I tap the add track option",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:30"
+              "location": "features/step_definitions/tracks_album.steps.js:30"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 1105271666
             }
           },
           {
@@ -299,11 +398,11 @@
             "line": 10,
             "name": "I enter the track name \"Christmas Tree\"",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:56"
+              "location": "features/step_definitions/tracks_album.steps.js:56"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 1565680208
             }
           },
           {
@@ -312,11 +411,11 @@
             "line": 11,
             "name": "I enter the track duration \"02:50\"",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:81"
+              "location": "features/step_definitions/tracks_album.steps.js:81"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 1504443500
             }
           },
           {
@@ -325,11 +424,11 @@
             "line": 12,
             "name": "I tap the save track button",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:107"
+              "location": "features/step_definitions/tracks_album.steps.js:107"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 556006833
             }
           },
           {
@@ -338,11 +437,11 @@
             "line": 13,
             "name": "I should see the track added toast",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:132"
+              "location": "features/step_definitions/tracks_album.steps.js:132"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 748295666
             }
           },
           {
@@ -351,11 +450,11 @@
             "line": 14,
             "name": "I should see the track name \"Christmas Tree\" in the tracks list",
             "match": {
-              "location": "features\\step_definitions\\tracks_album.steps.js:158"
+              "location": "features/step_definitions/tracks_album.steps.js:192"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 644396375
             }
           },
           {
@@ -363,7 +462,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 92725399
+              "duration": 750409790
             }
           }
         ],
@@ -376,6 +475,6 @@
     "keyword": "Feature",
     "name": "HU08 - Álbumes lista y detalle",
     "tags": [],
-    "uri": "features\\tracks_album.feature"
+    "uri": "features/tracks_album.feature"
   }
 ]

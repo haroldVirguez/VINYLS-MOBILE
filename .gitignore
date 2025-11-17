@@ -56,3 +56,4 @@ gradle-app.setting
 *.keystore
 /e2e-kraken/logs/
 /.idea/
+/e2e-kraken/reports/videos/
