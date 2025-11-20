@@ -1,18 +1,17 @@
-package com.team3.vinyls
+package com.team3.vinyls.data.services
 
+import com.squareup.moshi.Moshi
+import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import com.team3.vinyls.data.models.AlbumCreateDto
+import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
-import com.squareup.moshi.Moshi
-import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.team3.vinyls.data.models.AlbumCreateDto
-import com.team3.vinyls.data.services.AlbumsService
-import kotlinx.coroutines.runBlocking
 
 class AlbumsServiceTest {
     private lateinit var server: MockWebServer
@@ -49,8 +48,8 @@ class AlbumsServiceTest {
 
         val list = runBlocking { service.getAlbums() }
 
-        assertEquals(2, list.size)
-        assertEquals("Test", list[0].name)
+        Assert.assertEquals(2, list.size)
+        Assert.assertEquals("Test", list[0].name)
     }
 
     @Test
@@ -72,7 +71,7 @@ class AlbumsServiceTest {
             service.createAlbum(albumDto)
         }
 
-        assertEquals(3, newAlbum.id)
-        assertEquals("New Album", newAlbum.name)
+        Assert.assertEquals(3, newAlbum.id)
+        Assert.assertEquals("New Album", newAlbum.name)
     }
 }

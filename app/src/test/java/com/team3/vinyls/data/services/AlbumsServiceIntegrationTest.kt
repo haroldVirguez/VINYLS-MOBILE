@@ -1,13 +1,12 @@
-package com.team3.vinyls.data
+package com.team3.vinyls.data.services
 
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
-import com.team3.vinyls.data.services.AlbumsService
 import kotlinx.coroutines.runBlocking
 import okhttp3.mockwebserver.MockResponse
 import okhttp3.mockwebserver.MockWebServer
 import org.junit.After
-import org.junit.Assert.assertEquals
+import org.junit.Assert
 import org.junit.Before
 import org.junit.Test
 import retrofit2.Retrofit
@@ -54,11 +53,10 @@ class AlbumsServiceIntegrationTest {
         val result = runCatching { runBlockingFromTest { service.getAlbums() } }
 
         val list = result.getOrNull()
-        assertEquals(2, list?.size)
-        assertEquals("Abbey Road", list?.get(0)?.name)
+        Assert.assertEquals(2, list?.size)
+        Assert.assertEquals("Abbey Road", list?.get(0)?.name)
     }
 
     // Helper to call suspend from test without bringing extra deps
     private fun <T> runBlockingFromTest(block: suspend () -> T): T = runBlocking { block() }
 }
-

@@ -1,12 +1,11 @@
-package com.team3.vinyls
+package com.team3.vinyls.data.repositories
 
 import com.team3.vinyls.data.models.AlbumCreateDto
-import kotlinx.coroutines.runBlocking
-import org.junit.Assert.assertTrue
-import org.junit.Test
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.services.AlbumsService
-import com.team3.vinyls.data.repositories.AlbumRepository
+import kotlinx.coroutines.runBlocking
+import org.junit.Assert
+import org.junit.Test
 
 class AlbumRepositoryEdgeCasesTest {
 
@@ -36,8 +35,9 @@ class AlbumRepositoryEdgeCasesTest {
 
     @Test
     fun emptyList_returnsEmptyUiList() {
-        val result = runBlocking { repoWithBehavior(FakeAlbumsService.Behavior.EMPTY).fetchAlbums() }
-        assertTrue(result.isEmpty())
+        val result =
+            runBlocking { repoWithBehavior(FakeAlbumsService.Behavior.EMPTY).fetchAlbums() }
+        Assert.assertTrue(result.isEmpty())
     }
 
     @Test
@@ -45,9 +45,9 @@ class AlbumRepositoryEdgeCasesTest {
         try {
             runBlocking { repoWithBehavior(FakeAlbumsService.Behavior.THROW).fetchAlbums() }
             // if no exception, fail
-            assertTrue("Expected exception", false)
+            Assert.assertTrue("Expected exception", false)
         } catch (t: Throwable) {
-            assertTrue(t is IllegalArgumentException)
+            Assert.assertTrue(t is IllegalArgumentException)
         }
     }
 }
