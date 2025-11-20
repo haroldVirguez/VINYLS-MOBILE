@@ -17,4 +17,3 @@ class MusicianUiModelTest {
         assertEquals(2, m3.id)
     }
 }
-
