@@ -16,6 +16,7 @@ import com.team3.vinyls.core.network.ApiConstants
 import com.team3.vinyls.data.services.MusiciansService
 import com.team3.vinyls.data.repositories.MusicianRepository
 import com.team3.vinyls.ui.adapters.MusiciansAdapter
+import androidx.navigation.fragment.findNavController
 
 class MusiciansFragment : Fragment() {
 
@@ -55,6 +56,12 @@ class MusiciansFragment : Fragment() {
 
         binding.recyclerMusicians.layoutManager = LinearLayoutManager(requireContext())
         binding.recyclerMusicians.adapter = adapter
+
+        adapter.onMusicianClick = { musician ->
+            val action = MusiciansFragmentDirections
+                .actionMusiciansFragmentToMusicianDetailFragment(musician.id.toString())
+            findNavController().navigate(action)
+        }
 
         viewModel.musicians.observe(viewLifecycleOwner) { list ->
             adapter.submitList(list)
