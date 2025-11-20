@@ -4,17 +4,17 @@
     "elements": [
       {
         "description": "",
-        "id": "hu01/hu02---álbumes-lista-y-detalle;hu01---ver-la-lista-de-álbumes",
+        "id": "hu02---detalle-de-álbumes;hu02---abrir-detalle-del-primer-álbum",
         "keyword": "Scenario",
         "line": 6,
-        "name": "HU01 - Ver la lista de álbumes",
+        "name": "HU02 - Abrir detalle del primer álbum",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 6231828583
+              "duration": 7070471541
             }
           },
           {
@@ -27,7 +27,110 @@
             },
             "result": {
               "status": "passed",
-              "duration": 98778457
+              "duration": 110626749
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "I tap the first album in the list",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:35"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 238862750
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "I should see the album name \"Buscando América\"",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:54"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 804194792
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 9,
+            "name": "I should see the album description",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:79"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 50184500
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I should see the album tracks section",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:87"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3224679625
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 771473667
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hu02---detalle-de-álbumes",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HU02 - Detalle de Álbumes",
+    "tags": [],
+    "uri": "features/album_detail.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hu01---álbumes-lista;hu01---ver-la-lista-de-álbumes",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "HU01 - Ver la lista de álbumes",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 6146693999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 108875833
             }
           },
           {
@@ -40,7 +143,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 63373874
+              "duration": 58278916
             }
           },
           {
@@ -48,99 +151,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 695698999
-            }
-          }
-        ],
-        "tags": [],
-        "type": "scenario"
-      },
-      {
-        "description": "",
-        "id": "hu01/hu02---álbumes-lista-y-detalle;hu02---abrir-detalle-del-primer-álbum",
-        "keyword": "Scenario",
-        "line": 9,
-        "name": "HU02 - Abrir detalle del primer álbum",
-        "steps": [
-          {
-            "keyword": "Before",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 6203559334
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Given ",
-            "line": 4,
-            "name": "the app is launched",
-            "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 70531667
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "When ",
-            "line": 10,
-            "name": "I tap the first album in the list",
-            "match": {
-              "location": "features/step_definitions/albums.steps.js:35"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 191651375
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "Then ",
-            "line": 11,
-            "name": "I should see the album name \"Buscando América Prueba\"",
-            "match": {
-              "location": "features/step_definitions/albums.steps.js:54"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 701076250
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 12,
-            "name": "I should see the album description",
-            "match": {
-              "location": "features/step_definitions/albums.steps.js:79"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 71508625
-            }
-          },
-          {
-            "arguments": [],
-            "keyword": "And ",
-            "line": 13,
-            "name": "I should see the album tracks section",
-            "match": {
-              "location": "features/step_definitions/albums.steps.js:87"
-            },
-            "result": {
-              "status": "passed",
-              "duration": 80389916
-            }
-          },
-          {
-            "keyword": "After",
-            "hidden": true,
-            "result": {
-              "status": "passed",
-              "duration": 689070792
+              "duration": 670255124
             }
           }
         ],
@@ -148,10 +159,10 @@
         "type": "scenario"
       }
     ],
-    "id": "hu01/hu02---álbumes-lista-y-detalle",
+    "id": "hu01---álbumes-lista",
     "line": 1,
     "keyword": "Feature",
-    "name": "HU01/HU02 - Álbumes lista y detalle",
+    "name": "HU01 - Álbumes lista",
     "tags": [],
     "uri": "features/albums.feature"
   },
@@ -170,7 +181,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5774374583
+              "duration": 5533271958
             }
           },
           {
@@ -183,7 +194,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 79605374
+              "duration": 84423415
             }
           },
           {
@@ -196,7 +207,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 586974041
+              "duration": 594449541
             }
           },
           {
@@ -208,8 +219,9 @@
               "location": "features/step_definitions/album_create.steps.js:37"
             },
             "result": {
-              "status": "passed",
-              "duration": 10660100875
+              "status": "failed",
+              "duration": 20525459624,
+              "error_message": "AssertionError [ERR_ASSERTION]: Release Date input not found\n    + expected - actual\n\n    -false\n    +true\n\n    at VinylsWorld.<anonymous> (/Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/features/step_definitions/album_create.steps.js:47:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
             }
           },
           {
@@ -221,8 +233,8 @@
               "location": "features/step_definitions/album_create.steps.js:70"
             },
             "result": {
-              "status": "passed",
-              "duration": 11384744666
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -234,8 +246,8 @@
               "location": "features/step_definitions/albums.steps.js:54"
             },
             "result": {
-              "status": "passed",
-              "duration": 56777583
+              "status": "skipped",
+              "duration": 0
             }
           },
           {
@@ -243,7 +255,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 767463916
+              "duration": 698351125
             }
           }
         ],
@@ -263,17 +275,17 @@
     "elements": [
       {
         "description": "",
-        "id": "hu03---artistas-(musicians)-lista-y-detalle;ver-la-lista-de-artistas",
+        "id": "hu04---detalle-de-artista;hu04---abrir-detalle-del-primer-artista",
         "keyword": "Scenario",
         "line": 6,
-        "name": "Ver la lista de artistas",
+        "name": "HU04 - Abrir detalle del primer artista",
         "steps": [
           {
             "keyword": "Before",
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5770262042
+              "duration": 5876252166
             }
           },
           {
@@ -286,7 +298,136 @@
             },
             "result": {
               "status": "passed",
-              "duration": 87786290
+              "duration": 176167249
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 7,
+            "name": "I tap Artist menu",
+            "match": {
+              "location": "features/step_definitions/musician_detail.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 936405749
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 8,
+            "name": "I tap the first artist in the list",
+            "match": {
+              "location": "features/step_definitions/musician_detail.steps.js:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 10192110708
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 9,
+            "name": "I should see the artist name \"Rubén\"",
+            "match": {
+              "location": "features/step_definitions/musician_detail.steps.js:45"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 766138999
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 10,
+            "name": "I should see the artist description",
+            "match": {
+              "location": "features/step_definitions/musician_detail.steps.js:68"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 41049417
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 11,
+            "name": "I should see the artist albums section",
+            "match": {
+              "location": "features/step_definitions/musician_detail.steps.js:76"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 2431217917
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "And ",
+            "line": 12,
+            "name": "I should see the artist prizes section",
+            "match": {
+              "location": "features/step_definitions/musician_detail.steps.js:93"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 48786999
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 769813833
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hu04---detalle-de-artista",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HU04 - Detalle de Artista",
+    "tags": [],
+    "uri": "features/musician_detail.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hu03---artistas-(musicians)-lista-y-detalle;ver-la-lista-de-artistas",
+        "keyword": "Scenario",
+        "line": 6,
+        "name": "Ver la lista de artistas",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 5744586875
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "the app is launched",
+            "match": {
+              "location": "features/step_definitions/albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 94196790
             }
           },
           {
@@ -299,7 +440,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 10319625166
+              "duration": 11092586167
             }
           },
           {
@@ -307,7 +448,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 749300875
+              "duration": 698782374
             }
           }
         ],
@@ -337,7 +478,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5737432208
+              "duration": 5529615041
             }
           },
           {
@@ -350,7 +491,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 80213792
+              "duration": 130656917
             }
           },
           {
@@ -363,7 +504,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 189594249
+              "duration": 174483584
             }
           },
           {
@@ -376,7 +517,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 725655041
+              "duration": 683799125
             }
           },
           {
@@ -389,7 +530,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1105271666
+              "duration": 716476666
             }
           },
           {
@@ -402,7 +543,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1565680208
+              "duration": 1694450541
             }
           },
           {
@@ -415,7 +556,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 1504443500
+              "duration": 1582842959
             }
           },
           {
@@ -428,7 +569,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 556006833
+              "duration": 573452125
             }
           },
           {
@@ -441,7 +582,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 748295666
+              "duration": 1022040208
             }
           },
           {
@@ -454,7 +595,7 @@
             },
             "result": {
               "status": "passed",
-              "duration": 644396375
+              "duration": 19186837375
             }
           },
           {
@@ -462,7 +603,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 750409790
+              "duration": 825975124
             }
           }
         ],
