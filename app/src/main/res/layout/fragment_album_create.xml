@@ -212,7 +212,7 @@
                         android:layout_weight="1"
                         android:text="Cancelar"
                         android:textAllCaps="false"
-                        app:backgroundTint="@color/accent_dark_purple"
+                        app:backgroundTint="@color/accent_dark_red"
                         app:cornerRadius="12dp"
                         android:layout_marginEnd="12dp"/>
 
