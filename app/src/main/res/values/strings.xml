@@ -10,4 +10,37 @@
     <!-- Fragment musicians strings -->
     <string name="musicians_heading">Vinilos • Artistas</string>
     <string name="btn_view_all">Refrescar</string>
+
+    <!-- Fragment collectors strings -->
+
+    <!-- Collector item placeholders -->
+    <string name="collector_name_placeholder">Coleccionista</string>
+    <string name="collector_subtitle_placeholder">Ciudad</string>
+
+    <!-- Added musician detail strings -->
+    <string name="musician_photo_desc">Foto del artista</string>
+    <string name="musician_birthdate_placeholder">Nació en 1960</string>
+    <string name="musician_description_title">Descripción</string>
+    <string name="musician_description_placeholder">Descripción del artista</string>
+    <string name="albums_title">Álbumes</string>
+    <string name="prizes_title">Premios</string>
+
+    <!-- Added for album create fragment -->
+    <string name="select_genre_hint">Seleccionar género</string>
+
+    <!-- New album create strings -->
+    <string name="album_cover_desc">Portada del álbum</string>
+    <string name="cover_url_label">URL de la imagen de portada</string>
+    <string name="cover_url_hint">https://…</string>
+    <string name="album_title_label">Título del álbum</string>
+    <string name="album_title_hint">Ej: A Night at the Opera</string>
+    <string name="genre_label">Género</string>
+    <string name="label_record_label">Sello discográfico</string>
+    <string name="select_label_hint">Seleccionar sello</string>
+    <string name="release_date_label">Fecha de lanzamiento</string>
+    <string name="release_date_hint">Ej: 1975–11–21</string>
+    <string name="description_label">Descripción</string>
+    <string name="description_hint">Resumen del álbum</string>
+    <string name="btn_cancel">Cancelar</string>
+    <string name="btn_save">Guardar</string>
 </resources>

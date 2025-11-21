@@ -10,7 +10,6 @@
 
         <!-- MAIN FORM SCROLL AREA -->
         <ScrollView
-            android:id="@+id/scrollForm"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginBottom="100dp"
@@ -27,15 +26,14 @@
                     android:layout_width="200dp"
                     android:layout_height="200dp"
                     android:layout_marginBottom="16dp"
-                    android:background="@drawable/rounded_album_cover"
-                    android:clipToOutline="true">
+                    android:background="@drawable/rounded_album_cover">
 
                     <ImageView
                         android:id="@+id/imgAlbumCover"
                         android:layout_width="0dp"
                         android:layout_height="0dp"
                         android:scaleType="centerCrop"
-                        android:contentDescription="Portada del álbum"
+                        android:contentDescription="@string/album_cover_desc"
                         android:src="@drawable/ic_broken_image"
                         app:layout_constraintTop_toTopOf="parent"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -47,7 +45,7 @@
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:text="URL de la imagen de portada"
+                    android:text="@string/cover_url_label"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
@@ -55,7 +53,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="https://..."
+                    android:hint="@string/cover_url_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -72,7 +70,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Título del álbum"
+                    android:text="@string/album_title_label"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
@@ -80,7 +78,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ej: A Night at the Opera"
+                    android:hint="@string/album_title_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -95,15 +93,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Género"
+                    android:text="@string/genre_label"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:labelFor="@id/inputGenre" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Seleccionar género"
+                    android:hint="@string/select_genre_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:endIconMode="dropdown_menu">
 
@@ -113,7 +112,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_primary"
                         android:inputType="none"
-                        android:focusable="false"
+                        android:focusable="true"
                         android:clickable="true"
                         android:popupBackground="@color/card_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -123,15 +122,16 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Sello discográfico"
+                    android:text="@string/label_record_label"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold"
-                    android:textSize="14sp" />
+                    android:textSize="14sp"
+                    android:labelFor="@id/inputLabel" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Seleccionar sello"
+                    android:hint="@string/select_label_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
                     app:endIconMode="dropdown_menu">
 
@@ -141,7 +141,7 @@
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_primary"
                         android:inputType="none"
-                        android:focusable="false"
+                        android:focusable="true"
                         android:clickable="true"
                         android:popupBackground="@color/card_dark" />
                 </com.google.android.material.textfield.TextInputLayout>
@@ -151,7 +151,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Fecha de lanzamiento"
+                    android:text="@string/release_date_label"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
@@ -159,7 +159,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Ej: 1975-11-21"
+                    android:hint="@string/release_date_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -167,7 +167,7 @@
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:textColor="@color/text_primary"
-                        android:focusable="false"
+                        android:focusable="true"
                         android:clickable="true"/>
                 </com.google.android.material.textfield.TextInputLayout>
 
@@ -177,7 +177,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="12dp"
-                    android:text="Descripción"
+                    android:text="@string/description_label"
                     android:textColor="@color/text_primary"
                     android:textStyle="bold"
                     android:textSize="14sp"/>
@@ -185,7 +185,7 @@
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Resumen del álbum"
+                    android:hint="@string/description_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
 
                     <com.google.android.material.textfield.TextInputEditText
@@ -210,7 +210,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Cancelar"
+                        android:text="@string/btn_cancel"
                         android:textAllCaps="false"
                         app:backgroundTint="@color/accent_dark_red"
                         app:cornerRadius="12dp"
@@ -221,7 +221,7 @@
                         android:layout_width="0dp"
                         android:layout_height="wrap_content"
                         android:layout_weight="1"
-                        android:text="Guardar"
+                        android:text="@string/btn_save"
                         android:textAllCaps="false"
                         app:backgroundTint="@color/accent_purple"
                         app:cornerRadius="12dp"/>

@@ -9,7 +9,6 @@
     android:padding="12dp">
 
     <TextView
-        android:id="@+id/dialogTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"
@@ -19,7 +18,6 @@
         android:textStyle="bold" />
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputTrackNameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:hint="Nombre de la canción"
@@ -38,7 +36,6 @@
     </com.google.android.material.textfield.TextInputLayout>
 
     <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/inputTrackDurationLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"

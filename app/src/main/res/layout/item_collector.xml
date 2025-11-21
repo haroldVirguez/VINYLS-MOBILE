@@ -17,13 +17,12 @@
         android:padding="16dp">
 
         <ImageView
-            android:id="@+id/imgCover"
+            android:id="@+id/imgCollector"
             android:layout_width="60dp"
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/vinyls_card_bg"
-            android:clipToOutline="true"
-            android:contentDescription="TODO"
+            android:contentDescription="@string/musician_image_cd"
             android:scaleType="centerCrop"
             android:src="@drawable/vinyls_card_bg" />
 
@@ -34,12 +33,12 @@
             android:orientation="vertical">
 
             <TextView
-                android:id="@+id/txtTitle"
+                android:id="@+id/txtName"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:ellipsize="end"
                 android:maxLines="2"
-                android:text="Título del Álbum"
+                android:text="@string/collector_name_placeholder"
                 android:textColor="@color/text_primary"
                 android:textSize="16sp"
                 android:textStyle="bold" />
@@ -51,25 +50,12 @@
                 android:layout_marginTop="4dp"
                 android:ellipsize="end"
                 android:maxLines="1"
-                android:text="Artista • Año"
+                android:text="@string/collector_subtitle_placeholder"
                 android:textColor="@color/text_secondary"
                 android:textSize="14sp" />
-
-            <TextView
-                android:id="@+id/txtGenre"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@drawable/vinyls_card_bg"
-                android:paddingHorizontal="8dp"
-                android:paddingVertical="2dp"
-                android:text="Género"
-                android:textColor="@color/text_secondary"
-                android:textSize="10sp" />
 
         </LinearLayout>
 
     </LinearLayout>
 
 </androidx.cardview.widget.CardView>
-

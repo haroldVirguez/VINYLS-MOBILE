@@ -35,7 +35,6 @@
                     app:layout_constraintEnd_toEndOf="parent" />
 
                 <LinearLayout
-                    android:id="@+id/coverOverlay"
                     android:layout_width="0dp"
                     android:layout_height="wrap_content"
                     android:layout_margin="0dp"
@@ -87,7 +86,6 @@
 
                 <!-- Descripción -->
                 <TextView
-                    android:id="@+id/txtDescriptionTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="6dp"
@@ -117,7 +115,6 @@
                 <!-- Título de la caja -->
 
                 <TextView
-                    android:id="@+id/txtTracksTitle"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:paddingBottom="6dp"

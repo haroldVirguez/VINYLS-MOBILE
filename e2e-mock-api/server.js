@@ -157,6 +157,43 @@ app.get('/musicians/:id', (req, res) => {
   res.json(m);
 });
 
+// Explicit mock collectors data to be returned by /collectors
+const collectors = [
+  {
+    id: 1,
+    name: 'Jaime Andrés Monsalve',
+    telephone: '3102178976',
+    email: 'j.monsalve@gmail.com',
+    comments: [],
+    favoritePerformers: [],
+    collectorAlbums: []
+  },
+  {
+    id: 2,
+    name: 'María Alejandra Palacios',
+    telephone: '3502889087',
+    email: 'j.palacios@outlook.es',
+    comments: [],
+    favoritePerformers: [],
+    collectorAlbums: []
+  }
+]
+
+// Return all collectors
+app.get('/collectors', (req, res) => {
+  console.log('[mock] GET /collectors -> returning', collectors.length, 'collectors')
+  res.json(collectors)
+})
+
+// Return a single collector by id
+app.get('/collectors/:id', (req, res) => {
+  const id = Number(req.params.id)
+  const c = collectors.find(x => x.id === id)
+  console.log(`[mock] GET /collectors/${id} -> ${c ? 'FOUND' : 'NOT FOUND'}`)
+  if (!c) return res.status(404).json({ error: 'Collector not found' })
+  res.json(c)
+})
+
 const port = process.env.PORT || 3000;
 app.listen(port, () => {
   console.log(`Mock API running on http://localhost:${port}`);

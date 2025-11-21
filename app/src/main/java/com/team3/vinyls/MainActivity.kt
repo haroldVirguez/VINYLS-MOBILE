@@ -48,7 +48,7 @@ class MainActivity : AppCompatActivity() {
                 }
 
                 R.id.nav_collectors -> {
-                    // Placeholder destination
+                    navController.navigate(R.id.collectorsFragment)
                     true
                 }
 
