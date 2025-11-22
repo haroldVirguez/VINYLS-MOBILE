@@ -1,4 +1,4 @@
-Feature: HU08 - Álbumes lista y detalle
+Feature: HU08 - Asociar canciones a álbum
 
   Background:
     Given the app is launched

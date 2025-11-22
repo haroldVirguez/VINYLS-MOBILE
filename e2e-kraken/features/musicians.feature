@@ -1,4 +1,4 @@
-Feature: HU03 - Artistas (Musicians) lista y detalle
+Feature: HU03 - Lista de Artistas
 
   Background:
     Given the app is launched

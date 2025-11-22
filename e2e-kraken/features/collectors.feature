@@ -1,4 +1,4 @@
-Feature: HU05 - listar coleccionistas
+Feature: HU05 - Lista de Coleccionistas
   Como usuario quiero ver la lista de coleccionistas para poder explorar perfiles
 
   Background:

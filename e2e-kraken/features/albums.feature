@@ -1,4 +1,4 @@
-Feature: HU01 - Álbumes lista
+Feature: HU01 - Lista de Álbumes
 
   Background:
     Given the app is launched
