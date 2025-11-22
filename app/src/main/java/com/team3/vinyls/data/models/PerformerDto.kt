@@ -5,5 +5,6 @@ data class PerformerDto(
     val name: String,
     val image: String,
     val description: String,
-    val birthDate: String? = null
+    val birthDate: String? = null,
+    val creationDate: String? = null
 )
