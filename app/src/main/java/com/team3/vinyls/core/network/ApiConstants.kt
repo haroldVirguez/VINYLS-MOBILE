@@ -9,4 +9,5 @@ object ApiConstants {
     // Endpoints
     const val ALBUMS_ENDPOINT = "albums"
     const val MUSICIANS_ENDPOINT = "musicians"
+    const val COLLECTORS_ENDPOINT = "collectors"
 }

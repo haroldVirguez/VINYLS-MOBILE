@@ -2,7 +2,6 @@
 <navigation xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/nav_graph"
     app:startDestination="@id/albumsFragment">
 
     <fragment
@@ -64,5 +63,12 @@
             app:argType="string" />
 
     </fragment>
+
+    <!-- Collectors fragment -->
+    <fragment
+        android:id="@+id/collectorsFragment"
+        android:name="com.team3.vinyls.ui.fragments.CollectorsFragment"
+        android:label="Coleccionistas"
+        tools:layout="@layout/fragment_collectors" />
 
 </navigation>

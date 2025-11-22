@@ -14,7 +14,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5989803667
+              "duration": 9106436200
             }
           },
           {
@@ -23,11 +23,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
+              "location": "features\\step_definitions\\albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 250837208
+              "duration": 120607499
             }
           },
           {
@@ -36,11 +36,11 @@
             "line": 7,
             "name": "I tap the first album in the list",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:35"
+              "location": "features\\step_definitions\\albums.steps.js:35"
             },
             "result": {
               "status": "passed",
-              "duration": 222198665
+              "duration": 242971000
             }
           },
           {
@@ -49,11 +49,11 @@
             "line": 8,
             "name": "I should see the album name \"Buscando América\"",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:54"
+              "location": "features\\step_definitions\\albums.steps.js:54"
             },
             "result": {
               "status": "passed",
-              "duration": 814380167
+              "duration": 876721299
             }
           },
           {
@@ -62,11 +62,11 @@
             "line": 9,
             "name": "I should see the album description",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:79"
+              "location": "features\\step_definitions\\albums.steps.js:79"
             },
             "result": {
               "status": "passed",
-              "duration": 56239666
+              "duration": 92998200
             }
           },
           {
@@ -75,11 +75,11 @@
             "line": 10,
             "name": "I should see the album tracks section",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:87"
+              "location": "features\\step_definitions\\albums.steps.js:87"
             },
             "result": {
               "status": "passed",
-              "duration": 2868601083
+              "duration": 6666978999
             }
           },
           {
@@ -87,7 +87,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 828471875
+              "duration": 1214323499
             }
           }
         ],
@@ -100,7 +100,7 @@
     "keyword": "Feature",
     "name": "HU02 - Detalle de Álbumes",
     "tags": [],
-    "uri": "features/album_detail.feature"
+    "uri": "features\\album_detail.feature"
   },
   {
     "description": "",
@@ -117,7 +117,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5617380084
+              "duration": 8300907599
             }
           },
           {
@@ -126,11 +126,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
+              "location": "features\\step_definitions\\albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 78269958
+              "duration": 121146499
             }
           },
           {
@@ -139,11 +139,11 @@
             "line": 7,
             "name": "I should see the albums list",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:29"
+              "location": "features\\step_definitions\\albums.steps.js:29"
             },
             "result": {
               "status": "passed",
-              "duration": 57134916
+              "duration": 115206900
             }
           },
           {
@@ -151,7 +151,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 777752333
+              "duration": 862608399
             }
           }
         ],
@@ -164,7 +164,7 @@
     "keyword": "Feature",
     "name": "HU01 - Álbumes lista",
     "tags": [],
-    "uri": "features/albums.feature"
+    "uri": "features\\albums.feature"
   },
   {
     "description": "",
@@ -181,7 +181,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5823743834
+              "duration": 8454220300
             }
           },
           {
@@ -190,11 +190,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
+              "location": "features\\step_definitions\\albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 66594250
+              "duration": 120014600
             }
           },
           {
@@ -203,11 +203,11 @@
             "line": 8,
             "name": "I tap the create album button",
             "match": {
-              "location": "features/step_definitions/album_create.steps.js:28"
+              "location": "features\\step_definitions\\album_create.steps.js:125"
             },
             "result": {
               "status": "passed",
-              "duration": 595440291
+              "duration": 672500800
             }
           },
           {
@@ -216,12 +216,11 @@
             "line": 9,
             "name": "I fill the album creation form",
             "match": {
-              "location": "features/step_definitions/album_create.steps.js:37"
+              "location": "features\\step_definitions\\album_create.steps.js:134"
             },
             "result": {
-              "status": "failed",
-              "duration": 20947755166,
-              "error_message": "AssertionError [ERR_ASSERTION]: Release Date input not found\n    + expected - actual\n\n    -false\n    +true\n\n    at VinylsWorld.<anonymous> (/Users/ferparrav/Documents/Coding/Vinyls-android/e2e-kraken/features/step_definitions/album_create.steps.js:47:10)\n    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)"
+              "status": "passed",
+              "duration": 122363732400
             }
           },
           {
@@ -230,11 +229,11 @@
             "line": 10,
             "name": "I submit the album creation form",
             "match": {
-              "location": "features/step_definitions/album_create.steps.js:70"
+              "location": "features\\step_definitions\\album_create.steps.js:399"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 1133443100
             }
           },
           {
@@ -243,11 +242,11 @@
             "line": 11,
             "name": "I should see the album name \"Buscando América Prueba\"",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:54"
+              "location": "features\\step_definitions\\albums.steps.js:54"
             },
             "result": {
-              "status": "skipped",
-              "duration": 0
+              "status": "passed",
+              "duration": 79416100
             }
           },
           {
@@ -255,7 +254,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 703024499
+              "duration": 1304885500
             }
           }
         ],
@@ -268,7 +267,71 @@
     "keyword": "Feature",
     "name": "HU07 - Crear Album",
     "tags": [],
-    "uri": "features/albums_create.feature"
+    "uri": "features\\albums_create.feature"
+  },
+  {
+    "description": "  Como usuario quiero ver la lista de coleccionistas para poder explorar perfiles",
+    "elements": [
+      {
+        "description": "",
+        "id": "hu05---listar-coleccionistas;ver-la-lista-de-coleccionistas",
+        "keyword": "Scenario",
+        "line": 7,
+        "name": "Ver la lista de coleccionistas",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 9240493699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "the app is launched",
+            "match": {
+              "location": "features\\step_definitions\\albums.steps.js:6"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 119440399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 8,
+            "name": "I should see the collectors list",
+            "match": {
+              "location": "features\\step_definitions\\collectors.steps.js:26"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 11422366100
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 870662500
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hu05---listar-coleccionistas",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "HU05 - listar coleccionistas",
+    "tags": [],
+    "uri": "features\\collectors.feature"
   },
   {
     "description": "",
@@ -285,7 +348,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5712522540
+              "duration": 8312231599
             }
           },
           {
@@ -294,11 +357,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
+              "location": "features\\step_definitions\\albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 77489709
+              "duration": 124499400
             }
           },
           {
@@ -307,11 +370,11 @@
             "line": 7,
             "name": "I tap Artist menu",
             "match": {
-              "location": "features/step_definitions/musician_detail.steps.js:6"
+              "location": "features\\step_definitions\\musician_detail.steps.js:29"
             },
             "result": {
               "status": "passed",
-              "duration": 1043259458
+              "duration": 1241760899
             }
           },
           {
@@ -320,11 +383,11 @@
             "line": 8,
             "name": "I tap the first artist in the list",
             "match": {
-              "location": "features/step_definitions/musician_detail.steps.js:20"
+              "location": "features\\step_definitions\\musician_detail.steps.js:43"
             },
             "result": {
               "status": "passed",
-              "duration": 10260976333
+              "duration": 10316261299
             }
           },
           {
@@ -333,11 +396,11 @@
             "line": 9,
             "name": "I should see the artist name \"Demo Artist\"",
             "match": {
-              "location": "features/step_definitions/musician_detail.steps.js:45"
+              "location": "features\\step_definitions\\musician_detail.steps.js:68"
             },
             "result": {
               "status": "passed",
-              "duration": 741382416
+              "duration": 788530700
             }
           },
           {
@@ -346,11 +409,11 @@
             "line": 10,
             "name": "I should see the artist description",
             "match": {
-              "location": "features/step_definitions/musician_detail.steps.js:68"
+              "location": "features\\step_definitions\\musician_detail.steps.js:91"
             },
             "result": {
               "status": "passed",
-              "duration": 49007957
+              "duration": 89794299
             }
           },
           {
@@ -359,11 +422,11 @@
             "line": 11,
             "name": "I should see the artist albums section",
             "match": {
-              "location": "features/step_definitions/musician_detail.steps.js:76"
+              "location": "features\\step_definitions\\musician_detail.steps.js:99"
             },
             "result": {
               "status": "passed",
-              "duration": 2370828166
+              "duration": 190148399
             }
           },
           {
@@ -372,11 +435,11 @@
             "line": 12,
             "name": "I should see the artist prizes section",
             "match": {
-              "location": "features/step_definitions/musician_detail.steps.js:93"
+              "location": "features\\step_definitions\\musician_detail.steps.js:126"
             },
             "result": {
               "status": "passed",
-              "duration": 48620915
+              "duration": 10190729200
             }
           },
           {
@@ -384,7 +447,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 950874708
+              "duration": 899972300
             }
           }
         ],
@@ -397,7 +460,7 @@
     "keyword": "Feature",
     "name": "HU04 - Detalle de Artista",
     "tags": [],
-    "uri": "features/musician_detail.feature"
+    "uri": "features\\musician_detail.feature"
   },
   {
     "description": "",
@@ -414,7 +477,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5631323375
+              "duration": 8391487400
             }
           },
           {
@@ -423,11 +486,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
+              "location": "features\\step_definitions\\albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 73396542
+              "duration": 115501499
             }
           },
           {
@@ -436,11 +499,11 @@
             "line": 7,
             "name": "I should see the musicians list",
             "match": {
-              "location": "features/step_definitions/musicians.steps.js:19"
+              "location": "features\\step_definitions\\musicians.steps.js:19"
             },
             "result": {
               "status": "passed",
-              "duration": 11221872166
+              "duration": 10555424400
             }
           },
           {
@@ -448,7 +511,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 1076806292
+              "duration": 920549700
             }
           }
         ],
@@ -461,7 +524,7 @@
     "keyword": "Feature",
     "name": "HU03 - Artistas (Musicians) lista y detalle",
     "tags": [],
-    "uri": "features/musicians.feature"
+    "uri": "features\\musicians.feature"
   },
   {
     "description": "",
@@ -478,7 +541,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 5790074957
+              "duration": 8457549700
             }
           },
           {
@@ -487,11 +550,11 @@
             "line": 4,
             "name": "the app is launched",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:6"
+              "location": "features\\step_definitions\\albums.steps.js:6"
             },
             "result": {
               "status": "passed",
-              "duration": 62640500
+              "duration": 121459999
             }
           },
           {
@@ -500,11 +563,11 @@
             "line": 7,
             "name": "I tap the first album in the list",
             "match": {
-              "location": "features/step_definitions/albums.steps.js:35"
+              "location": "features\\step_definitions\\albums.steps.js:35"
             },
             "result": {
               "status": "passed",
-              "duration": 114047082
+              "duration": 243135000
             }
           },
           {
@@ -513,11 +576,11 @@
             "line": 8,
             "name": "I tap the plus floating button",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:4"
+              "location": "features\\step_definitions\\tracks_album.steps.js:4"
             },
             "result": {
               "status": "passed",
-              "duration": 650234582
+              "duration": 1002783499
             }
           },
           {
@@ -526,11 +589,11 @@
             "line": 9,
             "name": "I tap the add track option",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:30"
+              "location": "features\\step_definitions\\tracks_album.steps.js:30"
             },
             "result": {
               "status": "passed",
-              "duration": 634382249
+              "duration": 1170755000
             }
           },
           {
@@ -539,11 +602,11 @@
             "line": 10,
             "name": "I enter the track name \"Christmas Tree\"",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:56"
+              "location": "features\\step_definitions\\tracks_album.steps.js:56"
             },
             "result": {
               "status": "passed",
-              "duration": 1768130208
+              "duration": 2116603400
             }
           },
           {
@@ -552,11 +615,11 @@
             "line": 11,
             "name": "I enter the track duration \"02:50\"",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:81"
+              "location": "features\\step_definitions\\tracks_album.steps.js:81"
             },
             "result": {
               "status": "passed",
-              "duration": 1662043875
+              "duration": 1576836600
             }
           },
           {
@@ -565,11 +628,11 @@
             "line": 12,
             "name": "I tap the save track button",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:107"
+              "location": "features\\step_definitions\\tracks_album.steps.js:107"
             },
             "result": {
               "status": "passed",
-              "duration": 549607959
+              "duration": 600952199
             }
           },
           {
@@ -578,11 +641,11 @@
             "line": 13,
             "name": "I should see the track added toast",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:132"
+              "location": "features\\step_definitions\\tracks_album.steps.js:132"
             },
             "result": {
               "status": "passed",
-              "duration": 754997667
+              "duration": 735456500
             }
           },
           {
@@ -591,11 +654,11 @@
             "line": 14,
             "name": "I should see the track name \"Christmas Tree\" in the tracks list",
             "match": {
-              "location": "features/step_definitions/tracks_album.steps.js:192"
+              "location": "features\\step_definitions\\tracks_album.steps.js:192"
             },
             "result": {
               "status": "passed",
-              "duration": 3651148583
+              "duration": 3589800900
             }
           },
           {
@@ -603,7 +666,7 @@
             "hidden": true,
             "result": {
               "status": "passed",
-              "duration": 938712750
+              "duration": 1152039300
             }
           }
         ],
@@ -616,6 +679,6 @@
     "keyword": "Feature",
     "name": "HU08 - Álbumes lista y detalle",
     "tags": [],
-    "uri": "features/tracks_album.feature"
+    "uri": "features\\tracks_album.feature"
   }
 ]
