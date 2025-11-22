@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<shape xmlns:android="http://schemas.android.com/apk/res/android"
+    android:shape="rectangle">
+
+    <!-- Fondo -->
+    <solid android:color="@color/card_dark" />
+
+    <!-- Esquinas suaves -->
+    <corners android:radius="12dp" />
+
+    <!-- Borde súper delgado -->
+    <stroke
+        android:width="0.8dp"
+        android:color="@color/card_dark_lighter" />
+
+    <!-- Sombra ligera (para API<28 no se verá) -->
+    <padding
+        android:left="4dp"
+        android:top="4dp"
+        android:right="4dp"
+        android:bottom="4dp" />
+
+</shape>
