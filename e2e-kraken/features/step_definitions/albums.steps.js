@@ -85,62 +85,18 @@ Then('I should see the album description', async function () {
 })
 
 Then('I should see the album tracks section', async function () {
+  await this.driver.$(
+    'android=new UiScrollable(new UiSelector().scrollable(true))' +
+    '.scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/txtTracksTitle"))'
+  )
+
   const el = await this.driver.$(byResId('tracksContainer'))
-  try {
-    await el.waitForExist({ timeout: 15000 })
-  } catch (e) {
-    const alt = await this.driver.$$('//*[contains(@resource-id, "tracks")]')
-    if (alt && alt.length > 0) return
+  const exists = await el.isExisting()
 
-
-    try {
-      try {
-        await this.driver.$('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/txtTracksTitle"))')
-        const titleAfter = await this.driver.$(byResId('txtTracksTitle'))
-        if (titleAfter && await titleAfter.isExisting()) return
-      } catch (scrollErr) {
-        try {
-          for (let i = 0; i < 3; i++) {
-            await this.driver.touchAction([{ action: 'press', x: 540, y: 1600 }, { action: 'moveTo', x: 540, y: 800 }, 'release'])
-            await this.driver.pause(500)
-            const titleCheck = await this.driver.$(byResId('txtTracksTitle'))
-            if (titleCheck && await titleCheck.isExisting()) return
-          }
-        } catch (swErr) {
-        }
-      }
-
-      const titleEl = await this.driver.$(byResId('txtTracksTitle'))
-      if (titleEl && await titleEl.isExisting()) return
-      await titleEl.waitForExist({ timeout: 5000 })
-      return
-    } catch (err) {
-    }
-
-    const texts = ['Canciones', 'Tracks', 'Songs']
-    for (const t of texts) {
-      try {
-        const found = await this.driver.$(`//*[contains(@text, "${t}")]`)
-        if (found && await found.isExisting()) return
-      } catch (err) {
-      }
-    }
-
-    try {
-      const src = await this.driver.getPageSource()
-      const fs = require('fs')
-      const path = require('path')
-      const ts = new Date().toISOString().replace(/[:.]/g, '-')
-      const outDir = path.join(__dirname, '..', '..', 'logs')
-      try { fs.mkdirSync(outDir, { recursive: true }) } catch (err) {}
-      const outPath = path.join(outDir, `tracks-missing-${ts}.xml`)
-      try { fs.writeFileSync(outPath, src, 'utf8'); console.error(`Wrote page source to ${outPath}`) } catch (err) { console.error('Failed writing page source:', err.message) }
-    } catch (err) {
-    }
-
+  if (!exists) {
+    await dumpPageSource('tracks-missing', this.driver)
     throw new Error('Tracks section not visible')
   }
 
-  const exists = await el.isExisting()
   assert.ok(exists, 'Tracks section not visible')
 })

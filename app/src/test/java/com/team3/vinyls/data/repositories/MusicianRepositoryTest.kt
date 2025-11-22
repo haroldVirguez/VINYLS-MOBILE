@@ -1,12 +1,11 @@
-package com.team3.vinyls.data
+package com.team3.vinyls.data.repositories
 
 import com.team3.vinyls.data.models.MusicianDto
-import com.team3.vinyls.data.repositories.MusicianRepository
 import com.team3.vinyls.data.services.MusiciansService
 import kotlinx.coroutines.ExperimentalCoroutinesApi
 import kotlinx.coroutines.test.runTest
+import org.junit.Assert
 import org.junit.Test
-import org.junit.Assert.assertEquals
 import org.mockito.kotlin.mock
 import org.mockito.kotlin.whenever
 
@@ -28,7 +27,7 @@ class MusicianRepositoryTest {
 
         val result = repository.fetchMusicians()
 
-        assertEquals(musicians, result)
+        Assert.assertEquals(musicians, result)
     }
 
     @Test
@@ -38,7 +37,7 @@ class MusicianRepositoryTest {
 
         val result = repository.fetchMusicians()
 
-        assertEquals(0, result.size)
+        Assert.assertEquals(0, result.size)
     }
 
     @Test
@@ -47,9 +46,30 @@ class MusicianRepositoryTest {
 
         try {
             repository.fetchMusicians()
-            org.junit.Assert.fail("Expected RuntimeException")
+            Assert.fail("Expected RuntimeException")
         } catch (e: RuntimeException) {
             // expected
         }
+    }
+
+    @Test
+    fun `fetchMusicianDetail returns musician from service`() = runTest {
+        val musician = MusicianDto(
+            id = 10,
+            name = "Rubén Blades",
+            image = "image.jpg",
+            description = "Cantante",
+            birthDate = "1948-07-16",
+            albums = emptyList(),
+            performerPrizes = emptyList()
+        )
+
+        whenever(service.getMusicianDetail(10)).thenReturn(musician)
+
+        val result = repository.fetchMusicianDetail(10)
+
+        Assert.assertNotNull(result)
+        Assert.assertEquals(10, result?.id)
+        Assert.assertEquals("Rubén Blades", result?.name)
     }
 }

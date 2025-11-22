@@ -31,4 +31,32 @@ class NavigationTest {
 
         assertEquals("99", albumId)
     }
+
+    @Test
+    fun directionsContainMusicianIdArgument() {
+        val action = com.team3.vinyls.ui.fragments.MusiciansFragmentDirections
+            .actionMusiciansFragmentToMusicianDetailFragment("55")
+
+        assertEquals(R.id.action_musiciansFragment_to_musicianDetailFragment, action.actionId)
+
+        val cls = action::class.java
+        var musicianId: String? = null
+
+        val named = cls.declaredFields.firstOrNull { it.name == "musicianId" }
+        if (named != null) {
+            named.isAccessible = true
+            musicianId = named.get(action) as? String
+        } else {
+            for (field in cls.declaredFields) {
+                field.isAccessible = true
+                val value = field.get(action)
+                if (value is String) {
+                    musicianId = value
+                    break
+                }
+            }
+        }
+
+        assertEquals("55", musicianId)
+    }
 }

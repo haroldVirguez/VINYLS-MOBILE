@@ -44,6 +44,25 @@
         android:id="@+id/musiciansFragment"
         android:name="com.team3.vinyls.ui.fragments.MusiciansFragment"
         android:label="Artistas"
-        tools:layout="@layout/fragment_musicians" />
+        tools:layout="@layout/fragment_musicians">
+
+        <action
+            android:id="@+id/action_musiciansFragment_to_musicianDetailFragment"
+            app:destination="@id/musicianDetailFragment"
+            app:enterAnim="@android:animator/fade_in" />
+
+    </fragment>
+
+    <fragment
+        android:id="@+id/musicianDetailFragment"
+        android:name="com.team3.vinyls.ui.fragments.MusicianDetailFragment"
+        android:label="Detalle del artista"
+        tools:layout="@layout/fragment_musician_detail">
+
+        <argument
+            android:name="musicianId"
+            app:argType="string" />
+
+    </fragment>
 
 </navigation>
