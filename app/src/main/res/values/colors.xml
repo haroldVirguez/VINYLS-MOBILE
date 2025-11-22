@@ -5,8 +5,10 @@
     <color name="bg_dark">#0E1323</color>
     <color name="card_dark">#1A2235</color>
     <color name="card_stroke">#3A4666</color>
-    <color name="accent_purple">#816BFF</color>
+    <color name="accent_purple">#5A3CCF</color>
     <color name="accent_dark_purple">#5A3CCF</color>
+    <color name="accent_dark_red">#B8324F</color>
     <color name="text_primary">#FFFFFF</color>
     <color name="text_secondary">#A7B0C0</color>
+    <color name="text_bg">#C3C3CD</color>
 </resources>

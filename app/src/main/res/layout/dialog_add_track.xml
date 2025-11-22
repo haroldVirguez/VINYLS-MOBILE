@@ -22,13 +22,16 @@
         android:id="@+id/inputTrackNameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Nombre de la canción">
+        android:hint="Nombre de la canción"
+        android:textColorHint="@color/text_bg"
+        app:boxStrokeWidth="1dp"
+        app:hintTextColor="@color/text_bg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputTrackName"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:minHeight="0dp"
+            android:minHeight="48dp"
             android:paddingTop="10dp"
             android:paddingBottom="6dp"
             android:textColor="@color/text_primary" />
@@ -39,14 +42,18 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
-        android:hint="Duración (ej: 4:05)">
+        android:hint="Duración (ej: 4:05)"
+        android:textColorHint="@color/text_bg"
+        app:boxBackgroundColor="@android:color/transparent"
+        app:boxStrokeWidth="1dp"
+        app:hintTextColor="@color/text_bg">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/inputTrackDuration"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:inputType="text"
-            android:minHeight="0dp"
+            android:minHeight="48dp"
             android:paddingTop="10dp"
             android:paddingBottom="6dp"
             android:textColor="@color/text_primary" />
@@ -66,7 +73,7 @@
             android:layout_marginEnd="12dp"
             android:text="Cancelar"
             android:textAllCaps="false"
-            app:backgroundTint="@color/accent_dark_purple"
+            app:backgroundTint="@color/accent_dark_red"
             app:cornerRadius="12dp" />
 
         <com.google.android.material.button.MaterialButton
