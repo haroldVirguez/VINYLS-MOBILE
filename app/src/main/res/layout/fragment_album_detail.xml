@@ -164,6 +164,7 @@
     </ScrollView>
 
     <include
+        android:id="@+id/includeFabDetail"
         layout="@layout/layout_fab_add"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

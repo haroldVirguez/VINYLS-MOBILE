@@ -28,8 +28,6 @@ import com.bumptech.glide.Glide
 import androidx.core.net.toUri
 import com.bumptech.glide.request.RequestOptions
 import com.bumptech.glide.load.engine.DiskCacheStrategy
-import com.google.android.material.floatingactionbutton.FloatingActionButton
-
 
 class AlbumDetailFragment : Fragment() {
 
@@ -67,37 +65,9 @@ class AlbumDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val albumId = args.albumId.toInt()
-        val fabAddTrack =
-            view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
-                R.id.fabAddTrack
-            )
 
-        fabAddTrack.setOnClickListener {
-            val dialogView = layoutInflater.inflate(R.layout.menu_fab_options, null)
-            val option1 = dialogView.findViewById<TextView>(R.id.option1)
-            val option2 = dialogView.findViewById<TextView>(R.id.option2)
-
-            option1.text = "Agregar canción"
-            option2.text = "Agregar comentario"
-
-            val dialog = AlertDialog.Builder(requireContext())
-                .setView(dialogView)
-                .create()
-
-            dialog.window?.setBackgroundDrawable(
-                android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
-            )
-            dialog.show()
-
-            option1.setOnClickListener {
-                showAddTrackDialog(albumId)
-                dialog.dismiss()
-            }
-
-            option2.setOnClickListener {
-                showAddCommentDialog()
-                dialog.dismiss()
-            }
+        binding.includeFabDetail.fabAddTrack.setOnClickListener {
+            handleClickFabButton(albumId)
         }
 
         viewModel.loadAlbumDetail(albumId)
@@ -212,6 +182,33 @@ class AlbumDetailFragment : Fragment() {
         }
     }
 
+    private fun handleClickFabButton(albumId:Int){
+        val dialogView = layoutInflater.inflate(R.layout.menu_fab_options, null)
+        val option1 = dialogView.findViewById<TextView>(R.id.option1)
+        val option2 = dialogView.findViewById<TextView>(R.id.option2)
+
+        option1.text = "Agregar canción"
+        option2.text = "Agregar comentario"
+
+        val dialog = AlertDialog.Builder(requireContext())
+            .setView(dialogView)
+            .create()
+
+        dialog.window?.setBackgroundDrawable(
+            android.graphics.drawable.ColorDrawable(android.graphics.Color.TRANSPARENT)
+        )
+        dialog.show()
+
+        option1.setOnClickListener {
+            showAddTrackDialog(albumId)
+            dialog.dismiss()
+        }
+
+        option2.setOnClickListener {
+            showAddCommentDialog()
+            dialog.dismiss()
+        }
+    }
     private fun showAddCommentDialog() {
         // TODO: Implementar flujo real de agregar comentario
         Toast.makeText(

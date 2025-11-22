@@ -16,6 +16,7 @@
     <!-- Collector item placeholders -->
     <string name="collector_name_placeholder">Coleccionista</string>
     <string name="collector_subtitle_placeholder">Ciudad</string>
+    <string name="collector_img_cd">Imagen Coleccionista</string>
 
     <!-- Added musician detail strings -->
     <string name="musician_photo_desc">Foto del artista</string>
