@@ -1,6 +1,7 @@
 package com.team3.vinyls.ui.mapper
 
 import com.team3.vinyls.data.models.MusicianDto
+import com.team3.vinyls.data.models.PerformerDto
 import com.team3.vinyls.ui.models.MusicianUiModel
 
 fun MusicianDto.toUi(): MusicianUiModel {

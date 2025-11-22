@@ -11,7 +11,7 @@ import kotlinx.coroutines.launch
 class CollectorsDetailViewModel(private val collectorsRepository: CollectorRepository): ViewModel() {
 
     private val _collector = MutableLiveData<CollectorDto>()
-
+    val collector: LiveData<CollectorDto> = _collector
     private val _loading = MutableLiveData(false)
     val loading: LiveData<Boolean> = _loading
 

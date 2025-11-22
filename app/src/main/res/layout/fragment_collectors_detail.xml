@@ -15,124 +15,102 @@
             android:layout_height="wrap_content"
             android:orientation="vertical">
 
-            <androidx.constraintlayout.widget.ConstraintLayout
+            <!-- HEADER: foto y nombre -->
+            <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/rounded_album_cover"
-                android:clipToOutline="true"
-                android:outlineProvider="background">
+                android:gravity="center_horizontal"
+                android:orientation="vertical">
 
                 <ImageView
-                    android:id="@+id/imgAlbumCover"
-                    android:layout_width="0dp"
-                    android:layout_height="0dp"
-                    app:layout_constraintDimensionRatio="1:1"
+                    android:id="@+id/imgCollectorAvatar"
+                    android:layout_width="140dp"
+                    android:layout_height="140dp"
+                    android:layout_marginTop="12dp"
                     android:scaleType="centerCrop"
-                    android:contentDescription="Portada del álbum"
-                    app:layout_constraintTop_toTopOf="parent"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintEnd_toEndOf="parent" />
+                    android:src="@drawable/ic_broken_image"
+                    android:background="@drawable/rounded_album_cover"
+                    android:clipToOutline="true" />
 
-                <LinearLayout
-                    android:layout_width="0dp"
+                <TextView
+                    android:id="@+id/txtCollectorName"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_margin="0dp"
-                    android:background="#66000000"
-                    android:orientation="vertical"
-                    android:padding="12dp"
-                    app:layout_constraintBottom_toBottomOf="@id/imgAlbumCover"
-                    app:layout_constraintStart_toStartOf="@id/imgAlbumCover"
-                    app:layout_constraintEnd_toEndOf="@id/imgAlbumCover">
+                    android:layout_marginTop="12dp"
+                    android:text="Nombre del coleccionista"
+                    android:textColor="@color/text_primary"
+                    android:textSize="22sp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <!-- Información del coleccionista -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="16dp"
+                android:background="@drawable/vinyls_card_bg"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="6dp"
+                    android:text="Información"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <!-- Teléfono -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:layout_marginTop="4dp">
 
                     <TextView
-                        android:id="@+id/txtTitle"
+                        android:id="@+id/txtTelephoneLabel"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Nombre del álbum"
-                        android:textColor="@android:color/white"
-                        android:textSize="22sp"
-                        android:textStyle="bold" />
+                        android:text="Teléfono:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginEnd="6dp"/>
 
                     <TextView
-                        android:id="@+id/txtSubtitle"
+                        android:id="@+id/txtTelephoneValue"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:text="Género • Sello"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp" />
-
-                    <TextView
-                        android:id="@+id/txtReleaseDate"
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="Lanzado en 1984"
-                        android:textColor="@android:color/white"
-                        android:textSize="14sp" />
+                        android:textColor="@color/text_secondary"/>
                 </LinearLayout>
 
-            </androidx.constraintlayout.widget.ConstraintLayout>
-
-
-            <!-- Detalle del álbum -->
-            <!-- Caja de canciones -->
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/vinyls_card_bg"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <!-- Descripción -->
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="6dp"
-                    android:text="Descripción"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <TextView
-                    android:id="@+id/txtDescription"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:text="Descripción del álbum"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="15sp" />
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:background="@drawable/vinyls_card_bg"
-                android:orientation="vertical"
-                android:padding="12dp">
-
-                <!-- Título de la caja -->
-
-                <TextView
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="6dp"
-                    android:text="Canciones"
-                    android:textColor="@color/text_primary"
-                    android:textSize="16sp"
-                    android:textStyle="bold" />
-
-                <!-- Lista de canciones -->
+                <!-- Email -->
                 <LinearLayout
-                    android:id="@+id/tracksContainer"
-                    android:layout_width="match_parent"
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:dividerPadding="4dp"
-                    android:orientation="vertical" />
+                    android:orientation="horizontal"
+                    android:layout_marginTop="2dp">
+
+                    <TextView
+                        android:id="@+id/txtEmailLabel"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="Email:"
+                        android:textStyle="bold"
+                        android:textColor="@color/text_primary"
+                        android:layout_marginEnd="6dp"/>
+
+                    <TextView
+                        android:id="@+id/txtEmailValue"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:textColor="@color/text_secondary"/>
+                </LinearLayout>
+
             </LinearLayout>
 
-            <!-- Sección de comentarios -->
+            <!-- Comentarios -->
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -150,23 +128,39 @@
                     android:textSize="16sp"
                     android:textStyle="bold" />
 
-                <TextView
-                    android:id="@+id/txtComments"
+                <LinearLayout
+                    android:id="@+id/commentsContainer"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:paddingBottom="16dp"
-                    android:text="Lista de comentarios"
-                    android:textColor="@color/text_secondary"
-                    android:textSize="14sp" />
+                    android:orientation="vertical" />
+            </LinearLayout>
+
+            <!-- Artistas favoritos -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:background="@drawable/vinyls_card_bg"
+                android:orientation="vertical"
+                android:padding="12dp">
+
+                <TextView
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:paddingBottom="4dp"
+                    android:text="Artistas favoritos"
+                    android:textColor="@color/text_primary"
+                    android:textSize="16sp"
+                    android:textStyle="bold" />
+
+                <LinearLayout
+                    android:id="@+id/performersContainer"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical" />
             </LinearLayout>
 
         </LinearLayout>
     </ScrollView>
-
-    <include
-        layout="@layout/layout_fab_add"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginBottom="12dp"/>
 
 </FrameLayout>

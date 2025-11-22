@@ -4,6 +4,7 @@
     <color name="white">#FFFFFFFF</color>
     <color name="bg_dark">#0E1323</color>
     <color name="card_dark">#1A2235</color>
+    <color name="card_dark_lighter">#25304A</color>
     <color name="card_stroke">#3A4666</color>
     <color name="accent_purple">#5A3CCF</color>
     <color name="accent_dark_purple">#5A3CCF</color>

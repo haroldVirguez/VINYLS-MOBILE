@@ -22,7 +22,7 @@
             android:layout_height="60dp"
             android:layout_marginEnd="16dp"
             android:background="@drawable/vinyls_card_bg"
-            android:contentDescription="@string/musician_image_cd"
+            android:contentDescription="@string/collector_img_cd"
             android:scaleType="centerCrop"
             android:src="@drawable/vinyls_card_bg" />
 
