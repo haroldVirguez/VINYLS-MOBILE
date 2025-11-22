@@ -69,6 +69,26 @@
         android:id="@+id/collectorsFragment"
         android:name="com.team3.vinyls.ui.fragments.CollectorsFragment"
         android:label="Coleccionistas"
-        tools:layout="@layout/fragment_collectors" />
+        tools:layout="@layout/fragment_collectors" >
+
+        <action
+            android:id="@+id/action_collectorsFragment_to_collectorDetailFragment"
+            app:destination="@id/collectorsDetailFragment"
+            app:enterAnim="@android:animator/fade_in" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/collectorsDetailFragment"
+        android:name="com.team3.vinyls.ui.fragments.CollectorsDetailFragment"
+        android:label="Detalle Coleccionistas"
+        tools:layout="@layout/fragment_collectors_detail" >
+
+        <argument
+            android:name="collectorId"
+            app:argType="string" />
+
+
+    </fragment>
+
 
 </navigation>

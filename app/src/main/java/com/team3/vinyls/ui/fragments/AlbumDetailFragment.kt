@@ -67,12 +67,8 @@ class AlbumDetailFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val albumId = args.albumId.toInt()
-        val fabAddTrack =
-            view.findViewById<com.google.android.material.floatingactionbutton.FloatingActionButton>(
-                R.id.fabAddTrack
-            )
 
-        fabAddTrack.setOnClickListener {
+        binding.includeFabDetail.fabAddTrack.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.menu_fab_options, null)
             val option1 = dialogView.findViewById<TextView>(R.id.option1)
             val option2 = dialogView.findViewById<TextView>(R.id.option2)
