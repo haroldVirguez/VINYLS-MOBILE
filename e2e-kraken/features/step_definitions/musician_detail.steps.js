@@ -89,8 +89,33 @@ Then('I should see the artist name {string}', async function (expectedName) {
 })
 
 Then('I should see the artist description', async function () {
+  await this.driver.pause(1000)
+  
+  try {
+    await this.driver.$(
+      'android=new UiScrollable(new UiSelector().scrollable(true))' +
+      '.scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/txtArtistDescription"))'
+    )
+  } catch (_) {}
+
   const el = await this.driver.$(byResId('txtArtistDescription'))
-  await el.waitForExist({ timeout: 15000 })
+  
+  try {
+    await el.waitForExist({ timeout: 15000 })
+  } catch (e) {
+    const fs = require('fs')
+    const path = require('path')
+    let src = '<page source unavailable>'
+    try {
+      src = await this.driver.getPageSource()
+      const ts = new Date().toISOString().replace(/[:.]/g, '-')
+      const outDir = path.join(__dirname, '..', '..', 'logs')
+      try { fs.mkdirSync(outDir, { recursive: true }) } catch (_) {}
+      const outPath = path.join(outDir, `artist-description-missing-${ts}.xml`)
+      try { fs.writeFileSync(outPath, src, 'utf8'); console.error(`Wrote page source to ${outPath}`) } catch (_) {}
+    } catch (_) {}
+    throw new Error('Artist description element not found')
+  }
 
   const text = await el.getText()
   assert.ok(text && text.trim().length > 0, 'Artist description is empty')
@@ -124,12 +149,29 @@ Then('I should see the artist albums section', async function () {
 })
 
 Then('I should see the artist prizes section', async function () {
-  await this.driver.$(
-    'android=new UiScrollable(new UiSelector().scrollable(true))' +
-    '.scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/txtPrizesTitle"))'
-  )
+  try {
+    await this.driver.$(
+      'android=new UiScrollable(new UiSelector().scrollable(true))' +
+      '.scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/txtPrizesTitle"))'
+    )
+  } catch (_) {
+    try {
+      await this.driver.$(
+        'android=new UiScrollable(new UiSelector().scrollable(true))' +
+        '.scrollIntoView(new UiSelector().textContains("Premios"))'
+      )
+    } catch (_) { }
+  }
 
   const titleEl = await this.driver.$(byResId('txtPrizesTitle'))
+  
+  try {
+    await titleEl.waitForExist({ timeout: 5000 })
+  } catch (e) {
+    await dumpPageSource('prizes-title-missing', this.driver)
+    throw new Error('Prizes section not visible (title missing)')
+  }
+
   const titleExists = await titleEl.isExisting()
 
   if (!titleExists) {
