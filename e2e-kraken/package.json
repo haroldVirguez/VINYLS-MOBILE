@@ -6,6 +6,14 @@
   "scripts": {
     "appium": "appium",
     "test:android": "cucumber-js --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:albums": "cucumber-js features/albums.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:album-detail": "cucumber-js features/album_detail.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:albums-create": "cucumber-js features/albums_create.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:collectors": "cucumber-js features/collectors.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:collectors-detail": "cucumber-js features/collectors_detail.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:musicians": "cucumber-js features/musicians.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:musician-detail": "cucumber-js features/musician_detail.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
+    "test:android:tracks-album": "cucumber-js features/tracks_album.feature --require features/step_definitions/**/*.js --require features/support/**/*.js --format json:reports/cucumber_report.json && node generate-report.js",
     "test:android:prod": "node ./scripts/run-test-prod.js",
     "test:android:prod:install": "node ./scripts/run-test-prod.js --install"
   },

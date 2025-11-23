@@ -77,9 +77,35 @@ Then('I should see the album name {string}', async function (albumName) {
 })
 
 Then('I should see the album description', async function () {
+  try {
+    await this.driver.$(
+      'android=new UiScrollable(new UiSelector().scrollable(true))' +
+      '.scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/txtDescription"))'
+    )
+  } catch (_) { }
+
   const el = await this.driver.$(byResId('txtDescription'))
+  
+  try {
+    await el.waitForExist({ timeout: 5000 })
+  } catch (e) {
+    const fs = require('fs')
+    const path = require('path')
+    let src = '<page source unavailable>'
+    try {
+      src = await this.driver.getPageSource()
+      const ts = new Date().toISOString().replace(/[:.]/g, '-')
+      const outDir = path.join(__dirname, '..', '..', 'logs')
+      try { fs.mkdirSync(outDir, { recursive: true }) } catch (_) {}
+      const outPath = path.join(outDir, `album-description-missing-${ts}.xml`)
+      try { fs.writeFileSync(outPath, src, 'utf8'); console.error(`Wrote page source to ${outPath}`) } catch (_) {}
+    } catch (_) {}
+    throw new Error('Description element not found')
+  }
+  
   const exists = await el.isExisting()
   assert.ok(exists, 'Description not visible')
+  
   const text = await el.getText()
   assert.ok(text && text.trim().length > 0, 'Description is empty')
 })
