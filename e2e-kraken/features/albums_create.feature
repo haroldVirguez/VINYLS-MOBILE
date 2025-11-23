@@ -1,4 +1,4 @@
-Feature: HU07 - Crear Album
+Feature: HU07 - Crear Álbum
 
   Background:
     Given the app is launched

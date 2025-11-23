@@ -55,5 +55,5 @@ gradle-app.setting
 # Otros
 *.keystore
 /e2e-kraken/logs/
-/.idea/
+/.idea/*
 /e2e-kraken/reports/videos/
