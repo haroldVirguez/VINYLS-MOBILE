@@ -1,4 +1,4 @@
-Feature: HU02 - Detalle de Álbume
+Feature: HU02 - Detalle de Álbumes
 
   Background:
     Given the app is launched
