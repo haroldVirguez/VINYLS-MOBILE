@@ -30,7 +30,8 @@
                     android:scaleType="centerCrop"
                     android:src="@drawable/ic_broken_image"
                     android:background="@drawable/rounded_album_cover"
-                    android:clipToOutline="true" />
+                    android:clipToOutline="true"
+                    android:contentDescription="Avatar del coleccionista" />
 
                 <TextView
                     android:id="@+id/txtCollectorName"
