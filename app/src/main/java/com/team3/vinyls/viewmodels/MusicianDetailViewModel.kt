@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.models.MusicianDto
 import com.team3.vinyls.data.repositories.MusicianRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MusiciansDetailViewModel(
@@ -16,7 +17,7 @@ class MusiciansDetailViewModel(
     val musician: LiveData<MusicianDto> get() = _musician
 
     fun loadMusicianDetail(id: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val result = repository.fetchMusicianDetail(id)
                 _musician.value = result

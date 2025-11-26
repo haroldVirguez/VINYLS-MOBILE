@@ -8,6 +8,7 @@ import com.team3.vinyls.data.repositories.AlbumRepository
 import com.team3.vinyls.data.repositories.TrackRepository
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.models.TrackDto
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class AlbumDetailViewModel(
@@ -31,7 +32,7 @@ class AlbumDetailViewModel(
         _loading.value = true
         _error.value = null
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val data = albumRepository.getAlbumDetail(albumId)
                 _album.value = data
@@ -44,7 +45,7 @@ class AlbumDetailViewModel(
     }
 
     fun loadTracks(albumId: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val response = trackRepository.getTracksByAlbum(albumId)
                 _tracks.postValue(response)
@@ -56,7 +57,7 @@ class AlbumDetailViewModel(
 
     fun addTrackToAlbum(albumId: Int, trackName: String, trackDuration: String) {
         val track = TrackDto(name = trackName, duration = trackDuration)
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val newTrack = trackRepository.addTrackToAlbum(albumId, track)
 

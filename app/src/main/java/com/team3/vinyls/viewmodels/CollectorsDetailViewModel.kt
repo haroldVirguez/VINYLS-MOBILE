@@ -6,6 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.models.CollectorDto
 import com.team3.vinyls.data.repositories.CollectorRepository
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CollectorsDetailViewModel(private val collectorsRepository: CollectorRepository): ViewModel() {
@@ -22,7 +23,7 @@ class CollectorsDetailViewModel(private val collectorsRepository: CollectorRepos
         _loading.value = true
         _error.value = null
 
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val data = collectorsRepository.fetchCollectorDetail(collectorId)
                 _collector.value = data

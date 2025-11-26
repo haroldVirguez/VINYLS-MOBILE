@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.repositories.CollectorRepository
 import com.team3.vinyls.ui.models.CollectorUiModel
 import com.team3.vinyls.ui.mapper.toUi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class CollectorsViewModel(
@@ -34,7 +35,7 @@ class CollectorsViewModel(
     private fun loadCollectors() {
         _loading.value = true
         _error.value = null
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val data = repository.fetchCollectors()
                 try {

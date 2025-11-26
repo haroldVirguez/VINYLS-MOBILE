@@ -8,6 +8,7 @@ import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.repositories.MusicianRepository
 import com.team3.vinyls.ui.models.MusicianUiModel
 import com.team3.vinyls.ui.mapper.toUi
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MusiciansViewModel(
@@ -34,7 +35,7 @@ class MusiciansViewModel(
     private fun loadMusicians() {
         _loading.value = true
         _error.value = null
-        viewModelScope.launch {
+        viewModelScope.launch(Dispatchers.IO) {
             try {
                 val data = repository.fetchMusicians()
                 // Log calls can throw in plain JVM unit tests (android.util.Log not mocked).
