@@ -50,7 +50,7 @@ android {
     productFlavors {
         create("prod") {
             dimension = "env"
-            buildConfigField("String", "BASE_URL", "\"https://backvynils-q6yc.onrender.com/\"")
+            buildConfigField("String", "BASE_URL", "\"https://backend-vinyls-334-16668f39863b.herokuapp.com/\"")
         }
         create("e2e") {
             dimension = "env"
