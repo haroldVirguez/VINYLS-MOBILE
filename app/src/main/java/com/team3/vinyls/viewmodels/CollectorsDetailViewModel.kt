@@ -6,9 +6,14 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.models.CollectorDto
 import com.team3.vinyls.data.repositories.CollectorRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
-class CollectorsDetailViewModel(private val collectorsRepository: CollectorRepository): ViewModel() {
+class CollectorsDetailViewModel(
+    private val collectorsRepository: CollectorRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
+): ViewModel() {
 
     private val _collector = MutableLiveData<CollectorDto>()
     val collector: LiveData<CollectorDto> = _collector
@@ -22,7 +27,7 @@ class CollectorsDetailViewModel(private val collectorsRepository: CollectorRepos
         _loading.value = true
         _error.value = null
 
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             try {
                 val data = collectorsRepository.fetchCollectorDetail(collectorId)
                 _collector.value = data

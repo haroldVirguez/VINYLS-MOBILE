@@ -6,17 +6,20 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.team3.vinyls.data.models.MusicianDto
 import com.team3.vinyls.data.repositories.MusicianRepository
+import kotlinx.coroutines.CoroutineDispatcher
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 
 class MusiciansDetailViewModel(
-    private val repository: MusicianRepository
+    private val repository: MusicianRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val _musician = MutableLiveData<MusicianDto>()
     val musician: LiveData<MusicianDto> get() = _musician
 
     fun loadMusicianDetail(id: Int) {
-        viewModelScope.launch {
+        viewModelScope.launch(dispatcher) {
             try {
                 val result = repository.fetchMusicianDetail(id)
                 _musician.value = result

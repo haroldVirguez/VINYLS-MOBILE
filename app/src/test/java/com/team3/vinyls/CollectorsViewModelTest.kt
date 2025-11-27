@@ -47,7 +47,7 @@ class CollectorsViewModelTest {
 
         whenever(repository.fetchCollectors()).thenReturn(dtoList)
 
-        val vm = CollectorsViewModel(repository)
+        val vm = CollectorsViewModel(repository, dispatcher = testDispatcher)
         // avanzar corrutinas
         testDispatcher.scheduler.advanceUntilIdle()
 
@@ -62,7 +62,7 @@ class CollectorsViewModelTest {
     fun loadCollectors_error_setsError() = runTest {
         whenever(repository.fetchCollectors()).thenThrow(RuntimeException("fail"))
 
-        val vm = CollectorsViewModel(repository)
+        val vm = CollectorsViewModel(repository, dispatcher = testDispatcher)
         testDispatcher.scheduler.advanceUntilIdle()
 
         val err = vm.error.value

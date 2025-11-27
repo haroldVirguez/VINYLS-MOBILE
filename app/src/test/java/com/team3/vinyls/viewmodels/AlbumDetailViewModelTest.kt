@@ -90,7 +90,7 @@ class AlbumDetailViewModelTest {
             }
         }) {}
 
-        val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo())
+        val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo(), dispatcher = dispatcher)
         viewModel.loadAlbumDetail(1)
         advanceUntilIdle()
 
@@ -110,7 +110,7 @@ class AlbumDetailViewModelTest {
             }
         }) {}
 
-        val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo())
+        val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo(), dispatcher = dispatcher)
         viewModel.loadAlbumDetail(1)
         advanceUntilIdle()
 
@@ -146,7 +146,7 @@ class AlbumDetailViewModelTest {
             }
         }) {}
 
-        val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo())
+        val viewModel = AlbumDetailViewModel(fakeRepo, FakeTrackRepo(), dispatcher = dispatcher)
 
         assertEquals(false, viewModel.loading.value)
 
@@ -172,7 +172,8 @@ class AlbumDetailViewModelTest {
 
         val vm = AlbumDetailViewModel(
             albumRepository = FakeAlbumRepo(fakeAlbum),
-            trackRepository = FakeTrackRepo()
+            trackRepository = FakeTrackRepo(),
+            dispatcher = dispatcher
         )
 
         vm.loadAlbumDetail(1)
@@ -186,7 +187,8 @@ class AlbumDetailViewModelTest {
     fun `loadAlbumDetail emite error si falla el repo`() = runTest {
         val vm = AlbumDetailViewModel(
             albumRepository = FakeAlbumRepo(null),
-            trackRepository = FakeTrackRepo()
+            trackRepository = FakeTrackRepo(),
+            dispatcher = dispatcher
         )
 
         vm.loadAlbumDetail(1)
@@ -225,7 +227,8 @@ class AlbumDetailViewModelTest {
 
         val vm = AlbumDetailViewModel(
             AlbumRepository(delayedRepo),
-            FakeTrackRepo()
+            FakeTrackRepo(),
+            dispatcher = dispatcher
         )
 
         assertFalse(vm.loading.value!!)
@@ -248,7 +251,8 @@ class AlbumDetailViewModelTest {
 
         val vm = AlbumDetailViewModel(
             FakeAlbumRepo(null),
-            fakeTrackRepo
+            fakeTrackRepo,
+            dispatcher = dispatcher
         )
 
         vm.loadTracks(1)

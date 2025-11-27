@@ -6,9 +6,7 @@ import com.team3.vinyls.data.models.AlbumDto
 
 open class AlbumRepository(private val service: AlbumsService) {
     open suspend fun fetchAlbums(): List<AlbumDto> {
-        val albums = service.getAlbums()
-        return albums.map { dto ->dto
-        }
+        return service.getAlbums()
     }
 
     suspend fun getAlbumDetail(albumId: Int): AlbumDto {

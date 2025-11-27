@@ -44,7 +44,7 @@ class CollectorsDetailViewModelTest {
     fun setup() {
         MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(dispatcher)
-        viewModel = CollectorsDetailViewModel(repository)
+        viewModel = CollectorsDetailViewModel(repository, dispatcher = dispatcher)
         viewModel.collector.observeForever(observer)
     }
 

@@ -43,7 +43,7 @@ class AlbumsViewModelTest {
                     AlbumDto(1, "A", "B", "cover", "desc", "genre", "label")
                 )
             }
-            val viewModel = AlbumsViewModel(repository = mockRepository)
+            val viewModel = AlbumsViewModel(repository = mockRepository, dispatcher = testDispatcher)
 
             // let coroutines in viewModelScope run
             advanceUntilIdle()
