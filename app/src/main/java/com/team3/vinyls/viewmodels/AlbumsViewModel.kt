@@ -8,12 +8,14 @@ import com.team3.vinyls.data.models.AlbumCreateDto
 import com.team3.vinyls.data.models.AlbumDto
 import com.team3.vinyls.data.repositories.AlbumRepository
 import com.team3.vinyls.ui.models.AlbumUiModel
+import kotlinx.coroutines.CoroutineDispatcher
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import com.team3.vinyls.ui.mapper.toUi
 
 class AlbumsViewModel(
-    private val repository: AlbumRepository
+    private val repository: AlbumRepository,
+    private val dispatcher: CoroutineDispatcher = Dispatchers.IO
 ) : ViewModel() {
 
     private val _albums = MutableLiveData<List<AlbumUiModel>>()
@@ -39,7 +41,7 @@ class AlbumsViewModel(
     private fun loadAlbums() {
         _loading.value = true
         _error.value = null
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             try {
                 val data = repository.fetchAlbums()
                 _albums.value = data.map { it.toUi() }
@@ -52,7 +54,7 @@ class AlbumsViewModel(
     }
 
     fun createAlbum(dto: AlbumCreateDto) {
-        viewModelScope.launch(Dispatchers.IO) {
+        viewModelScope.launch(dispatcher) {
             try {
                 val createdAlbum = repository.createAlbum(dto)   // now returns AlbumDto
                 _createAlbumResult.postValue(Result.success(createdAlbum))

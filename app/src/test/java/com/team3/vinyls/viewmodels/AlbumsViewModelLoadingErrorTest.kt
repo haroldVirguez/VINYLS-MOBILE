@@ -43,7 +43,7 @@ class AlbumsViewModelLoadingErrorTest {
                     throw RuntimeException("boom")
                 }
             }
-            val viewModel = AlbumsViewModel(repository = mockRepository)
+            val viewModel = AlbumsViewModel(repository = mockRepository, dispatcher = testDispatcher)
 
             // let coroutines in viewModelScope run
             advanceUntilIdle()

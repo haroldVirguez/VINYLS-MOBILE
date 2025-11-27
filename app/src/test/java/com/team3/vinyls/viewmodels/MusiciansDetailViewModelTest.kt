@@ -42,7 +42,7 @@ class MusiciansDetailViewModelTest {
         MockitoAnnotations.openMocks(this)
         Dispatchers.setMain(dispatcher)
 
-        viewModel = MusiciansDetailViewModel(repository)
+        viewModel = MusiciansDetailViewModel(repository, dispatcher = dispatcher)
         viewModel.musician.observeForever(observer)
     }
 
