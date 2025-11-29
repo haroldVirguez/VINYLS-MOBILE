@@ -106,13 +106,32 @@ app.post('/albums/:id/tracks', (req, res) => {
 const musicians = [
   {
     id: 201,
+    name: 'Demo Artist',
+    image: 'https://picsum.photos/seed/artist2/400/300',
+    description: 'Artista de prueba',
+    birthDate: '1990-01-01',
+    albums: [
+      {
+        id: 1,
+        name: 'Mock Album 2',
+        cover: 'https://picsum.photos/seed/album2/600/600',
+        releaseDate: '2021-08-20',
+        description: 'Segundo álbum de prueba para E2E',
+        genre: 'Pop',
+        recordLabel: 'Demo Label'
+      }
+    ],
+    performerPrizes: []
+  },
+  {
+    id: 202,
     name: 'Mock Band',
     image: 'https://picsum.photos/seed/band1/400/300',
     description: 'Banda de prueba',
     birthDate: null,
     albums: [
       {
-        id: 1,
+        id: 2,
         name: 'Mock Album 1',
         cover: 'https://picsum.photos/seed/album1/600/600',
         releaseDate: '2020-05-10',
@@ -123,25 +142,6 @@ const musicians = [
     ],
     performerPrizes: []
   },
-  {
-    id: 202,
-    name: 'Demo Artist',
-    image: 'https://picsum.photos/seed/artist2/400/300',
-    description: 'Artista de prueba',
-    birthDate: '1990-01-01',
-    albums: [
-      {
-        id: 2,
-        name: 'Mock Album 2',
-        cover: 'https://picsum.photos/seed/album2/600/600',
-        releaseDate: '2021-08-20',
-        description: 'Segundo álbum de prueba para E2E',
-        genre: 'Pop',
-        recordLabel: 'Demo Label'
-      }
-    ],
-    performerPrizes: []
-  }
 ];
 
 // Return all musicians

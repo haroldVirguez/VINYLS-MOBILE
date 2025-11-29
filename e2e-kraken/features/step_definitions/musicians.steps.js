@@ -29,7 +29,7 @@ Then('I should see the musicians list', async function () {
     if (nav && await nav.isExisting()) {
       await nav.click()
       try {
-        await list.waitForExist({ timeout: 45000 })
+        await list.waitForExist({ timeout: 10000 })
         return
       } catch (e) {
         await dumpPageSource('musicians-list-missing-after-nav', this.driver)

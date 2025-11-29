@@ -47,6 +47,7 @@ class AlbumsViewModel(
                 _albums.postValue(data.map { it.toUi() })
             } catch (t: Throwable) {
                 _error.postValue(t.message)
+                _albums.postValue(emptyList())
             } finally {
                 _loading.postValue(false)
             }

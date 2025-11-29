@@ -6,8 +6,9 @@ When('I tap the plus floating button', async function () {
   const fab = await this.driver.$(byResId('fabAddTrack'))
 
   try {
-    await fab.waitForExist({ timeout: 15000 })
+    await fab.waitForExist({ timeout: 8000 })
     await fab.click()
+    await this.driver.pause(500)
   } catch (e) {
     let src = '<page source unavailable>'
     try {
@@ -58,7 +59,7 @@ When('I enter the track name {string}', async function (trackName) {
   const inputName = await this.driver.$(byResId('inputTrackName'))
 
   try {
-    await inputName.waitForExist({ timeout: 15000 })
+    await inputName.waitForExist({ timeout: 8000 })
     await inputName.setValue(trackName)
   } catch (e) {
     let src = '<page source unavailable>'
@@ -83,7 +84,7 @@ When('I enter the track duration {string}', async function (duration) {
   const inputDuration = await this.driver.$(byResId('inputTrackDuration'))
 
   try {
-    await inputDuration.waitForExist({ timeout: 15000 })
+    await inputDuration.waitForExist({ timeout: 8000 })
     await inputDuration.setValue(duration)
   } catch (e) {
     let src = '<page source unavailable>'
@@ -109,7 +110,7 @@ When('I tap the save track button', async function () {
   const saveBtn = await this.driver.$(byResId('btnSave'))
 
   try {
-    await saveBtn.waitForExist({ timeout: 15000 })
+    await saveBtn.waitForExist({ timeout: 8000 })
     await saveBtn.click()
   } catch (e) {
     let src = '<page source unavailable>'
@@ -132,7 +133,7 @@ When('I tap the save track button', async function () {
 Then('I should see the track added toast', async function () {
   try {
     const toast = await this.driver.$('//android.widget.Toast[contains(@text, "Canción agregada")]')
-    await toast.waitForExist({ timeout: 7000 })
+    await toast.waitForExist({ timeout: 5000 })
 
         const visible = await toast.isExisting()
         if (!visible) throw new Error('Toast not visible')
@@ -156,7 +157,7 @@ Then('I should see the track added toast', async function () {
     })
 
 // Helper: poll the local mock server for the track to appear in album's tracks
-async function pollMockForTrack(albumId, trackName, timeoutMs = 15000) {
+async function pollMockForTrack(albumId, trackName, timeoutMs = 8000) {
   const http = require('http')
   const url = `http://localhost:3000/albums/${albumId}/tracks`
   const start = Date.now()

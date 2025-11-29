@@ -6,7 +6,7 @@ const byResId = (id) => `//*[@resource-id="com.team3.vinyls:id/${id}"]`
 Given('the app is launched', async function () {
   const el = await this.driver.$(byResId('recyclerAlbums'))
   try {
-    await el.waitForExist({ timeout: 45000 })
+    await el.waitForExist({ timeout: 10000 })
   } catch (e) {
     let src = '<page source unavailable>'
     try {
@@ -21,7 +21,7 @@ Given('the app is launched', async function () {
     } catch (err) {
       // ignore
     }
-    console.error('recyclerAlbums not found after 45000ms. Page source (first 400 chars):\n', String(src).slice(0,400))
+    console.error('recyclerAlbums not found after 10000ms. Page source (first 400 chars):\n', String(src).slice(0,400))
     throw e
   }
 })
