@@ -49,15 +49,15 @@ class CollectorsViewModel(
                     Log.d("CollectorsVM", "mapped to ui ${'$'}{uiList.size} items: ${'$'}{uiList.take(5)}")
                 } catch (_: Throwable) {
                 }
-                _collectors.value = uiList
+                _collectors.postValue(uiList)
             } catch (t: Throwable) {
                 try {
                     Log.e("CollectorsVM", "error loading collectors", t)
                 } catch (_: Throwable) {
                 }
-                _error.value = t.message
+                _error.postValue(t.message)
             } finally {
-                _loading.value = false
+                _loading.postValue(false)
             }
         }
     }

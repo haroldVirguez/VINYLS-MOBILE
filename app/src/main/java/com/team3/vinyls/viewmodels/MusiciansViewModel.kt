@@ -51,15 +51,15 @@ class MusiciansViewModel(
                     Log.d("MusiciansVM", "mapped to ui ${'$'}{uiList.size} items: ${'$'}{uiList.take(5)}")
                 } catch (_: Throwable) {
                 }
-                _musicians.value = uiList
+                _musicians.postValue(uiList)
             } catch (t: Throwable) {
                 try {
                     Log.e("MusiciansVM", "error loading musicians", t)
                 } catch (_: Throwable) {
                 }
-                _error.value = t.message
+                _error.postValue(t.message)
             } finally {
-                _loading.value = false
+                _loading.postValue(false)
             }
         }
     }

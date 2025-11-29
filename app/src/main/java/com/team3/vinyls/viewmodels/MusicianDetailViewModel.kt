@@ -22,7 +22,7 @@ class MusiciansDetailViewModel(
         viewModelScope.launch(dispatcher) {
             try {
                 val result = repository.fetchMusicianDetail(id)
-                _musician.value = result
+                _musician.postValue(result)
             } catch (e: Exception) {
                 e.printStackTrace()
             }

@@ -30,11 +30,11 @@ class CollectorsDetailViewModel(
         viewModelScope.launch(dispatcher) {
             try {
                 val data = collectorsRepository.fetchCollectorDetail(collectorId)
-                _collector.value = data
+                _collector.postValue(data)
             } catch (t: Throwable) {
-                _error.value = t.message
+                _error.postValue(t.message)
             } finally {
-                _loading.value = false
+                _loading.postValue(false)
             }
         }
     }

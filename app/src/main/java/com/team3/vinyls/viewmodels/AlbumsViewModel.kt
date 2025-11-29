@@ -44,11 +44,11 @@ class AlbumsViewModel(
         viewModelScope.launch(dispatcher) {
             try {
                 val data = repository.fetchAlbums()
-                _albums.value = data.map { it.toUi() }
+                _albums.postValue(data.map { it.toUi() })
             } catch (t: Throwable) {
-                _error.value = t.message
+                _error.postValue(t.message)
             } finally {
-                _loading.value = false
+                _loading.postValue(false)
             }
         }
     }
