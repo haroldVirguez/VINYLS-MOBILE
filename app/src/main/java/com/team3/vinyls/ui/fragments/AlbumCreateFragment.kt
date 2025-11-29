@@ -2,6 +2,7 @@ package com.team3.vinyls.ui.fragments
 
 import android.app.DatePickerDialog
 import android.os.Bundle
+import android.view.ContextThemeWrapper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -87,17 +88,21 @@ class AlbumCreateFragment : Fragment() {
         binding.inputReleaseDate.setOnClickListener {
             val calendar = Calendar.getInstance()
 
-            val datePicker = DatePickerDialog(
-                requireContext(),
+            val context = ContextThemeWrapper(requireContext(), R.style.MyDatePickerDialog)
+
+            val dialog = DatePickerDialog(
+                context,
+                R.style.MyDatePickerDialog,
                 { _, year, month, day ->
-                    val formatted = "%04d-%02d-%02d".format(year, month + 1, day)
-                    binding.inputReleaseDate.setText(formatted)
+                    val date = "%04d-%02d-%02d".format(year, month + 1, day)
+                    binding.inputReleaseDate.setText(date)
                 },
                 calendar.get(Calendar.YEAR),
                 calendar.get(Calendar.MONTH),
                 calendar.get(Calendar.DAY_OF_MONTH)
             )
-            datePicker.show()
+
+            dialog.show()
         }
     }
 

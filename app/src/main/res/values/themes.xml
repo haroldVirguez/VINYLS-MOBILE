@@ -12,4 +12,26 @@
     </style>
 
     <style name="Theme.Vinyls" parent="Base.Theme.Vinyls" />
+
+    <style name="MyDatePickerDialog" parent="Theme.MaterialComponents.Light.Dialog">
+
+        <!-- Your existing styles -->
+        <item name="colorBackgroundFloating">@color/white</item>
+
+        <!-- Force OK/Cancel text color (API 21–34) -->
+        <item name="android:textColorAlertDialogListItem">@color/black</item>
+
+        <!-- Holo / AppCompat fallback (older devices, emulators) -->
+        <item name="android:buttonStyle">@style/MyDialogButtonStyle</item>
+
+        <!-- MaterialComponents fallback (newer devices) -->
+        <item name="materialButtonStyle">@style/MyDialogButtonStyle</item>
+
+    </style>
+
+    <style name="MyDialogButtonStyle" parent="@android:style/Widget.Material.Button.Borderless">
+        <item name="android:textColor">@color/black</item>
+    </style>
+
+
 </resources>

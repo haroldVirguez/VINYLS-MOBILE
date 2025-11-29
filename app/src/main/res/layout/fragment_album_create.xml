@@ -54,7 +54,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/cover_url_hint"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/text_bg"
+                    app:hintTextColor="@color/text_bg"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputCoverUrl"
@@ -79,7 +82,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/album_title_hint"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/text_bg"
+                    app:hintTextColor="@color/text_bg"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputTitle"
@@ -104,7 +110,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/select_genre_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:endIconMode="dropdown_menu">
+                    app:endIconMode="dropdown_menu"
+                    android:textColorHint="@color/text_bg"
+                    app:hintTextColor="@color/text_bg"
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/inputGenre"
@@ -133,7 +142,10 @@
                     android:layout_height="wrap_content"
                     android:hint="@string/select_label_hint"
                     style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
-                    app:endIconMode="dropdown_menu">
+                    app:endIconMode="dropdown_menu"
+                    android:textColorHint="@color/text_bg"
+                    app:hintTextColor="@color/text_bg"
+                    >
 
                     <AutoCompleteTextView
                         android:id="@+id/inputLabel"
@@ -160,7 +172,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/release_date_hint"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/text_bg"
+                    app:hintTextColor="@color/text_bg"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputReleaseDate"
@@ -186,7 +201,10 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="@string/description_hint"
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    android:textColorHint="@color/text_bg"
+                    app:hintTextColor="@color/text_bg"
+                    >
 
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/inputDescription"
