@@ -339,15 +339,35 @@ When("I fill the album creation form", async function () {
     }
   }
 
-  // Robustly set description: always re-find the element (avoid stale references)
+  // Robustly set description: scroll element up and click on top part to avoid bottom nav
   async function robustSetDescription(driver, /*prevEl not used intentionally*/ _prevEl, options, text) {
     const opts = options || { containsKeywords: ['description','desc'], textKeywords: ['Description','Descripción','descripcion'] };
     const max = 6;
     for (let i = 0; i < max; i++) {
-      // attempt to scroll into view before each try
+      // Step 1: Scroll element into view
       try {
         await driver.$('android=new UiScrollable(new UiSelector().scrollable(true)).scrollIntoView(new UiSelector().resourceId("com.team3.vinyls:id/inputDescription"))');
+        await driver.pause(300);
       } catch (_) {}
+      
+      try {
+        const windowSize = await driver.getWindowSize();
+        const screenHeight = windowSize.height;
+        const screenWidth = windowSize.width;
+        
+        const startY = screenHeight * 0.6; 
+        const endY = screenHeight * 0.25;
+        const centerX = screenWidth * 0.5; 
+        
+        await driver.touchAction([
+          { action: 'press', x: centerX, y: startY },
+          { action: 'wait', ms: 150 },
+          { action: 'moveTo', x: centerX, y: endY },
+          { action: 'release' }
+        ]);
+        await driver.pause(400);
+      } catch (_) {}
+      
       try {
         const ref = await findInput(driver, opts);
         if (ref) {
@@ -361,8 +381,28 @@ When("I fill the album creation form", async function () {
               }
             } catch (_) {}
 
-            // focus and set value
-            try { await target.click(); } catch (_) {}
+            try {
+              const location = await target.getLocation();
+              const size = await target.getSize();
+              
+              const clickX = location.x + (size.width / 2); 
+              const clickY = location.y + (size.height * 0.2);
+              
+              const windowSize = await driver.getWindowSize();
+              const bottomNavThreshold = windowSize.height * 0.85;
+              
+              if (clickY < bottomNavThreshold) {
+                await driver.touchAction({ action: 'tap', x: clickX, y: clickY });
+                await driver.pause(300);
+              } else {
+                await target.click();
+                await driver.pause(300);
+              }
+            } catch (coordError) {
+              await target.click();
+              await driver.pause(300);
+            }
+            
             await target.clearValue().catch(() => {});
             await target.setValue(text);
             try { await driver.hideKeyboard(); } catch (_) {}
