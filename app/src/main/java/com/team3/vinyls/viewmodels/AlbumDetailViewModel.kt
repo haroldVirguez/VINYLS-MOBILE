@@ -37,11 +37,11 @@ class AlbumDetailViewModel(
         viewModelScope.launch(dispatcher) {
             try {
                 val data = albumRepository.getAlbumDetail(albumId)
-                _album.value = data
+                _album.postValue(data)
             } catch (t: Throwable) {
-                _error.value = t.message
+                _error.postValue(t.message)
             } finally {
-                _loading.value = false
+                _loading.postValue(false)
             }
         }
     }
