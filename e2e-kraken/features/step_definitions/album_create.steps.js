@@ -408,8 +408,8 @@ When("I submit the album creation form", async function () {
   await submitButton.click();
 
   // Wait robustly: either button disappears, activity changes, or a success indicator appears
-  const timeout = 15000; // ms
-  const pollInterval = 500; // ms
+  const timeout = 8000; // ms
+  const pollInterval = 300; // ms
   const start = Date.now();
 
   while (Date.now() - start < timeout) {

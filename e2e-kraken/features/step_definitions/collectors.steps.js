@@ -50,7 +50,7 @@ Then('I should see the collectors list', async function () {
     if (nav && await nav.isExisting()) {
       await nav.click()
       try {
-        await list.waitForExist({ timeout: 20000 })
+        await list.waitForExist({ timeout: 8000 })
         return
       } catch (e) {
         await dumpPageSource('collectors-list-missing-after-nav', this.driver)
@@ -74,7 +74,7 @@ When('I tap the first collector in the list', async function () {
         const nav = await this.driver.$(byResId('nav_collectors'))
         if (nav && await nav.isExisting()) {
           await nav.click()
-          await list.waitForExist({ timeout: 20000 })
+          await list.waitForExist({ timeout: 8000 })
         } else {
           // try alternative heuristics: any recycler with 'collect' in resource-id
           const alts = await this.driver.$$('//*[contains(@resource-id, "recycler") and contains(@resource-id, "collect")]')
@@ -102,7 +102,7 @@ When('I tap the first collector in the list', async function () {
   }
 
   // ensure list exists now
-  await list.waitForExist({ timeout: 10000 })
+  await list.waitForExist({ timeout: 8000 })
 
   // get first child robustly
   let items = await list.$$('./*')
