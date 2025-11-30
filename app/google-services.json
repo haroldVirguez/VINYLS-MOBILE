@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "635285341800",
+    "project_id": "vinyls-6619b",
+    "storage_bucket": "vinyls-6619b.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:635285341800:android:d011ca2c7467ed3388dddd",
+        "android_client_info": {
+          "package_name": "com.team3.vinyls"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "Api-key"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
