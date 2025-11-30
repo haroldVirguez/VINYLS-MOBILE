@@ -12,7 +12,7 @@ Aplicación Android (Kotlin) con MVVM, Repository y Service Adapter. Presenta un
 3) Crea/inicia un emulador en AVD Manager (API 33+ sirve).
 4) Selecciona el flavor de construcción:
    - En Android Studio: **View → Tool Windows → Build Variants** (o pestaña inferior "Build Variants")
-   - Para producción: selecciona **prodDebug** (usa backend real `https://backend-vinyls-334-16668f39863b.herokuapp.com/`)
+   - Para producción: selecciona **prodDebug** (usa backend real `https://back-vinyls-d8bdfb262330.herokuapp.com/`)
    - Para pruebas E2E: selecciona **e2eDebug** (requiere servidor mock local corriendo)
 5) Ejecuta el módulo `app` desde Android Studio; la app inicia en "Álbumes".
 
@@ -131,7 +131,7 @@ Qué valida:
 ```
 
 **Configuración:**
-- `prod`: usa el backend real `https://backend-vinyls-334-16668f39863b.herokuapp.com/`
+- `prod`: usa el backend real `https://back-vinyls-d8bdfb262330.herokuapp.com/`
 - `e2e`: usa el mock `http://10.0.2.2:3000/` (emulador). Configurado vía `BuildConfig.BASE_URL` en `app/build.gradle.kts`
 
 Archivos clave:
